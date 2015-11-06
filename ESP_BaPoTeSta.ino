@@ -5,7 +5,6 @@
    Martin Schuster 2015
 
 ToDo:
-    check for WiFi status instead of blindly waiting
     figure out best sleep mode
     look for other power-saving measures
         switch off UART
@@ -43,8 +42,8 @@ void setup() {
     WiFi.config(IPLocal, IPGW, IPSubnet);
     WiFi.begin(ssid);
 
-    // wait a while for WiFi to associate
-    delay(1000);
+    while (WiFi.status() != WL_CONNECTED)
+        delay(100);
 
     // get ChipID, will be used as unique ID when sending data
     chipId = ESP.getChipId();
