@@ -1,17 +1,10 @@
 /*
-  Blink
-  Turns on an LED on for one second, then off for one second, repeatedly.
+   Battery-Powered WiFi Temperature Station
+   Send temperature data via UDP
 
-  Most Arduinos have an on-board LED you can control. On the Uno and
-  Leonardo, it is attached to digital pin 13. If you're unsure what
-  pin the on-board LED is connected to on your Arduino model, check
-  the documentation at http://www.arduino.cc
-
-  This example code is in the public domain.
-
-  modified 8 May 2014
-  by Scott Fitzgerald
+   Martin Schuster 2015
  */
+
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 
