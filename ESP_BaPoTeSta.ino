@@ -9,7 +9,6 @@ ToDo:
         switch off UART
         put all unused pins into INPUT/OUTPUT/?
     add timestamp to sent packet (needs NTP)
-    allow connections to password-protected WLAN
 
  */
 
@@ -18,6 +17,7 @@ ToDo:
 
 // configuration
 const char ssid[] = "tabr.org";
+const char pass[] = "";
 IPAddress IPLocal(10, 1, 0, 35);
 IPAddress IPGateway(10, 1, 0, 1);
 IPAddress IPSubnet(255, 255, 255, 0);
@@ -41,7 +41,11 @@ void setup() {
     // start WiFi
     WiFi.mode(WIFI_STA);
     WiFi.config(IPLocal, IPGateway, IPSubnet);
-    WiFi.begin(ssid);
+    if (pass == NULL || pass[0] == 0) {
+        WiFi.begin(ssid);
+    } else {
+        WiFi.begin(ssid, pass);
+    }
 
     while (WiFi.status() != WL_CONNECTED)
         delay(100);
