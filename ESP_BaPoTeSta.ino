@@ -18,10 +18,10 @@ ToDo:
 // configuration
 const char ssid[] = "tabr.org";
 const char pass[] = "";
-IPAddress IPLocal(10, 1, 0, 35);
-IPAddress IPGateway(10, 1, 0, 1);
-IPAddress IPSubnet(255, 255, 255, 0);
-IPAddress IPServer(10, 1, 0, 9);
+const IPAddress IPLocal(10, 1, 0, 35);
+const IPAddress IPGateway(10, 1, 0, 1);
+const IPAddress IPSubnet(255, 255, 255, 0);
+const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
 const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
