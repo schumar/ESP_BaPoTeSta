@@ -40,7 +40,7 @@ void setup() {
 
     // start WiFi
     WiFi.mode(WIFI_STA);
-    WiFi.config(IPLocal, IPGW, IPSubnet);
+    WiFi.config(IPLocal, IPGateway, IPSubnet);
     WiFi.begin(ssid);
 
     while (WiFi.status() != WL_CONNECTED)
