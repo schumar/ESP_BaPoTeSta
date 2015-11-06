@@ -9,6 +9,8 @@ ToDo:
     look for other power-saving measures
         switch off UART
         put all unused pins into INPUT/OUTPUT/?
+    add timestamp to send packet
+    allow connections to password-protected WLAN
 
  */
 
