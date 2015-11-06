@@ -5,7 +5,6 @@
    Martin Schuster 2015
 
 ToDo:
-    figure out best sleep mode
     look for other power-saving measures
         switch off UART
         put all unused pins into INPUT/OUTPUT/?
@@ -74,7 +73,7 @@ void loop() {
     digitalWrite(PIN_BLUELED, HIGH);
 
     // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
-    ESP.deepSleep(1e6 * SLEEPSEC, WAKE_RF_DEFAULT);
+    ESP.deepSleep(1e6 * SLEEPSEC, WAKE_NO_RFCAL);
 }
 
 
