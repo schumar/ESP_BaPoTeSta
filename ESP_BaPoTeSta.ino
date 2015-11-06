@@ -15,7 +15,7 @@ IPAddress tempServer(10, 1, 0, 9);
 const unsigned int tempPort = 9988;
 const byte MEASURES = 5
 const byte SLEEPSEC = 2
-const byte BLUELED = 4;
+const byte PIN_LED = 4;
 
 WiFiUDP Udp;
 unsigned int sensorValue[MEASURES];
@@ -23,9 +23,9 @@ unsigned long int chipId;
 
 
 void setup() {
-    // activate blue LED to show that we are "on"
-    pinMode(BLUELED, OUTPUT);
-    digitalWrite(BLUELED, HIGH);
+    // activate LED to show that we are "on"
+    pinMode(PIN_LED, OUTPUT);
+    digitalWrite(PIN_LED, HIGH);
 
     // start WiFi
     WiFi.mode(WIFI_STA);
