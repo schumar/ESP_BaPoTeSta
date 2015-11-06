@@ -8,6 +8,9 @@ ToDo:
     use static IP
     check for WiFi status instead of blindly waiting
     figure out best sleep mode
+    look for other power-saving measures
+        switch off UART
+        put all unused pins into INPUT/OUTPUT/?
 
  */
 
