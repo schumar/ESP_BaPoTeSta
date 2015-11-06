@@ -19,8 +19,8 @@ const char ssid[] = "tabr.org";
 IPAddress myAddr(10, 1, 0, 35);
 IPAddress tempServer(10, 1, 0, 9);
 const unsigned int tempPort = 9988;
-const byte MEASURES = 5
-const byte SLEEPSEC = 2
+const byte MEASURES = 5;
+const byte SLEEPSEC = 2;
 const byte PIN_LED = 4;
 const byte PIN_PTC = 5;
 
