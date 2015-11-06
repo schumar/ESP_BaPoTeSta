@@ -98,9 +98,12 @@ void sendTemp(unsigned int* temp) {
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
 
-    Udp.beginPacket(IPServer, portServer);
-    Udp.write(packetBuffer, PACKET_SIZE);
-    Udp.endPacket();
+    // send packet (twice, to make sure)
+    for (byte i=0; i<2; i++) {
+        Udp.beginPacket(IPServer, portServer);
+        Udp.write(packetBuffer, PACKET_SIZE);
+        Udp.endPacket();
+    }
 }
 
 // vim: sw=4:expandtab:ts=4
