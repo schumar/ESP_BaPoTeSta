@@ -3,6 +3,13 @@
    Send temperature data via UDP
 
    Martin Schuster 2015
+
+ToDo:
+    power PTC only when needed
+    use static IP
+    check for WiFi status instead of blindly waiting
+    figure out best sleep mode
+
  */
 
 #include <ESP8266WiFi.h>
