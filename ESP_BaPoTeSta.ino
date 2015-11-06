@@ -33,13 +33,17 @@ const byte PIN_PTC = 5;
 // behaviour
 const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
+// temp calculation
+const float Vdd = 3.3;      // voltage of PIN_PTC when HIGH
+const float Voff = 0.05;    // highest V where ADC still reports "0"
+const float Rfix = 15e3;    // pulldown
 /*
     END OF CONFIGURATION
  */
 
 
 WiFiUDP Udp;
-unsigned int sensorValue[MEASURES];
+float sensorValue[MEASURES];
 unsigned long int chipId;
 
 
@@ -75,7 +79,7 @@ void loop() {
     // measure temp multiple times
     for (byte c=0; c<MEASURES; c++) {
         delay(100);
-        sensorValue[c] = analogRead(A0);
+        sensorValue[c] = calcTemp(analogRead(A0));
     }
 
     // switch off PTC
@@ -91,8 +95,8 @@ void loop() {
 }
 
 
-void sendTemp(unsigned int* temp) {
-    const byte PACKET_SIZE = 11 + 5*MEASURES + 1;
+void sendTemp(float* temp) {
+    const byte PACKET_SIZE = 11 + 6*MEASURES + 1;
     static char packetBuffer[PACKET_SIZE];
 
     // set all bytes in the buffer to 0
@@ -103,7 +107,7 @@ void sendTemp(unsigned int* temp) {
 
     // add measured temperature values
     for (byte c=0; c<MEASURES; c++) {
-        sprintf(11+packetBuffer+5*c, "%04d ", temp[c]);
+        sprintf(11+packetBuffer+6*c, "%+04.1f ", temp[c]);
     }
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
@@ -115,5 +119,19 @@ void sendTemp(unsigned int* temp) {
         Udp.endPacket();
     }
 }
+
+float calcTemp(unsigned int raw) {
+    /*
+       V = Vdd * Rfix / (Rfix + PTC)
+       raw/1024 = V - Voff
+
+       PTC = Vdd*Rfix / V - Rfix
+           = Vdd*Rfix / (raw/1024 + Voff) - Rfix
+     */
+    float ptc = Vdd * Rfix / (raw/1024. + Voff) - Rfix;
+    float temp = 0.001 * ptc - 10;  // [XXX] just a test!!
+    return temp;
+}
+
 
 // vim: sw=4:expandtab:ts=4
