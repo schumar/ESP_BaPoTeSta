@@ -5,7 +5,6 @@
    Martin Schuster 2015
 
 ToDo:
-    use static IP
     check for WiFi status instead of blindly waiting
     figure out best sleep mode
     look for other power-saving measures
@@ -19,9 +18,11 @@ ToDo:
 
 // configuration
 const char ssid[] = "tabr.org";
-IPAddress myAddr(10, 1, 0, 35);
-IPAddress tempServer(10, 1, 0, 9);
-const unsigned int tempPort = 9988;
+IPAddress IPLocal(10, 1, 0, 35);
+IPAddress IPGateway(10, 1, 0, 1);
+IPAddress IPSubnet(255, 255, 255, 0);
+IPAddress IPServer(10, 1, 0, 9);
+const unsigned int portServer = 9988;
 const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
 const byte PIN_BLUELED = 1;
@@ -39,10 +40,11 @@ void setup() {
 
     // start WiFi
     WiFi.mode(WIFI_STA);
+    WiFi.config(IPLocal, IPGW, IPSubnet);
     WiFi.begin(ssid);
 
-    // wait a while for WiFi to associate and get IP
-    delay(2000);
+    // wait a while for WiFi to associate
+    delay(1000);
 
     // get ChipID, will be used as unique ID when sending data
     chipId = ESP.getChipId();
@@ -65,7 +67,6 @@ void loop() {
     // switch off PTC
     digitalWrite(PIN_PTC, LOW);
 
-    delay(1000);
     sendTemp(sensorValue);
 
     // switch off (active low) blue LED to show that we are "off"
@@ -93,7 +94,7 @@ void sendTemp(unsigned int* temp) {
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
 
-    Udp.beginPacket(tempServer, tempPort);
+    Udp.beginPacket(IPServer, portServer);
     Udp.write(packetBuffer, PACKET_SIZE);
     Udp.endPacket();
 }
