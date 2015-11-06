@@ -5,7 +5,6 @@
    Martin Schuster 2015
 
 ToDo:
-    power PTC only when needed
     use static IP
     check for WiFi status instead of blindly waiting
     figure out best sleep mode
@@ -23,6 +22,7 @@ const unsigned int tempPort = 9988;
 const byte MEASURES = 5
 const byte SLEEPSEC = 2
 const byte PIN_LED = 4;
+const byte PIN_PTC = 5;
 
 WiFiUDP Udp;
 unsigned int sensorValue[MEASURES];
@@ -49,11 +49,18 @@ void setup() {
 // this won't actually "loop", as the last command leads to a reset
 void loop() {
 
+    // activate power to PTC
+    pinMode(PIN_PTC, OUTPUT);
+    digitalWrite(PIN_PTC, HIGH);
+
     // measure temp multiple times
     for (byte c=0; c<MEASURES; c++) {
         delay(100);
         sensorValue[c] = analogRead(A0);
     }
+
+    // switch off PTC
+    digitalWrite(PIN_PTC, LOW);
 
     delay(1000);
     sendTemp(sensorValue);
