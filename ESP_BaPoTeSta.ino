@@ -20,7 +20,7 @@ IPAddress myAddr(10, 1, 0, 35);
 IPAddress tempServer(10, 1, 0, 9);
 const unsigned int tempPort = 9988;
 const byte MEASURES = 5;
-const byte SLEEPSEC = 2;
+const byte SLEEPSEC = 20;
 const byte PIN_LED = 4;
 const byte PIN_PTC = 5;
 
@@ -66,7 +66,7 @@ void loop() {
     sendTemp(sensorValue);
 
     // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
-    ESP.deepSleep(10e6 * SLEEPSEC, WAKE_RF_DEFAULT);
+    ESP.deepSleep(1e6 * SLEEPSEC, WAKE_RF_DEFAULT);
 }
 
 
