@@ -21,7 +21,7 @@ IPAddress tempServer(10, 1, 0, 9);
 const unsigned int tempPort = 9988;
 const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
-const byte PIN_LED = 4;
+const byte PIN_BLUELED = 1;
 const byte PIN_PTC = 5;
 
 WiFiUDP Udp;
@@ -30,9 +30,9 @@ unsigned long int chipId;
 
 
 void setup() {
-    // activate LED to show that we are "on"
-    pinMode(PIN_LED, OUTPUT);
-    digitalWrite(PIN_LED, HIGH);
+    // activate (active low) blue LED to show that we are "on"
+    pinMode(PIN_BLUELED, OUTPUT);
+    digitalWrite(PIN_BLUELED, LOW);
 
     // start WiFi
     WiFi.mode(WIFI_STA);
@@ -64,6 +64,9 @@ void loop() {
 
     delay(1000);
     sendTemp(sensorValue);
+
+    // switch off (active low) blue LED to show that we are "off"
+    digitalWrite(PIN_BLUELED, HIGH);
 
     // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
     ESP.deepSleep(1e6 * SLEEPSEC, WAKE_RF_DEFAULT);
