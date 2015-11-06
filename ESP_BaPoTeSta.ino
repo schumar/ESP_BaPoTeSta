@@ -15,7 +15,11 @@ ToDo:
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 
-// configuration
+
+/*
+    CONFIGURATION
+ */
+// network
 const char ssid[] = "tabr.org";
 const char pass[] = "";
 const IPAddress IPLocal(10, 1, 0, 35);
@@ -23,10 +27,16 @@ const IPAddress IPGateway(10, 1, 0, 1);
 const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
-const byte MEASURES = 5;
-const byte SLEEPSEC = 20;
+// hardware
 const byte PIN_BLUELED = 1;
 const byte PIN_PTC = 5;
+// behaviour
+const byte MEASURES = 5;
+const byte SLEEPSEC = 20;
+/*
+    END OF CONFIGURATION
+ */
+
 
 WiFiUDP Udp;
 unsigned int sensorValue[MEASURES];
