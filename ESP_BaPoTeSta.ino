@@ -8,7 +8,22 @@ ToDo:
     look for other power-saving measures
         switch off UART
         put all unused pins into INPUT/OUTPUT/?
-    add timestamp to sent packet (needs NTP)
+    add "timestamp" to sent packet
+        read time + counter from eprom
+        if 0, or counter > 100(?)
+            retrieve time via NTP
+            reset counter
+            write new time to eprom
+        when sending data, use time + counter * (SLEEPSEC + c)
+            c needs to be calibrated (few secs)
+        write counter to eprom
+    CoAP
+        use Discovery to find URI?
+            store URI and expiration-time in eprom
+            if URI not yet known, or expired
+                send out Discovery paket to multicast
+                on reply, store URI and time+maxvalid to eprom
+        Multicast: 224.0.1.187
 
  */
 
