@@ -58,7 +58,7 @@ const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
 // temp calculation
 const float Vdd = 3.3;      // voltage of PIN_PTC when HIGH
-const float Voff = 0.05;    // highest V where ADC still reports "0"
+const float Voff = -0.01;   // highest V where ADC still reports "0"
 const float Rfix = 4.7e3;   // pulldown
 const float PTC_B = 3950;
 const float PTC_R0 = 20e3;
