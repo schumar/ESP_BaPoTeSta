@@ -33,6 +33,7 @@ Pins:
 
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
+#include <math.h>
 
 
 /*
@@ -58,6 +59,8 @@ const byte SLEEPSEC = 20;
 const float Vdd = 3.3;      // voltage of PIN_PTC when HIGH
 const float Voff = 0.05;    // highest V where ADC still reports "0"
 const float Rfix = 4.7e3;   // pulldown
+const float PTC_B = 3950;
+const float PTC_R0 = 20e3;
 /*
     END OF CONFIGURATION
  */
@@ -67,6 +70,7 @@ WiFiUDP Udp;
 float sensorValue[MEASURES];
 unsigned long int chipId;
 
+const float Rinf = PTC_R0*exp(-PTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
@@ -154,9 +158,13 @@ float calcTemp(unsigned int raw) {
 
        PTC = Vdd*Rfix / V - Rfix
            = Vdd*Rfix / (raw/1024 + Voff) - Rfix
+
+       T = B / ln(R/Rinf)
      */
     float ptc = Vdd * Rfix / (raw/1024. + Voff) - Rfix;
-    float temp = 0.001 * ptc - 10;  // [XXX] just a test!!
+    float temp = PTC_B / log(ptc/Rinf) - 273.15;
+    // float temp = raw * 0.01;  // use this to test ADC
+    // float temp = ptc * 1e-3;  // use this to test the PTC
     return temp;
 }
 
