@@ -51,6 +51,7 @@ const byte maxConnRetry = 200;   // in 50ms units!
 const unsigned int noConnSleepSec = 120;
 // hardware
 const byte PIN_BLUELED = 1;
+const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte PIN_PTC = 5;
 // behaviour
 const byte MEASURES = 5;
@@ -75,7 +76,7 @@ const float Rinf = PTC_R0*exp(-PTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 void setup() {
     // activate (active low) blue LED to show that we are "on"
     pinMode(PIN_BLUELED, OUTPUT);
-    digitalWrite(PIN_BLUELED, LOW);
+    digitalWrite(PIN_BLUELED, BLUELED_ON);
 
     // start WiFi
     WiFi.mode(WIFI_STA);
@@ -119,7 +120,7 @@ void loop() {
     sendTemp(sensorValue);
 
     // switch off (active low) blue LED to show that we are "off"
-    digitalWrite(PIN_BLUELED, HIGH);
+    digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
 
     // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
     ESP.deepSleep(1e6 * SLEEPSEC, WAKE_NO_RFCAL);
