@@ -70,6 +70,8 @@ const float NTC_R0 = 20e3;
     END OF CONFIGURATION
  */
 
+void sendTemp(float* temp);
+float calcTemp(unsigned int raw);
 
 WiFiUDP Udp;
 float sensorValue[MEASURES];
