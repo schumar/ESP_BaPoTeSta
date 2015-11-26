@@ -134,7 +134,7 @@ void sendTemp(float* temp) {
 
     // add measured temperature values
     for (byte c=0; c<MEASURES; c++) {
-        sprintf(11+packetBuffer+6*c, "%+04.1f ", temp[c]);
+        sprintf(11+packetBuffer+6*c, "%+04d ", (int)(temp[c]*100));
     }
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
