@@ -25,6 +25,10 @@ ToDo:
                 on reply, store URI and time+maxvalid to eprom
         Multicast: 224.0.1.187
 
+Pins:
+    CH_PD PullUp  GPIO 15 PullDn  GPIO 2 PullUp
+    Normal: GPIO 0 PullUp
+    Upload: GPIO 0 GND
  */
 
 #include <ESP8266WiFi.h>
