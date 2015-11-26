@@ -24,6 +24,10 @@ ToDo:
                 send out Discovery paket to multicast
                 on reply, store URI and time+maxvalid to eprom
         Multicast: 224.0.1.187
+    output decimal
+        "23.45" instead of "2345", by simple string manipulation
+    send 1 value
+        Median
 
 Pins:
     CH_PD PullUp  GPIO 15 PullDn  GPIO 2 PullUp
