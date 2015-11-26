@@ -56,16 +56,16 @@ const unsigned int noConnSleepSec = 120;
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
-const byte PIN_PTC = 5;
+const byte PIN_NTC = 5;
 // behaviour
 const byte MEASURES = 5;
 const byte SLEEPSEC = 20;
 // temp calculation
-const float Vdd = 3.3;      // voltage of PIN_PTC when HIGH
+const float Vdd = 3.3;      // voltage of PIN_NTC when HIGH
 const float Voff = -0.01;   // highest V where ADC still reports "0"
 const float Rfix = 4.7e3;   // pulldown
-const float PTC_B = 3950;
-const float PTC_R0 = 20e3;
+const float NTC_B = 3950;
+const float NTC_R0 = 20e3;
 /*
     END OF CONFIGURATION
  */
@@ -75,7 +75,7 @@ WiFiUDP Udp;
 float sensorValue[MEASURES];
 unsigned long int chipId;
 
-const float Rinf = PTC_R0*exp(-PTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
+const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
@@ -108,9 +108,9 @@ void setup() {
 // this won't actually "loop", as the last command leads to a reset
 void loop() {
 
-    // activate power to PTC
-    pinMode(PIN_PTC, OUTPUT);
-    digitalWrite(PIN_PTC, HIGH);
+    // activate power to NTC
+    pinMode(PIN_NTC, OUTPUT);
+    digitalWrite(PIN_NTC, HIGH);
 
     // measure temp multiple times
     for (byte c=0; c<MEASURES; c++) {
@@ -118,8 +118,8 @@ void loop() {
         sensorValue[c] = calcTemp(analogRead(A0));
     }
 
-    // switch off PTC
-    digitalWrite(PIN_PTC, LOW);
+    // switch off NTC
+    digitalWrite(PIN_NTC, LOW);
 
     sendTemp(sensorValue);
 
@@ -158,18 +158,18 @@ void sendTemp(float* temp) {
 
 float calcTemp(unsigned int raw) {
     /*
-       V = Vdd * Rfix / (Rfix + PTC)
+       V = Vdd * Rfix / (Rfix + NTC)
        raw/1024 = V - Voff
 
-       PTC = Vdd*Rfix / V - Rfix
+       NTC = Vdd*Rfix / V - Rfix
            = Vdd*Rfix / (raw/1024 + Voff) - Rfix
 
        T = B / ln(R/Rinf)
      */
-    float ptc = Vdd * Rfix / (raw/1024. + Voff) - Rfix;
-    float temp = PTC_B / log(ptc/Rinf) - 273.15;
+    float ntc = Vdd * Rfix / (raw/1024. + Voff) - Rfix;
+    float temp = NTC_B / log(ntc/Rinf) - 273.15;
     // float temp = raw * 0.01;  // use this to test ADC
-    // float temp = ptc * 1e-3;  // use this to test the PTC
+    // float temp = ntc * 1e-3;  // use this to test the NTC
     return temp;
 }
 
