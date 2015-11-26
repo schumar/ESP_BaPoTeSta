@@ -46,7 +46,7 @@ const IPAddress IPGateway(10, 1, 0, 1);
 const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
-const byte maxConnRetry = 100;   // in 100ms units!
+const byte maxConnRetry = 200;   // in 50ms units!
 const unsigned int noConnSleepSec = 120;
 // hardware
 const byte PIN_BLUELED = 1;
@@ -86,7 +86,7 @@ void setup() {
     for (byte i = 0;
             i < maxConnRetry && WiFi.status() != WL_CONNECTED;
             i++)
-        delay(100);
+        delay(50);
     // if this didn't work, go back to sleep
     if (WiFi.status() != WL_CONNECTED)
         ESP.deepSleep(1e6 * noConnSleepSec, WAKE_NO_RFCAL);
