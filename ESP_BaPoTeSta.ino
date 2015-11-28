@@ -125,6 +125,9 @@ void loop() {
 
     sendTemp(sensorValue);
 
+    // wait a little bit, to ensure that everything is sent
+    delay(100);
+
     // switch off (active low) blue LED to show that we are "off"
     digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
 
@@ -155,6 +158,7 @@ void sendTemp(float* temp) {
         Udp.beginPacket(IPServer, portServer);
         Udp.write(packetBuffer, PACKET_SIZE);
         Udp.endPacket();
+        delay(50);
     }
 }
 
