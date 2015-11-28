@@ -26,8 +26,6 @@ ToDo:
         Multicast: 224.0.1.187
     output decimal
         "23.45" instead of "2345", by simple string manipulation
-    send 1 value
-        Median
 
 Pins:
     CH_PD PullUp  GPIO 15 PullDn  GPIO 2 PullUp
@@ -70,8 +68,9 @@ const float NTC_R0 = 20e3;
     END OF CONFIGURATION
  */
 
-void sendTemp(float* temp);
+void sendTemp(float temp);
 float calcTemp(unsigned int raw);
+void bubbleSort(float * analogValues);
 
 WiFiUDP Udp;
 float sensorValue[MEASURES];
@@ -123,7 +122,9 @@ void loop() {
     // switch off NTC
     digitalWrite(PIN_NTC, LOW);
 
-    sendTemp(sensorValue);
+    bubbleSort(sensorValue);
+
+    sendTemp(sensorValue[MEASURES/2]);
 
     // wait a little bit, to ensure that everything is sent
     delay(100);
@@ -136,8 +137,8 @@ void loop() {
 }
 
 
-void sendTemp(float* temp) {
-    const byte PACKET_SIZE = 11 + 6*MEASURES + 1;
+void sendTemp(float temp) {
+    const byte PACKET_SIZE = 11 + 6 + 1;
     static char packetBuffer[PACKET_SIZE];
 
     // set all bytes in the buffer to 0
@@ -147,9 +148,8 @@ void sendTemp(float* temp) {
     sprintf(packetBuffer, "0x%08x ", chipId);
 
     // add measured temperature values
-    for (byte c=0; c<MEASURES; c++) {
-        sprintf(11+packetBuffer+6*c, "%+04d ", (int)(temp[c]*100));
-    }
+    sprintf(packetBuffer+11, "%+04d ", (int)(temp*100));
+
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
 
@@ -179,5 +179,18 @@ float calcTemp(unsigned int raw) {
     return temp;
 }
 
+void bubbleSort(float * analogValues) {
+    int out, in, swapper;
+    for(out=0 ; out < MEASURES; out++) {  // outer loop
+        for(in=out; in<(MEASURES-1); in++)  {  // inner loop
+            if( analogValues[in] > analogValues[in+1] ) {   // out of order?
+                // swap them:
+                swapper = analogValues[in];
+                analogValues [in] = analogValues[in+1];
+                analogValues[in+1] = swapper;
+            }
+        }
+    }
+}
 
 // vim: sw=4:expandtab:ts=4
