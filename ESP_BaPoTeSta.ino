@@ -74,7 +74,7 @@ void bubbleSort(float * analogValues);
 
 WiFiUDP Udp;
 float sensorValue[MEASURES];
-unsigned long int chipId;
+// unsigned long int chipId;
 
 const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 
@@ -102,7 +102,7 @@ void setup() {
         ESP.deepSleep(1e6 * noConnSleepSec, WAKE_NO_RFCAL);
 
     // get ChipID, will be used as unique ID when sending data
-    chipId = ESP.getChipId();
+    // chipId = ESP.getChipId();
 }
 
 
@@ -138,17 +138,17 @@ void loop() {
 
 
 void sendTemp(float temp) {
-    const byte PACKET_SIZE = 11 + 6 + 1;
+    const byte PACKET_SIZE = 6 + 1;
     static char packetBuffer[PACKET_SIZE];
 
     // set all bytes in the buffer to 0
     memset(packetBuffer, 0, PACKET_SIZE);
 
     // start data with ChipID (so multiple stations can use the same server)
-    sprintf(packetBuffer, "0x%08x ", chipId);
+    // sprintf(packetBuffer, "0x%08x ", chipId);
 
     // add measured temperature values
-    sprintf(packetBuffer+11, "%+04d ", (int)(temp*100));
+    sprintf(packetBuffer, "%+04d ", (int)(temp*100));
 
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
