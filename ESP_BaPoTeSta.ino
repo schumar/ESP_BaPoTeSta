@@ -117,7 +117,13 @@ void loop() {
     // measure temp multiple times
     for (byte c=0; c<MEASURES; c++) {
         delay(100);
-        sensorValue[c] = calcTemp(analogRead(A0));
+
+        unsigned int adc = analogRead(A0);
+        if (adc == 0 || adc >= 1023)
+            // don't report wrong values, better sleep a little
+            gotoSleep(noConnSleepSec);
+
+        sensorValue[c] = calcTemp(adc);
     }
 
     // switch off NTC
