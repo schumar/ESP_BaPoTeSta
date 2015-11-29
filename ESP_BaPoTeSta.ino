@@ -71,6 +71,7 @@ const float NTC_R0 = 20e3;
 void sendTemp(float temp);
 float calcTemp(unsigned int raw);
 void bubbleSort(float * analogValues);
+void gotoSleep(unsigned int seconds);
 
 WiFiUDP Udp;
 float sensorValue[MEASURES];
@@ -99,7 +100,7 @@ void setup() {
         delay(50);
     // if this didn't work, go back to sleep
     if (WiFi.status() != WL_CONNECTED)
-        ESP.deepSleep(1e6 * noConnSleepSec, WAKE_NO_RFCAL);
+        gotoSleep(noConnSleepSec);
 
     // get ChipID, will be used as unique ID when sending data
     // chipId = ESP.getChipId();
@@ -129,11 +130,7 @@ void loop() {
     // wait a little bit, to ensure that everything is sent
     delay(100);
 
-    // switch off (active low) blue LED to show that we are "off"
-    digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
-
-    // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
-    ESP.deepSleep(1e6 * SLEEPSEC, WAKE_NO_RFCAL);
+    gotoSleep(SLEEPSEC);
 }
 
 
@@ -192,5 +189,15 @@ void bubbleSort(float * analogValues) {
         }
     }
 }
+
+void gotoSleep(unsigned int seconds) {
+    // switch off (active low) blue LED to show that we are "off"
+    digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
+
+    // go to sleep, reboot after 'seconds' seconds
+    // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED
+    ESP.deepSleep(1e6 * seconds, WAKE_NO_RFCAL);
+}
+
 
 // vim: sw=4:expandtab:ts=4
