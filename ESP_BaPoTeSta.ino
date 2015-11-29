@@ -148,7 +148,7 @@ void sendTemp(float temp) {
     // sprintf(packetBuffer, "0x%08x ", chipId);
 
     // add measured temperature values
-    sprintf(packetBuffer, "%+04d ", (int)(temp*100));
+    sprintf(packetBuffer, "%+05d ", (int)(temp*100));
 
     // the buffer now ends with SPC NUL -- change SPC to Newline
     packetBuffer[PACKET_SIZE - 2] = '\n';
