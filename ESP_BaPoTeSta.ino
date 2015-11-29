@@ -24,8 +24,6 @@ ToDo:
                 send out Discovery paket to multicast
                 on reply, store URI and time+maxvalid to eprom
         Multicast: 224.0.1.187
-    output decimal
-        "23.45" instead of "2345", by simple string manipulation
 
 Pins:
     CH_PD PullUp  GPIO 15 PullDn  GPIO 2 PullUp
@@ -141,20 +139,25 @@ void loop() {
 
 
 void sendTemp(float temp) {
-    const byte PACKET_SIZE = 6 + 1;
+    //                    sign digits decimal-dot \n \000
+    const byte PACKET_SIZE = 1 + 4 + 1 + 2;
     static char packetBuffer[PACKET_SIZE];
-
-    // set all bytes in the buffer to 0
-    memset(packetBuffer, 0, PACKET_SIZE);
 
     // start data with ChipID (so multiple stations can use the same server)
     // sprintf(packetBuffer, "0x%08x ", chipId);
 
     // add measured temperature values
-    sprintf(packetBuffer, "%+05d ", (int)(temp*100));
+    sprintf(packetBuffer, "%+05d", (int)(temp*100));
 
-    // the buffer now ends with SPC NUL -- change SPC to Newline
+    // packetBuffer is now "+1234"
+    // add decimal point
+    for (byte i=5; i>3; i--)
+        packetBuffer[i] = packetBuffer[i-1];
+    packetBuffer[3] = '.';
+
+    // end with \n \000
     packetBuffer[PACKET_SIZE - 2] = '\n';
+    packetBuffer[PACKET_SIZE - 1] = '\000';
 
     // send packet (twice, to make sure)
     for (byte i=0; i<2; i++) {
