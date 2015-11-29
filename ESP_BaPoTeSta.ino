@@ -55,7 +55,7 @@ const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte PIN_NTC = 5;
 // behaviour
 const byte MEASURES = 5;
-const byte SLEEPSEC = 300 - 1; // acquisition needs ~1s
+const unsigned int SLEEPSEC = 300 - 1; // acquisition needs ~1s
 // temp calculation
 const float Vdd = 3.3;      // voltage of PIN_NTC when HIGH
 const float Voff = -0.01;   // highest V where ADC still reports "0"
