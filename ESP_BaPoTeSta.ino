@@ -48,14 +48,14 @@ const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
 const byte maxConnRetry = 200;   // in 50ms units!
-const unsigned int noConnSleepSec = 120;
+const unsigned int noConnSleepSec = 600;
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte PIN_NTC = 5;
 // behaviour
 const byte MEASURES = 5;
-const byte SLEEPSEC = 20;
+const byte SLEEPSEC = 300;
 // temp calculation
 const float Vdd = 3.3;      // voltage of PIN_NTC when HIGH
 const float Voff = -0.01;   // highest V where ADC still reports "0"
