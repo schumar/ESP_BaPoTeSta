@@ -24,4 +24,5 @@ see https://github.com/schumar/ESP_BaPoTeSta/issues
 
 ## Thanks
 
-Cheers to [jdunmire](https://github.com/jdunmire/kicad-ESP8266) for his ESP8266 KiCAD library!
+* Many thanks to all the people working on the [Arduino core for ESP8266](https://github.com/esp8266/Arduino)
+* Cheers to [jdunmire](https://github.com/jdunmire/kicad-ESP8266) for his ESP8266 KiCAD library!
