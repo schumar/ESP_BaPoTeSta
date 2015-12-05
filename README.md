@@ -21,3 +21,7 @@ My prototype (using 2 NTCs as cheap sensors and an ESP-201 on an awfully big bre
 ## To Do
 
 see https://github.com/schumar/ESP_BaPoTeSta/issues
+
+## Thanks
+
+Cheers to [jdunmire](https://github.com/jdunmire/kicad-ESP8266) for his ESP8266 KiCAD library!
