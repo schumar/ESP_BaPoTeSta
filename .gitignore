@@ -1,2 +1,4 @@
 *.swp
 *.bak
+*-rescue.lib
+*_pcb-bak
