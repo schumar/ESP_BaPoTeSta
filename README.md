@@ -3,6 +3,7 @@
 ## Intro
 
 Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very cheap and power-efficient WiFi-enabled weather station.
+![BaPoTeSta Board](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg)
 
 ## Current state
 
