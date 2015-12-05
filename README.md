@@ -10,6 +10,10 @@ My prototype (using 2 NTCs as cheap sensors and an ESP-201 on an awfully big bre
 (powered by 3 AAA 850mAh batteries). I started to design a "real" version in KiCAD, and decided to release this WIP.
 "Release early, release often" -- so don't expect to be able to clone this repo and have a working IoThingy 10 minutes later :)
 
+## Screenshot
+
+![RRD Graph](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/temp-weekly.png)
+
 ## Technical details
 
 -> Read the source, stare at my KiCAD schematic :)
