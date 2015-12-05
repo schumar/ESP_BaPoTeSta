@@ -2,3 +2,4 @@
 *.bak
 *-rescue.lib
 *_pcb-bak
+_autosave-*
