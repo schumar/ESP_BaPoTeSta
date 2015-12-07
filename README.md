@@ -22,7 +22,7 @@ My prototype (using 2 NTCs as cheap sensors and an ESP-201 on an awfully big bre
 
 ## BOM
 
-Quick calculation: 10 boards would cost ~6.3 USD (excl. batteries)
+Quick calculation: 10 boards would cost ~6.3 USD each (excl. batteries)
 
 Part|need/board|URL|pcs|total Price|price/board|
 ----|---------:|---|--:|----------:|----------:|
