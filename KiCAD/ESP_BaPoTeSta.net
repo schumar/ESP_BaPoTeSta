@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/ESP_BaPoTeSta.sch)
-    (date "Mon 07 Dec 2015 03:14:11 PM CET")
+    (date "Mon 07 Dec 2015 03:30:40 PM CET")
     (tool "Eeschema 4.0.0-2.201511301921+6191~38~ubuntu15.04.1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -16,7 +16,7 @@
         (comment (number 4) (value "")))))
   (components
     (comp (ref U1)
-      (value MCP1700-3302E/TO)
+      (value MCP1700-3302E)
       (footprint TO_SOT_Packages_THT:TO-92_Inline_Wide)
       (libsource (lib regul) (part MCP1754ST-3302E/MB))
       (sheetpath (names /) (tstamps /))
