@@ -28,10 +28,12 @@ const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
 const byte maxConnRetry = 200;   // in 50ms units!
 const unsigned int noConnSleepSec = 600;
+const unsigned int maxPacketSize = 1400;
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte PIN_NTC = 5;
+unsigned int NTC_ID = 42;
 // behaviour
 const byte MEASURES = 5;
 const unsigned int SLEEPSEC = 307; // not very accurate
@@ -41,20 +43,55 @@ const float Voff = -0.01;   // highest V where ADC still reports "0"
 const float Rfix = 4.7e3;   // pulldown
 const float NTC_B = 3950;
 const float NTC_R0 = 20e3;
+const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 /*
     END OF CONFIGURATION
  */
+
+
+
+enum sensorType {
+    TEMP,
+    BATTERY,
+    HUMIDITY
+};
+
+enum unitType {
+    CENT_DEGC,
+    PERCENT,
+    RAW
+};
+
+struct sensorMeasurement {
+    unsigned int sensorId;
+    enum sensorType type;
+    float value;
+    enum unitType unit;
+};
+
+struct allMeasurements {
+    unsigned long int chipId;
+    unsigned int timestep;
+    byte nrMeasurements;
+    struct sensorMeasurement * sensorMeasurements;
+};
+
+struct sensorMeasurement sensorMeasurements[8];
+struct allMeasurements data;
+
+WiFiUDP Udp;
 
 void sendTemp(float temp);
 float calcTemp(unsigned int raw);
 void bubbleSort(float * analogValues);
 void gotoSleep(unsigned int seconds);
-
-WiFiUDP Udp;
-float sensorValue[MEASURES];
-// unsigned long int chipId;
-
-const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
+void collectData();
+void getNTC();
+void addData(unsigned int sensorId, enum sensorType type,
+        float value, enum unitType unit);
+void sendData();
+void powerSensors(bool on);
+void powerNTC(bool on);
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
@@ -80,72 +117,117 @@ void setup() {
         gotoSleep(noConnSleepSec);
 
     // get ChipID, will be used as unique ID when sending data
-    // chipId = ESP.getChipId();
+    data.chipId = ESP.getChipId();
+
+    data.sensorMeasurements = sensorMeasurements;
 }
 
 
 // this won't actually "loop", as the last command leads to a reset
 void loop() {
+    data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
+    data.nrMeasurements = 0;
 
-    // activate power to NTC
-    pinMode(PIN_NTC, OUTPUT);
-    digitalWrite(PIN_NTC, HIGH);
+    powerSensors(true);     // activate power to sensors
+    collectData();          // make mesurements
+    powerSensors(false);    // deactivate power to sensors again
+
+    sendData();
+
+    // wait a little bit, to ensure that everything is sent
+    delay(100);
+    gotoSleep(SLEEPSEC);
+}
+
+void collectData() {
+    getNTC();
+}
+
+void getNTC() {
+    float sensorValue[MEASURES];
 
     // measure temp multiple times
     for (byte c=0; c<MEASURES; c++) {
         delay(100);
 
         unsigned int adc = analogRead(A0);
-        if (adc == 0 || adc >= 1023)
-            // don't report wrong values, better sleep a little
-            gotoSleep(noConnSleepSec);
+        if (adc == 0 || adc >= 1023) return; // don't report wrong values
 
         sensorValue[c] = calcTemp(adc);
     }
 
-    // switch off NTC
-    digitalWrite(PIN_NTC, LOW);
-
+    // calculate median
     bubbleSort(sensorValue);
-
-    sendTemp(sensorValue[MEASURES/2]);
-
-    // wait a little bit, to ensure that everything is sent
-    delay(100);
-
-    gotoSleep(SLEEPSEC);
+    // as MEASURES is odd, we can just take the middle sample
+    addData(NTC_ID, TEMP, sensorValue[MEASURES/2], CENT_DEGC);
 }
 
+void addData(unsigned int sensorId, enum sensorType type,
+        float value, enum unitType unit) {
+    byte idx = data.nrMeasurements++;
+    sensorMeasurements[idx].sensorId = sensorId;
+    sensorMeasurements[idx].type = type;
+    sensorMeasurements[idx].value = value;
+    sensorMeasurements[idx].unit = unit;
+}
 
-void sendTemp(float temp) {
-    //                    sign digits decimal-dot \n \000
-    const byte PACKET_SIZE = 1 + 4 + 1 + 2;
-    static char packetBuffer[PACKET_SIZE];
+void sendData() {
+    static char packetBuffer[maxPacketSize];
+    unsigned int pos = 0;           // cursor
 
-    // start data with ChipID (so multiple stations can use the same server)
-    // sprintf(packetBuffer, "0x%08x ", chipId);
+    pos +=
+        snprintf(packetBuffer, maxPacketSize - pos,
+                "{\n"
+                "  \"chipId\": 0x%08x,\n"
+                "  \"timestep\": %d,\n",
+                data.chipId, data.timestep);
 
-    // add measured temperature values
-    sprintf(packetBuffer, "%+05d", (int)(temp*100));
+    pos +=
+        snprintf(packetBuffer, maxPacketSize - pos,
+                "  \"measurements\": [\n");
 
-    // packetBuffer is now "+1234"
-    // add decimal point
-    for (byte i=5; i>3; i--)
-        packetBuffer[i] = packetBuffer[i-1];
-    packetBuffer[3] = '.';
+    for (byte i = 0; i < data.nrMeasurements; i++) {
+        pos +=
+            snprintf(packetBuffer, maxPacketSize - pos,
+                    "    {\n"
+                    "      \"sensorId\": 0x%02x,\n"
+                    "      \"sensorType\": %d,\n"
+                    "      \"value\": %d,\n"
+                    "      \"unitType\": %d\n"
+                    "    },\n"
+                    , data.sensorMeasurements[i].sensorId,
+                    data.sensorMeasurements[i].type,
+                    data.sensorMeasurements[i].value,
+                    data.sensorMeasurements[i].unit
+                    );
+    }
 
-    // end with \n \000
-    packetBuffer[PACKET_SIZE - 2] = '\n';
-    packetBuffer[PACKET_SIZE - 1] = '\000';
+    pos +=
+        snprintf(packetBuffer, maxPacketSize - pos,
+                "  ]\n}\n");
+
+    // check that we aren't out-of-bounds
+    if (pos >= maxPacketSize-2) return;
+    packetBuffer[pos++] = '\000';
 
     // send packet (twice, to make sure)
     for (byte i=0; i<2; i++) {
         Udp.beginPacket(IPServer, portServer);
-        Udp.write(packetBuffer, PACKET_SIZE);
+        Udp.write(packetBuffer, pos);
         Udp.endPacket();
         delay(50);
     }
 }
+
+void powerSensors(bool on) {
+    powerNTC(on);
+}
+
+void powerNTC(bool on) {
+    pinMode(PIN_NTC, OUTPUT);
+    digitalWrite(PIN_NTC, on ? HIGH : LOW);
+}
+
 
 float calcTemp(unsigned int raw) {
     /*
