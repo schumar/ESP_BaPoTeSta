@@ -72,10 +72,10 @@ void collectData() {
 }
 
 void getNTC() {
-    float sensorValue[MEASURES];
+    float sensorValue[NTC_MEASURES];
 
     // measure temp multiple times
-    for (byte c=0; c<MEASURES; c++) {
+    for (byte c=0; c<NTC_MEASURES; c++) {
         delay(100);
 
         unsigned int adc = analogRead(A0);
@@ -85,9 +85,9 @@ void getNTC() {
     }
 
     // calculate median
-    bubbleSort(sensorValue);
-    // as MEASURES is odd, we can just take the middle sample
-    addData(NTC_ID, TEMP, sensorValue[MEASURES/2], CENT_DEGC);
+    bubbleSort(sensorValue, NTC_MEASURES);
+    // as NTC_MEASURES is odd, we can just take the middle sample
+    addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], CENT_DEGC);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,
@@ -174,10 +174,10 @@ float calcTemp(unsigned int raw) {
     return temp;
 }
 
-void bubbleSort(float * analogValues) {
+void bubbleSort(float * analogValues, int nr) {
     int out, in, swapper;
-    for(out=0 ; out < MEASURES; out++) {  // outer loop
-        for(in=out; in<(MEASURES-1); in++)  {  // inner loop
+    for(out=0 ; out < nr; out++) {  // outer loop
+        for(in=out; in<(nr-1); in++)  {  // inner loop
             if( analogValues[in] > analogValues[in+1] ) {   // out of order?
                 // swap them:
                 swapper = analogValues[in];

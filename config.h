@@ -17,8 +17,8 @@ const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte PIN_NTC = 5;
 const unsigned int NTC_ID = 42;
+const byte NTC_MEASURES = 5;
 // behaviour
-const byte MEASURES = 5;
 const unsigned int SLEEPSEC = 307; // not very accurate
 // temp calculation
 const float Vdd = 3.3;      // voltage of PIN_NTC when HIGH
