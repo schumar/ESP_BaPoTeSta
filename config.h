@@ -32,6 +32,8 @@ const float Voff = -0.01;   // highest V where ADC still reports "0"
 const bool doNTC = true;
 const bool doNTCraw = true;
 const bool doDallas = true;
+const bool doBattery = true;
+const bool doBattraw = true;
 
 // NTC
 const byte PIN_NTC = 5;
@@ -46,6 +48,9 @@ const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 const byte PIN_DALLAS_POWER = 14;
 const byte PIN_1WIRE = 13;
 const byte DALLAS_RESOLUTION = 12;
+
+// Battery
+const float battDivider = 10/78;    // 68k + 10k
 
 /*
     END OF CONFIGURATION

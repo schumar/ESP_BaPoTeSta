@@ -12,7 +12,7 @@ my $basedir = 'sensors';
 my $graphscript = './tempgraph.sh';
 
 my @sensortype = qw( temp battery humidity );
-my @unittype = qw( centdegc percent raw );
+my @unittype = qw( centdegc percent raw volt );
 
 my $socket = new IO::Socket::INET(
     LocalPort => '9989',

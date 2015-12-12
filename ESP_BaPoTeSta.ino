@@ -82,6 +82,7 @@ void loop() {
 void collectData() {
     if (doNTC) getNTC();
     if (doDallas) getDallas();
+    if (doBattery) getBattery();
 }
 
 void getNTC() {
@@ -122,6 +123,17 @@ int readADC() {
 
     // as ADC_MEASURES is odd, we can just take the middle sample
     return(sensorValue[ADC_MEASURES/2]);
+}
+
+void getBattery() {
+    int raw;
+
+    // Sanity check: We only have 1 ADC, so we can't measure battery AND NTC
+    if (doNTC) return;
+
+    addData(0, BATTERY, calcBattery(raw), VOLT);
+    if (doBattraw)
+        addData(0, BATTERY, raw, RAW);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,
@@ -218,6 +230,17 @@ float calcNTCTemp(unsigned int raw) {
     // float temp = raw * 0.01;  // use this to test ADC
     // float temp = ntc * 1e-3;  // use this to test the NTC
     return temp;
+}
+
+float calcBattery(int raw) {
+    /*
+       V = Vbatt * battDivider
+       raw/1024 = V - Voff
+
+       Vbatt = V / battDivider
+
+     */
+    return ((raw/1024. + Voff) / battDivider);
 }
 
 void bubbleSort(float * analogValues, int nr) {

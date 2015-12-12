@@ -8,7 +8,8 @@ enum sensorType {
 enum unitType {
     CENT_DEGC,
     PERCENT,
-    RAW
+    RAW,
+    VOLT
 };
 
 struct sensorMeasurement {
@@ -28,6 +29,8 @@ struct allMeasurements {
 void sendTemp(float temp);
 float calcNTCTemp(unsigned int raw);
 int readADC();
+void getBattery();
+float calcBattery(int raw);
 void bubbleSort(float * analogValues, int nr);
 void bubbleSort(int * analogValues, int nr);
 void gotoSleep(unsigned int seconds);
