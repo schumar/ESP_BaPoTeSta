@@ -13,13 +13,18 @@ Pins:
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <math.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 #include "config.h"
 #include "ESP_BaPoTeSta.h"
 
+// globals
 struct sensorMeasurement sensorMeasurements[8];
 struct allMeasurements data;
 WiFiUDP Udp;
+OneWire oneWire(2);
+DallasTemperature dallasSensors(&oneWire);
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
@@ -37,6 +42,10 @@ void setup() {
 
     // now is a perfect time for "other" stuff, as WiFi will need some time
     // to associate
+
+    // setup Dallas sensors
+    dallasSensors.begin();
+    dallasSensors.setResolution(DALLAS_RESOLUTION);
 
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
@@ -72,6 +81,7 @@ void loop() {
 
 void collectData() {
     if (doNTC) getNTC();
+    if (doDallas) getDallas();
 }
 
 void getNTC() {
@@ -93,6 +103,20 @@ void getNTC() {
     addData(NTC_ID, TEMP, calcTemp(sensorValue[NTC_MEASURES/2]), CENT_DEGC);
     if (doNTCraw)
         addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], RAW);
+}
+
+void getDallas() {
+    uint8_t addr[8];
+    float temp;
+
+    // try to find address of first sensor
+    if (dallasSensors.getAddress(addr, 0) == 0) return;
+
+    dallasSensors.requestTemperaturesByAddress(addr);
+    temp = dallasSensors.getTempC(addr);
+
+    // use last two byte of serial as ID (addr[0] is "family code")
+    addData(addr[2]<<8 + addr[1], TEMP, temp * 100.0, CENT_DEGC);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,
@@ -154,11 +178,17 @@ void sendData() {
 
 void powerSensors(bool on) {
     if (doNTC) powerNTC(on);
+    if (doDallas) powerDallas(on);
 }
 
 void powerNTC(bool on) {
     pinMode(PIN_NTC, OUTPUT);
     digitalWrite(PIN_NTC, on ? HIGH : LOW);
+}
+
+void powerDallas(bool on) {
+    pinMode(PIN_DALLAS, OUTPUT);
+    digitalWrite(PIN_DALLAS, on ? HIGH : LOW);
 }
 
 

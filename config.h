@@ -21,6 +21,7 @@ const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 // Sensors
 const bool doNTC = true;
 const bool doNTCraw = true;
+const bool doDallas = true;
 
 // NTC
 const byte PIN_NTC = 5;
@@ -33,6 +34,11 @@ const float Rfix = 4.7e3;   // pulldown
 const float NTC_B = 3950;
 const float NTC_R0 = 20e3;
 const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
+
+// Dallas
+const byte PIN_DALLAS = 14;
+const byte DALLAS_RESOLUTION = 12;
+
 /*
     END OF CONFIGURATION
  */

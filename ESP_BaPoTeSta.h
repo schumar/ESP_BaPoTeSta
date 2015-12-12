@@ -32,8 +32,10 @@ void bubbleSort(int * analogValues, int nr);
 void gotoSleep(unsigned int seconds);
 void collectData();
 void getNTC();
+void getDallas();
 void addData(unsigned int sensorId, enum sensorType type,
         float value, enum unitType unit);
 void sendData();
 void powerSensors(bool on);
 void powerNTC(bool on);
+void powerDallas(bool on);
