@@ -188,6 +188,20 @@ void bubbleSort(float * analogValues, int nr) {
     }
 }
 
+void bubbleSort(int * analogValues, int nr) {
+    int out, in, swapper;
+    for(out=0 ; out < nr; out++) {  // outer loop
+        for(in=out; in<(nr-1); in++)  {  // inner loop
+            if( analogValues[in] > analogValues[in+1] ) {   // out of order?
+                // swap them:
+                swapper = analogValues[in];
+                analogValues [in] = analogValues[in+1];
+                analogValues[in+1] = swapper;
+            }
+        }
+    }
+}
+
 void gotoSleep(unsigned int seconds) {
     // switch off (active low) blue LED to show that we are "off"
     digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
