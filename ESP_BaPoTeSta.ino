@@ -100,7 +100,7 @@ void getNTC() {
     // calculate median
     bubbleSort(sensorValue, NTC_MEASURES);
     // as NTC_MEASURES is odd, we can just take the middle sample
-    addData(NTC_ID, TEMP, calcTemp(sensorValue[NTC_MEASURES/2]), CENT_DEGC);
+    addData(NTC_ID, TEMP, calcNTCTemp(sensorValue[NTC_MEASURES/2]), CENT_DEGC);
     if (doNTCraw)
         addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], RAW);
 }
@@ -194,7 +194,7 @@ void powerDallas(bool on) {
 }
 
 
-float calcTemp(unsigned int raw) {
+float calcNTCTemp(unsigned int raw) {
     /*
        V = Vdd * Rfix / (Rfix + NTC)
        raw/1024 = V - Voff
