@@ -18,6 +18,9 @@ const unsigned int SLEEPSEC = 307; // not very accurate
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 
+// Sensors
+const bool doNTC = true;
+
 // NTC
 const byte PIN_NTC = 5;
 const unsigned int NTC_ID = 42;

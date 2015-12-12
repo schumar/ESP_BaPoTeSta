@@ -68,7 +68,7 @@ void loop() {
 }
 
 void collectData() {
-    getNTC();
+    if (doNTC) getNTC();
 }
 
 void getNTC() {
@@ -148,7 +148,7 @@ void sendData() {
 }
 
 void powerSensors(bool on) {
-    powerNTC(on);
+    if (doNTC) powerNTC(on);
 }
 
 void powerNTC(bool on) {
