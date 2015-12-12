@@ -137,7 +137,7 @@ void sendData() {
     pos +=
         snprintf(packetBuffer, maxPacketSize - pos,
                 "{\n"
-                "  \"chipId\": 0x%08x,\n"
+                "  \"chipId\": %d,\n"
                 "  \"timestep\": %d,\n",
                 data.chipId, data.timestep);
 
@@ -146,14 +146,18 @@ void sendData() {
                 "  \"measurements\": [\n");
 
     for (byte i = 0; i < data.nrMeasurements; i++) {
+        // if this isn't the first measurement, put a comma between the previous
+        // and this one
+        pos += snprintf(packetBuffer, maxPacketSize - pos, ",\n");
+
         pos +=
             snprintf(packetBuffer, maxPacketSize - pos,
                     "    {\n"
-                    "      \"sensorId\": 0x%02x,\n"
+                    "      \"sensorId\": %d,\n"
                     "      \"sensorType\": %d,\n"
                     "      \"value\": %d,\n"
                     "      \"unitType\": %d\n"
-                    "    },\n"
+                    "    }"
                     , data.sensorMeasurements[i].sensorId,
                     data.sensorMeasurements[i].type,
                     data.sensorMeasurements[i].value,
@@ -163,7 +167,7 @@ void sendData() {
 
     pos +=
         snprintf(packetBuffer, maxPacketSize - pos,
-                "  ]\n}\n");
+                "\n  ]\n}\n");
 
     // check that we aren't out-of-bounds
     if (pos >= maxPacketSize-2) return;
