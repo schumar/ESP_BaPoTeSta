@@ -35,6 +35,13 @@ void setup() {
         WiFi.begin(ssid, pass);
     }
 
+    // now is a perfect time for "other" stuff, as WiFi will need some time
+    // to associate
+
+    // get ChipID, will be used as unique ID when sending data
+    data.chipId = ESP.getChipId();
+    data.sensorMeasurements = sensorMeasurements;
+
     // wait until WiFi is connected, but max maxConnRetry
     for (byte i = 0;
             i < maxConnRetry && WiFi.status() != WL_CONNECTED;
@@ -44,10 +51,6 @@ void setup() {
     if (WiFi.status() != WL_CONNECTED)
         gotoSleep(noConnSleepSec);
 
-    // get ChipID, will be used as unique ID when sending data
-    data.chipId = ESP.getChipId();
-
-    data.sensorMeasurements = sensorMeasurements;
 }
 
 
