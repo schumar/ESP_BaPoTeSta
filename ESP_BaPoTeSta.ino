@@ -23,7 +23,7 @@ Pins:
 struct sensorMeasurement sensorMeasurements[maxSensors];
 struct allMeasurements data;
 WiFiUDP Udp;
-OneWire oneWire(2);
+OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
 
 void setup() {
@@ -189,8 +189,8 @@ void powerNTC(bool on) {
 }
 
 void powerDallas(bool on) {
-    pinMode(PIN_DALLAS, OUTPUT);
-    digitalWrite(PIN_DALLAS, on ? HIGH : LOW);
+    pinMode(PIN_DALLAS_POWER, OUTPUT);
+    digitalWrite(PIN_DALLAS_POWER, on ? HIGH : LOW);
 }
 
 

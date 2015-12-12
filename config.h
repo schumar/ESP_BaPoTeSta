@@ -37,7 +37,8 @@ const float NTC_R0 = 20e3;
 const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 
 // Dallas
-const byte PIN_DALLAS = 14;
+const byte PIN_DALLAS_POWER = 14;
+const byte PIN_1WIRE = 13;
 const byte DALLAS_RESOLUTION = 12;
 
 /*
