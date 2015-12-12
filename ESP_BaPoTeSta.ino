@@ -20,7 +20,7 @@ Pins:
 #include "ESP_BaPoTeSta.h"
 
 // globals
-struct sensorMeasurement sensorMeasurements[8];
+struct sensorMeasurement sensorMeasurements[maxSensors];
 struct allMeasurements data;
 WiFiUDP Udp;
 OneWire oneWire(2);
@@ -122,6 +122,8 @@ void getDallas() {
 void addData(unsigned int sensorId, enum sensorType type,
         float value, enum unitType unit) {
     byte idx = data.nrMeasurements++;
+    if (idx >= maxSensors) return;
+
     sensorMeasurements[idx].sensorId = sensorId;
     sensorMeasurements[idx].type = type;
     sensorMeasurements[idx].value = value;

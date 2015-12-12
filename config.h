@@ -14,6 +14,7 @@ const unsigned int maxPacketSize = 1400;
 const byte maxConnRetry = 200;   // in 50ms units!
 const unsigned int noConnSleepSec = 600;
 const unsigned int SLEEPSEC = 307; // not very accurate
+const byte maxSensors = 8;
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
