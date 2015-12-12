@@ -10,11 +10,17 @@ const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
 const unsigned int portServer = 9988;
 const unsigned int maxPacketSize = 1400;
+
 // behaviour/timing
-const byte maxConnRetry = 200;   // in 50ms units!
+const byte sleepWifiCheck = 50;     // ms to sleep between checks if associated
+const byte maxConnRetry = 200;      // how many sleepWifiCheck sleeps
 const unsigned int noConnSleepSec = 600;
 const unsigned int SLEEPSEC = 307; // not very accurate
+const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
+const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
+const byte sleepUDP = 50;           // ms to sleep after each UDP packet
 const byte maxSensors = 8;
+
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW

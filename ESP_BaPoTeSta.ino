@@ -55,7 +55,7 @@ void setup() {
     for (byte i = 0;
             i < maxConnRetry && WiFi.status() != WL_CONNECTED;
             i++)
-        delay(50);
+        delay(sleepWifiCheck);
     // if this didn't work, go back to sleep
     if (WiFi.status() != WL_CONNECTED)
         gotoSleep(noConnSleepSec);
@@ -75,7 +75,7 @@ void loop() {
     sendData();
 
     // wait a little bit, to ensure that everything is sent
-    delay(100);
+    delay(sleepEnd);
     gotoSleep(SLEEPSEC);
 }
 
@@ -89,7 +89,7 @@ void getNTC() {
 
     // measure temp multiple times
     for (byte c=0; c<NTC_MEASURES; c++) {
-        delay(100);
+        delay(sleepADCmeasure);
 
         unsigned int adc = analogRead(A0);
         if (adc == 0 || adc >= 1023) return; // don't report wrong values
@@ -174,7 +174,7 @@ void sendData() {
         Udp.beginPacket(IPServer, portServer);
         Udp.write(packetBuffer, pos);
         Udp.endPacket();
-        delay(50);
+        delay(sleepUDP);
     }
 }
 
