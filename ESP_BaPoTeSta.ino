@@ -85,24 +85,13 @@ void collectData() {
 }
 
 void getNTC() {
-    int sensorValue[NTC_MEASURES];
+    int raw;
 
-    // measure temp multiple times
-    for (byte c=0; c<NTC_MEASURES; c++) {
-        delay(sleepADCmeasure);
+    raw = readADC();
 
-        unsigned int adc = analogRead(A0);
-        if (adc == 0 || adc >= 1023) return; // don't report wrong values
-
-        sensorValue[c] = adc;
-    }
-
-    // calculate median
-    bubbleSort(sensorValue, NTC_MEASURES);
-    // as NTC_MEASURES is odd, we can just take the middle sample
-    addData(NTC_ID, TEMP, calcNTCTemp(sensorValue[NTC_MEASURES/2]), CENT_DEGC);
+    addData(NTC_ID, TEMP, calcNTCTemp(raw), CENT_DEGC);
     if (doNTCraw)
-        addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], RAW);
+        addData(NTC_ID, TEMP, raw, RAW);
 }
 
 void getDallas() {
@@ -117,6 +106,22 @@ void getDallas() {
 
     // use last two byte of serial as ID (addr[0] is "family code")
     addData(addr[2]<<8 + addr[1], TEMP, temp * 100.0, CENT_DEGC);
+}
+
+int readADC() {
+    int sensorValue[ADC_MEASURES];
+
+    // measure multiple times
+    for (byte c=0; c<ADC_MEASURES; c++) {
+        delay(sleepADCmeasure);
+        sensorValue[c] = analogRead(A0);
+    }
+
+    // calculate median
+    bubbleSort(sensorValue, ADC_MEASURES);
+
+    // as ADC_MEASURES is odd, we can just take the middle sample
+    return(sensorValue[ADC_MEASURES/2]);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,

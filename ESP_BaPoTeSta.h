@@ -27,6 +27,7 @@ struct allMeasurements {
 
 void sendTemp(float temp);
 float calcNTCTemp(unsigned int raw);
+int readADC();
 void bubbleSort(float * analogValues, int nr);
 void bubbleSort(int * analogValues, int nr);
 void gotoSleep(unsigned int seconds);

@@ -24,6 +24,9 @@ const byte maxSensors = 8;
 // hardware
 const byte PIN_BLUELED = 1;
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
+const byte ADC_MEASURES = 5;
+const float Vdd = 3.3;
+const float Voff = -0.01;   // highest V where ADC still reports "0"
 
 // Sensors
 const bool doNTC = true;
@@ -33,10 +36,7 @@ const bool doDallas = true;
 // NTC
 const byte PIN_NTC = 5;
 const unsigned int NTC_ID = 42;
-const byte NTC_MEASURES = 5;
 // temp calculation
-const float Vdd = 3.3;      // voltage of PIN_NTC when HIGH
-const float Voff = -0.01;   // highest V where ADC still reports "0"
 const float Rfix = 4.7e3;   // pulldown
 const float NTC_B = 3950;
 const float NTC_R0 = 20e3;
