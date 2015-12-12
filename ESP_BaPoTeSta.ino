@@ -72,7 +72,7 @@ void collectData() {
 }
 
 void getNTC() {
-    float sensorValue[NTC_MEASURES];
+    int sensorValue[NTC_MEASURES];
 
     // measure temp multiple times
     for (byte c=0; c<NTC_MEASURES; c++) {
@@ -81,13 +81,15 @@ void getNTC() {
         unsigned int adc = analogRead(A0);
         if (adc == 0 || adc >= 1023) return; // don't report wrong values
 
-        sensorValue[c] = calcTemp(adc);
+        sensorValue[c] = adc;
     }
 
     // calculate median
     bubbleSort(sensorValue, NTC_MEASURES);
     // as NTC_MEASURES is odd, we can just take the middle sample
-    addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], CENT_DEGC);
+    addData(NTC_ID, TEMP, calcTemp(sensorValue[NTC_MEASURES/2]), CENT_DEGC);
+    if (doNTCraw)
+        addData(NTC_ID, TEMP, sensorValue[NTC_MEASURES/2], RAW);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,

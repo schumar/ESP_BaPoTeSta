@@ -20,6 +20,7 @@ const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 
 // Sensors
 const bool doNTC = true;
+const bool doNTCraw = true;
 
 // NTC
 const byte PIN_NTC = 5;
