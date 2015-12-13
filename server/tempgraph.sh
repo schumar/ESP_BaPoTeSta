@@ -20,10 +20,10 @@ rrdtool graph ${out}-daily.png \
     AREA:sunnybar#ffff8060::skipscale \
     AREA:temp#aaaaaa80 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
-    COMMENT:"Min\:" GPRINT:min:"%2.1lf  " \
-    COMMENT:"Avg\:" GPRINT:avg:"%2.1lf  " \
-    COMMENT:"Max\:" GPRINT:max:"%2.1lf  " \
-    COMMENT:"Now\:" GPRINT:lst:"%2.1lf\l" \
+    COMMENT:"Min\:" GPRINT:min:"%5.1lf  " \
+    COMMENT:"Avg\:" GPRINT:avg:"%5.1lf  " \
+    COMMENT:"Max\:" GPRINT:max:"%5.1lf  " \
+    COMMENT:"Now\:" GPRINT:lst:"%5.1lf\l" \
     COMMENT:"     " LINE1:vortag#0000ff88:"Vortag\l" \
     SHIFT:smooth:-1800 \
     COMMENT:"     " LINE2:smooth#ff000088:"Stundenschnitt\l" \
@@ -44,10 +44,10 @@ rrdtool graph ${out}-weekly.png \
     AREA:sunnybar#ffff8060::skipscale \
     AREA:temp\#00000020 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
-    COMMENT:"Min\:" GPRINT:min:"%2.1lf  " \
-    COMMENT:"Avg\:" GPRINT:avg:"%2.1lf  " \
-    COMMENT:"Max\:" GPRINT:max:"%2.1lf  " \
-    COMMENT:"Now\:" GPRINT:lst:"%2.1lf\l" \
+    COMMENT:"Min\:" GPRINT:min:"%5.1lf  " \
+    COMMENT:"Avg\:" GPRINT:avg:"%5.1lf  " \
+    COMMENT:"Max\:" GPRINT:max:"%5.1lf  " \
+    COMMENT:"Now\:" GPRINT:lst:"%5.1lf\l" \
     COMMENT:"     " LINE1:vortag#0000ff88:"Vorwoche\l" \
     SHIFT:smooth:-43200 \
     COMMENT:"     " LINE2:smooth#ff000088:"Tagesschnitt\l" \
