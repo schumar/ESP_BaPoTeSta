@@ -15,7 +15,7 @@ enum unitType {
 struct sensorMeasurement {
     unsigned int sensorId;
     enum sensorType type;
-    float value;
+    int value;
     enum unitType unit;
 };
 
@@ -38,7 +38,7 @@ void collectData();
 void getNTC();
 void getDallas();
 void addData(unsigned int sensorId, enum sensorType type,
-        float value, enum unitType unit);
+        int value, enum unitType unit);
 void sendData();
 void powerSensors(bool on);
 void powerNTC(bool on);

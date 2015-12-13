@@ -90,7 +90,7 @@ void getNTC() {
 
     raw = readADC();
 
-    addData(NTC_ID, TEMP, calcNTCTemp(raw), CENT_DEGC);
+    addData(NTC_ID, TEMP, (int) (100.0*calcNTCTemp(raw)), CENT_DEGC);
     if (doNTCraw)
         addData(NTC_ID, TEMP, raw, RAW);
 }
@@ -106,7 +106,7 @@ void getDallas() {
     temp = dallasSensors.getTempC(addr);
 
     // use last two byte of serial as ID (addr[0] is "family code")
-    addData(addr[2]<<8 + addr[1], TEMP, temp * 100.0, CENT_DEGC);
+    addData(addr[2]<<8 + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
 }
 
 int readADC() {
@@ -137,7 +137,7 @@ void getBattery() {
 }
 
 void addData(unsigned int sensorId, enum sensorType type,
-        float value, enum unitType unit) {
+        int value, enum unitType unit) {
     byte idx = data.nrMeasurements++;
     if (idx >= maxSensors) return;
 
