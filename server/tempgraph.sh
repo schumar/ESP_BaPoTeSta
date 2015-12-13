@@ -42,7 +42,7 @@ rrdtool graph ${out}-weekly.png \
     CDEF:vortag=603000,1,3600,temp,PREDICT \
     CDEF:sunnybar=sunny,100,* \
     AREA:sunnybar#ffff8060::skipscale \
-    AREA:temp\#00000020 \
+    AREA:temp\#aaaaaa80 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
     COMMENT:"Min\:" GPRINT:min:"%5.1lf  " \
     COMMENT:"Avg\:" GPRINT:avg:"%5.1lf  " \
