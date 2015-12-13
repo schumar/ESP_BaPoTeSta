@@ -19,16 +19,15 @@ rrdtool graph ${out}-daily.png \
     CDEF:sunnybar=sunny,50,* \
     AREA:sunnybar#ffff8060::skipscale \
     AREA:temp#aaaaaa80 \
-    LINE1:vortag#0000ff88 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
     COMMENT:"Min\:" GPRINT:min:"%2.1lf  " \
     COMMENT:"Avg\:" GPRINT:avg:"%2.1lf  " \
     COMMENT:"Max\:" GPRINT:max:"%2.1lf  " \
     COMMENT:"Now\:" GPRINT:lst:"%2.1lf\l" \
+    COMMENT:"     " LINE1:vortag#0000ff88:"Vortag\l" \
     SHIFT:smooth:-1800 \
     COMMENT:"     " LINE2:smooth#ff000088:"Stundenschnitt\l" \
     COMMENT:"     " LINE1:exttemp#000000:"Temperatur (extern)\l"
-    #COMMENT:"     " LINE1::"Vortag\l" \
 
 rrdtool graph ${out}-weekly.png \
     --end now --start end-7d \
@@ -40,13 +39,12 @@ rrdtool graph ${out}-weekly.png \
     CDEF:smooth=temp,86400,TRENDNAN \
     CDEF:vortag=603000,1,3600,temp,PREDICT \
     AREA:temp\#00000020 \
-    LINE1:vortag#0000ff88 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
     COMMENT:"Min\:" GPRINT:min:"%2.1lf  " \
     COMMENT:"Avg\:" GPRINT:avg:"%2.1lf  " \
     COMMENT:"Max\:" GPRINT:max:"%2.1lf  " \
     COMMENT:"Now\:" GPRINT:lst:"%2.1lf\l" \
+    COMMENT:"     " LINE1:vortag#0000ff88:"Vorwoche\l" \
     SHIFT:smooth:-43200 \
     COMMENT:"     " LINE2:smooth#ff000088:"Tagesschnitt\l"
-    #COMMENT:"     " LINE0:0#0000ff88:"Vorwoche\l"
 
