@@ -1,7 +1,7 @@
 #!/bin/bash
 
 out='tempgraphs/temp'
-rrd='temp.rrd'
+rrddir='sensors/chip-12345678/';
 wunder='wunder.rrd'
 
 
@@ -10,7 +10,7 @@ rrdtool graph ${out}-daily.png \
     --title 'Temperatur Hasengehege (Tag)' --vertical-label Celsius \
     --width 800 --height 500 --upper-limit 20 --lower-limit -4 \
     --slope-mode --imgformat PNG \
-    DEF:cent="$rrd":temp:AVERAGE:start=end-49h CDEF:temp=cent,100,/ \
+    DEF:cent="$sensor1":value:AVERAGE:start=end-49h CDEF:temp=cent,100,/ \
     DEF:exttemp="$wunder":temp:AVERAGE:start=end-49h \
     DEF:sunny="$wunder":sunup:MAX:start=end-49h \
     VDEF:avg=temp,AVERAGE VDEF:min=temp,MINIMUM VDEF:max=temp,MAXIMUM VDEF:lst=temp,LAST \
@@ -34,7 +34,7 @@ rrdtool graph ${out}-weekly.png \
     --title 'Temperatur Hasengehege (Woche)' --vertical-label Celsius \
     --width 800 --height 300 --upper-limit 20 --lower-limit -4 \
     --slope-mode --imgformat PNG \
-    DEF:cent="$rrd":temp:AVERAGE:start=end-15d CDEF:temp=cent,100,/ \
+    DEF:cent="$sensor1":value:AVERAGE:start=end-15d CDEF:temp=cent,100,/ \
     DEF:exttemp="$wunder":temp:AVERAGE:start=end-8d \
     DEF:sunny="$wunder":sunup:MAX:start=end-8d \
     VDEF:avg=temp,AVERAGE VDEF:min=temp,MINIMUM VDEF:max=temp,MAXIMUM VDEF:lst=temp,LAST \
