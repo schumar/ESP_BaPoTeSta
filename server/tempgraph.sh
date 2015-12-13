@@ -35,9 +35,13 @@ rrdtool graph ${out}-weekly.png \
     --width 800 --height 300 --upper-limit 20 --lower-limit -4 \
     --slope-mode --imgformat PNG \
     DEF:cent="$rrd":temp:AVERAGE:start=end-15d CDEF:temp=cent,100,/ \
+    DEF:exttemp="$wunder":temp:AVERAGE:start=end-8d \
+    DEF:sunny="$wunder":sunup:MAX:start=end-8d \
     VDEF:avg=temp,AVERAGE VDEF:min=temp,MINIMUM VDEF:max=temp,MAXIMUM VDEF:lst=temp,LAST \
     CDEF:smooth=temp,86400,TRENDNAN \
     CDEF:vortag=603000,1,3600,temp,PREDICT \
+    CDEF:sunnybar=sunny,100,* \
+    AREA:sunnybar#ffff8060::skipscale \
     AREA:temp\#00000020 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
     COMMENT:"Min\:" GPRINT:min:"%2.1lf  " \
@@ -46,5 +50,6 @@ rrdtool graph ${out}-weekly.png \
     COMMENT:"Now\:" GPRINT:lst:"%2.1lf\l" \
     COMMENT:"     " LINE1:vortag#0000ff88:"Vorwoche\l" \
     SHIFT:smooth:-43200 \
-    COMMENT:"     " LINE2:smooth#ff000088:"Tagesschnitt\l"
+    COMMENT:"     " LINE2:smooth#ff000088:"Tagesschnitt\l" \
+    COMMENT:"     " LINE1:exttemp#000000:"Temperatur (extern)\l"
 
