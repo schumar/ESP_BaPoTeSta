@@ -152,23 +152,23 @@ void sendData() {
     unsigned int pos = 0;           // cursor
 
     pos +=
-        snprintf(packetBuffer, maxPacketSize - pos,
+        snprintf(packetBuffer+pos, maxPacketSize - pos,
                 "{\n"
                 "  \"chipId\": %d,\n"
                 "  \"timestep\": %d,\n",
                 data.chipId, data.timestep);
 
     pos +=
-        snprintf(packetBuffer, maxPacketSize - pos,
+        snprintf(packetBuffer+pos, maxPacketSize - pos,
                 "  \"measurements\": [\n");
 
     for (byte i = 0; i < data.nrMeasurements; i++) {
         // if this isn't the first measurement, put a comma between the previous
         // and this one
-        pos += snprintf(packetBuffer, maxPacketSize - pos, ",\n");
+        pos += snprintf(packetBuffer+pos, maxPacketSize - pos, ",\n");
 
         pos +=
-            snprintf(packetBuffer, maxPacketSize - pos,
+            snprintf(packetBuffer+pos, maxPacketSize - pos,
                     "    {\n"
                     "      \"sensorId\": %d,\n"
                     "      \"sensorType\": %d,\n"
@@ -183,7 +183,7 @@ void sendData() {
     }
 
     pos +=
-        snprintf(packetBuffer, maxPacketSize - pos,
+        snprintf(packetBuffer+pos, maxPacketSize - pos,
                 "\n  ]\n}\n");
 
     // check that we aren't out-of-bounds
