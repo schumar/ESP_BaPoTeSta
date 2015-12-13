@@ -16,7 +16,7 @@ rrdtool graph ${out}-daily.png \
     VDEF:avg=temp,AVERAGE VDEF:min=temp,MINIMUM VDEF:max=temp,MAXIMUM VDEF:lst=temp,LAST \
     CDEF:smooth=temp,3600,TRENDNAN \
     CDEF:vortag=84600,1,3600,temp,PREDICT \
-    CDEF:sunnybar=sunny,50,* \
+    CDEF:sunnybar=sunny,100,* \
     AREA:sunnybar#ffff8060::skipscale \
     AREA:temp#aaaaaa80 \
     COMMENT:"     " LINE2:temp#008800:"Temperatur    " \
