@@ -54,7 +54,7 @@ while(1)
     #   ]
     # }
 
-    my $chipdir = sprintf '%s/chip-%08x', $basedir, $1;
+    my $chipdir = sprintf '%s/chip-%08x', $basedir, $$data{'chipId'};
     mkdir $chipdir if ! -d $chipdir;
 
     foreach my $measurement (@{$$data{'measurements'}}) {
