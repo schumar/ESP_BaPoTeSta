@@ -165,7 +165,8 @@ void sendData() {
     for (byte i = 0; i < data.nrMeasurements; i++) {
         // if this isn't the first measurement, put a comma between the previous
         // and this one
-        pos += snprintf(packetBuffer+pos, maxPacketSize - pos, ",\n");
+        if (i>0)
+            pos += snprintf(packetBuffer+pos, maxPacketSize - pos, ",\n");
 
         pos +=
             snprintf(packetBuffer+pos, maxPacketSize - pos,
