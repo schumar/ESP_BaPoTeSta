@@ -48,6 +48,7 @@ const float Rinf = NTC_R0*exp(-NTC_B/298.15);  // (T0 = 25 + 273.15 = 298.15)
 const byte PIN_DALLAS_POWER = 14;
 const byte PIN_1WIRE = 13;
 const byte DALLAS_RESOLUTION = 12;
+const bool DALLAS_CHECKCONVERSION = false;  // set to false if sensor returns 85
 
 // Battery
 const float battDivider = 10/78;    // 68k + 10k

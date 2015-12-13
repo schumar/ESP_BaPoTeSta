@@ -46,6 +46,7 @@ void setup() {
     // setup Dallas sensors
     dallasSensors.begin();
     dallasSensors.setResolution(DALLAS_RESOLUTION);
+    dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
 
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
