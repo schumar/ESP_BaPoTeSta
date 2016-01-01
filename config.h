@@ -34,6 +34,8 @@ const bool doNTCraw = true;
 const bool doDallas = true;
 const bool doBattery = true;
 const bool doBattraw = true;
+const bool doPerf = true;
+const bool doPerfraw = true;
 
 // NTC
 const byte PIN_NTC = 5;

@@ -97,6 +97,7 @@ void collectData() {
     if (doNTC) getNTC();
     if (doDallas) getDallas();
     if (doBattery) getBattery();
+    if (doPerf) getPerf();
 }
 
 void getNTC() {
@@ -148,6 +149,15 @@ void getBattery() {
     addData(0, BATTERY, calcBattery(raw), VOLT);
     if (doBattraw)
         addData(0, BATTERY, raw, RAW);
+}
+
+void getPerf() {
+    // simple "measure" the number of CPU cycles since bootup
+    unsigned long int cycles;
+    cycles = ESP.getCycleCount();
+    addData(0, TIME, cycles/(F_CPU/1e6), USEC);
+    if (doPerfraw)
+        addData(0, TIME, cycles, RAW);
 }
 
 void addData(unsigned int sensorId, enum sensorType type,

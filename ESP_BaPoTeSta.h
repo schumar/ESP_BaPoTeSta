@@ -54,6 +54,7 @@ void gotoSleep(unsigned int seconds);
 void collectData();
 void getNTC();
 void getDallas();
+void getPerf();
 void addData(unsigned int sensorId, enum sensorType type,
         int value, enum unitType unit);
 void sendData();
