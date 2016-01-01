@@ -29,6 +29,8 @@ OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
 
 void setup() {
+    char idBuffer[32];
+
     // activate (active low) blue LED to show that we are "on"
     pinMode(PIN_BLUELED, OUTPUT);
     digitalWrite(PIN_BLUELED, BLUELED_ON);
@@ -65,6 +67,8 @@ void setup() {
 
     // connect to MQTT server
     mqttClient.setServer(IPServer, portServer);
+    sprintf(idBuffer, "esp8266-%08x", data.chipId);
+    mqttClient.connect(idBuffer);
 
 }
 
