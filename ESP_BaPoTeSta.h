@@ -2,27 +2,31 @@
 enum sensorType {
     TEMP,
     BATTERY,
-    HUMIDITY
+    HUMIDITY,
+    TIME
 };
 
-const char* sensorTypeName[3] = {
+const char* sensorTypeName[] = {
     "temp",
     "battery",
-    "humidity"
+    "humidity",
+    "time"
 };
 
 enum unitType {
     CENT_DEGC,
     PERCENT,
     RAW,
-    VOLT
+    VOLT,
+    USEC,
 };
 
-const char* unitTypeName[4] = {
+const char* unitTypeName[] = {
     "centdegc",
     "percent",
     "raw",
-    "volt"
+    "volt",
+    "usec"
 };
 
 struct sensorMeasurement {
