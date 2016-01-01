@@ -74,14 +74,18 @@ void loop() {
     data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
     data.nrMeasurements = 0;
 
+    mqttClient.loop();
+
     powerSensors(true);     // activate power to sensors
     collectData();          // make mesurements
     powerSensors(false);    // deactivate power to sensors again
 
     sendData();
+    mqttClient.loop();
 
     // wait a little bit, to ensure that everything is sent
     delay(sleepEnd);
+    mqttClient.loop();
     gotoSleep(SLEEPSEC);
 }
 
