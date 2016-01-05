@@ -28,7 +28,7 @@ WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
-DHT dhtSensor(PIN_1WIRE, DHT_TYPE);
+DHT dhtSensor(PIN_DHT, DHT_TYPE);
 
 void setup() {
     char idBuffer[32];
@@ -134,7 +134,20 @@ void getDallas() {
 }
 
 void getDHT() {
+    delay(sleepDHT);    // [XXX] should substract the time since power-up
 
+    // store values, so they can be used for calculating the heat index later
+    float hum = dhtSensor.readHumidity();
+    float temp = dhtSensor.readTemperature();
+
+    // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
+    addData(DHT_TYPE, TEMP, (int) (temp * 100.0), CENT_DEGC);
+    addData(DHT_TYPE, HUMIDITY, (int) (hum * 100.0), CENT_PERC);
+
+    if (doDHTHI)
+        addData(DHT_TYPE, TEMPHI,
+                (int) (dhtSensor.computeHeatIndex(temp, hum, false) * 100.0),
+                CENT_DEGC);
 }
 
 int readADC() {

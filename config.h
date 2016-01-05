@@ -19,6 +19,7 @@ const unsigned int SLEEPSEC = 307; // not very accurate
 const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
 const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
 const byte sleepUDP = 50;           // ms to sleep after each UDP packet
+const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
 const byte maxSensors = 8;
 
 // hardware
@@ -33,6 +34,7 @@ const bool doNTC = true;
 const bool doNTCraw = true;
 const bool doDallas = true;
 const bool doDHT = true;
+const bool doDHTHI = true;
 const bool doBattery = true;
 const bool doBattraw = true;
 const bool doPerf = true;
@@ -55,7 +57,7 @@ const bool DALLAS_CHECKCONVERSION = false;  // set to false if sensor returns 85
 
 // DHT
 const byte PIN_DHT_POWER = 14;
-// const byte PIN_1WIRE = 13; // already set above for Dallas
+const byte PIN_DHT = 13;
 const byte DHT_TYPE = DHT22;        // DHT11 / DHT21 / DHT22
 
 // Battery
