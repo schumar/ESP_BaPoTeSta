@@ -303,4 +303,4 @@ void gotoSleep(unsigned int seconds) {
 }
 
 
-// vim: sw=4:expandtab:ts=4
+// vim: sw=4:expandtab:ts=4:tw=80
