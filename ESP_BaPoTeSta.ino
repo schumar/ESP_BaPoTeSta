@@ -46,9 +46,11 @@ void setup() {
     // to associate
 
     // setup Dallas sensors
-    dallasSensors.begin();
-    dallasSensors.setResolution(DALLAS_RESOLUTION);
-    dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
+    if (doDallas) {
+        dallasSensors.begin();
+        dallasSensors.setResolution(DALLAS_RESOLUTION);
+        dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
+    }
 
     // setup DHT sensor
     if (doDHT)
