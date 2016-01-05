@@ -16,6 +16,7 @@ Pins:
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <DHT.h>
+#include <PubSubClient.h>
 
 #include "config.h"
 #include "ESP_BaPoTeSta.h"
@@ -23,12 +24,15 @@ Pins:
 // globals
 struct sensorMeasurement sensorMeasurements[maxSensors];
 struct allMeasurements data;
-WiFiUDP Udp;
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
 OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
 DHT dhtSensor(PIN_1WIRE, DHT_TYPE);
 
 void setup() {
+    char idBuffer[32];
+
     // activate (active low) blue LED to show that we are "on"
     pinMode(PIN_BLUELED, OUTPUT);
     digitalWrite(PIN_BLUELED, BLUELED_ON);
@@ -69,6 +73,11 @@ void setup() {
     if (WiFi.status() != WL_CONNECTED)
         gotoSleep(noConnSleepSec);
 
+    // connect to MQTT server
+    mqttClient.setServer(IPServer, portServer);
+    sprintf(idBuffer, "esp8266-%08x", data.chipId);
+    mqttClient.connect(idBuffer);
+
 }
 
 
@@ -77,14 +86,18 @@ void loop() {
     data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
     data.nrMeasurements = 0;
 
+    mqttClient.loop();
+
     powerSensors(true);     // activate power to sensors
     collectData();          // make mesurements
     powerSensors(false);    // deactivate power to sensors again
 
     sendData();
+    mqttClient.loop();
 
     // wait a little bit, to ensure that everything is sent
     delay(sleepEnd);
+    mqttClient.loop();
     gotoSleep(SLEEPSEC);
 }
 
@@ -92,6 +105,7 @@ void collectData() {
     if (doNTC) getNTC();
     if (doDallas) getDallas();
     if (doBattery) getBattery();
+    if (doPerf) getPerf();
 }
 
 void getNTC() {
@@ -149,6 +163,15 @@ void getBattery() {
         addData(0, BATTERY, raw, RAW);
 }
 
+void getPerf() {
+    // simple "measure" the number of CPU cycles since bootup
+    unsigned long int cycles;
+    cycles = ESP.getCycleCount();
+    addData(0, TIME, cycles/(F_CPU/1e6), USEC);
+    if (doPerfraw)
+        addData(0, TIME, cycles, RAW);
+}
+
 void addData(unsigned int sensorId, enum sensorType type,
         int value, enum unitType unit) {
     byte idx = data.nrMeasurements++;
@@ -161,56 +184,22 @@ void addData(unsigned int sensorId, enum sensorType type,
 }
 
 void sendData() {
-    static char packetBuffer[maxPacketSize];
-    unsigned int pos = 0;           // cursor
-
-    pos +=
-        snprintf(packetBuffer+pos, maxPacketSize - pos,
-                "{\n"
-                "  \"chipId\": %d,\n"
-                "  \"timestep\": %d,\n",
-                data.chipId, data.timestep);
-
-    pos +=
-        snprintf(packetBuffer+pos, maxPacketSize - pos,
-                "  \"measurements\": [\n");
+    char payloadBuffer[128];
+    char topicBuffer[128];
 
     for (byte i = 0; i < data.nrMeasurements; i++) {
-        // if this isn't the first measurement, put a comma between the previous
-        // and this one
-        if (i>0)
-            pos += snprintf(packetBuffer+pos, maxPacketSize - pos, ",\n");
+        snprintf(topicBuffer, 128,
+                "chip-%08x/sensor-%d/%s-%s",
+                data.chipId, data.sensorMeasurements[i].sensorId,
+                sensorTypeName[data.sensorMeasurements[i].type],
+                unitTypeName[data.sensorMeasurements[i].unit]);
 
-        pos +=
-            snprintf(packetBuffer+pos, maxPacketSize - pos,
-                    "    {\n"
-                    "      \"sensorId\": %d,\n"
-                    "      \"sensorType\": %d,\n"
-                    "      \"value\": %d,\n"
-                    "      \"unitType\": %d\n"
-                    "    }"
-                    , data.sensorMeasurements[i].sensorId,
-                    data.sensorMeasurements[i].type,
-                    data.sensorMeasurements[i].value,
-                    data.sensorMeasurements[i].unit
-                    );
+        snprintf(payloadBuffer, 128,
+                "value=%d", data.sensorMeasurements[i].value);
+
+        mqttClient.publish(topicBuffer, payloadBuffer);
     }
 
-    pos +=
-        snprintf(packetBuffer+pos, maxPacketSize - pos,
-                "\n  ]\n}\n");
-
-    // check that we aren't out-of-bounds
-    if (pos >= maxPacketSize-2) return;
-    packetBuffer[pos++] = '\000';
-
-    // send packet (twice, to make sure)
-    for (byte i=0; i<2; i++) {
-        Udp.beginPacket(IPServer, portServer);
-        Udp.write(packetBuffer, pos);
-        Udp.endPacket();
-        delay(sleepUDP);
-    }
 }
 
 void powerSensors(bool on) {

@@ -8,7 +8,7 @@ const IPAddress IPLocal(10, 1, 0, 35);
 const IPAddress IPGateway(10, 1, 0, 1);
 const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
-const unsigned int portServer = 9989;
+const unsigned int portServer = 1883;
 const unsigned int maxPacketSize = 1400;
 
 // behaviour/timing
@@ -35,6 +35,8 @@ const bool doDallas = true;
 const bool doDHT = true;
 const bool doBattery = true;
 const bool doBattraw = true;
+const bool doPerf = true;
+const bool doPerfraw = true;
 
 // NTC
 const byte PIN_NTC = 5;

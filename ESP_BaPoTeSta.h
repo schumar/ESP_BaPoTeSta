@@ -2,14 +2,31 @@
 enum sensorType {
     TEMP,
     BATTERY,
-    HUMIDITY
+    HUMIDITY,
+    TIME
+};
+
+const char* sensorTypeName[] = {
+    "temp",
+    "battery",
+    "humidity",
+    "time"
 };
 
 enum unitType {
     CENT_DEGC,
     PERCENT,
     RAW,
-    VOLT
+    VOLT,
+    USEC,
+};
+
+const char* unitTypeName[] = {
+    "centdegc",
+    "percent",
+    "raw",
+    "volt",
+    "usec"
 };
 
 struct sensorMeasurement {
@@ -38,6 +55,7 @@ void collectData();
 void getNTC();
 void getDallas();
 void getDHT();
+void getPerf();
 void addData(unsigned int sensorId, enum sensorType type,
         int value, enum unitType unit);
 void sendData();
