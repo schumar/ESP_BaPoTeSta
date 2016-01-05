@@ -37,9 +37,11 @@ void gotoSleep(unsigned int seconds);
 void collectData();
 void getNTC();
 void getDallas();
+void getDHT();
 void addData(unsigned int sensorId, enum sensorType type,
         int value, enum unitType unit);
 void sendData();
 void powerSensors(bool on);
 void powerNTC(bool on);
 void powerDallas(bool on);
+void powerDHT(bool on);

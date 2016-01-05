@@ -32,6 +32,7 @@ const float Voff = -0.01;   // highest V where ADC still reports "0"
 const bool doNTC = true;
 const bool doNTCraw = true;
 const bool doDallas = true;
+const bool doDHT = true;
 const bool doBattery = true;
 const bool doBattraw = true;
 
@@ -49,6 +50,11 @@ const byte PIN_DALLAS_POWER = 14;
 const byte PIN_1WIRE = 13;
 const byte DALLAS_RESOLUTION = 12;
 const bool DALLAS_CHECKCONVERSION = false;  // set to false if sensor returns 85
+
+// DHT
+const byte PIN_DHT_POWER = 14;
+// const byte PIN_1WIRE = 13; // already set above for Dallas
+const byte DHT_TYPE = DHT22;        // DHT11 / DHT21 / DHT22
 
 // Battery
 const float battDivider = 10/78;    // 68k + 10k

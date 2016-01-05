@@ -15,6 +15,7 @@ Pins:
 #include <math.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <DHT.h>
 
 #include "config.h"
 #include "ESP_BaPoTeSta.h"
@@ -25,6 +26,7 @@ struct allMeasurements data;
 WiFiUDP Udp;
 OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
+DHT dhtSensor(PIN_1WIRE, DHT_TYPE);
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
@@ -47,6 +49,10 @@ void setup() {
     dallasSensors.begin();
     dallasSensors.setResolution(DALLAS_RESOLUTION);
     dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
+
+    // setup DHT sensor
+    if (doDHT)
+        dhtSensor.begin();
 
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
@@ -108,6 +114,10 @@ void getDallas() {
 
     // use last two byte of serial as ID (addr[0] is "family code")
     addData(addr[2]<<8 + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
+}
+
+void getDHT() {
+
 }
 
 int readADC() {
@@ -204,6 +214,7 @@ void sendData() {
 void powerSensors(bool on) {
     if (doNTC) powerNTC(on);
     if (doDallas) powerDallas(on);
+    if (doDHT) powerDHT(on);
 }
 
 void powerNTC(bool on) {
@@ -215,6 +226,13 @@ void powerDallas(bool on) {
 #ifdef PIN_DALLAS_POWER
     pinMode(PIN_DALLAS_POWER, OUTPUT);
     digitalWrite(PIN_DALLAS_POWER, on ? HIGH : LOW);
+#endif
+}
+
+void powerDHT(bool on) {
+#ifdef PIN_DHT_POWER
+    pinMode(PIN_DHT_POWER, OUTPUT);
+    digitalWrite(PIN_DHT_POWER, on ? HIGH : LOW);
 #endif
 }
 
