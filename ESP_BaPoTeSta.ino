@@ -49,6 +49,8 @@ void setup() {
     // now is a perfect time for "other" stuff, as WiFi will need some time
     // to associate
 
+    powerSensors(true);     // activate power to sensors
+
     // setup Dallas sensors
     if (doDallas) {
         dallasSensors.begin();
@@ -88,7 +90,6 @@ void loop() {
 
     mqttClient.loop();
 
-    powerSensors(true);     // activate power to sensors
     collectData();          // make mesurements
     powerSensors(false);    // deactivate power to sensors again
 
