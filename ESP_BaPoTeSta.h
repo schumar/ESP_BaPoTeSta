@@ -29,7 +29,7 @@ const char* unitTypeName[] = {
     "percent",
     "raw",
     "millivolt",
-    "usec",
+    "microsec",
     "centpercent"
 };
 
