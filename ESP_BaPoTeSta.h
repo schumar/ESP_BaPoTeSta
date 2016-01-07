@@ -19,7 +19,7 @@ enum unitType {
     CENT_DEGC,
     PERCENT,
     RAW,
-    VOLT,
+    MVOLT,
     USEC,
     CENT_PERC
 };
@@ -28,7 +28,7 @@ const char* unitTypeName[] = {
     "centdegc",
     "percent",
     "raw",
-    "volt",
+    "millivolt",
     "usec",
     "centpercent"
 };
