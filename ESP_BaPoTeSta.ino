@@ -105,6 +105,7 @@ void loop() {
 void collectData() {
     if (doNTC) getNTC();
     if (doDallas) getDallas();
+    if (doDHT) getDHT();
     if (doBattery) getBattery();
     if (doPerf) getPerf();
 }
