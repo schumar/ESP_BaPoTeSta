@@ -172,6 +172,7 @@ void getBattery() {
     // Sanity check: We only have 1 ADC, so we can't measure battery AND NTC
     if (doNTC) return;
 
+    raw = readADC();
     addData(0, BATTERY, (int) (calcBattery(raw) * 1000.0), MVOLT);
     if (doBattraw)
         addData(0, BATTERY, raw, RAW);
