@@ -229,17 +229,13 @@ void powerNTC(bool on) {
 }
 
 void powerDallas(bool on) {
-#ifdef PIN_DALLAS_POWER
     pinMode(PIN_DALLAS_POWER, OUTPUT);
     digitalWrite(PIN_DALLAS_POWER, on ? HIGH : LOW);
-#endif
 }
 
 void powerDHT(bool on) {
-#ifdef PIN_DHT_POWER
     pinMode(PIN_DHT_POWER, OUTPUT);
     digitalWrite(PIN_DHT_POWER, on ? HIGH : LOW);
-#endif
 }
 
 
