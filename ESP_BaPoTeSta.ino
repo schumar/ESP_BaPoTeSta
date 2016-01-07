@@ -211,7 +211,7 @@ void sendData() {
                 unitTypeName[data.sensorMeasurements[i].unit]);
 
         snprintf(payloadBuffer, 128,
-                "value=%d", data.sensorMeasurements[i].value);
+                "%d", data.sensorMeasurements[i].value);
 
         mqttClient.publish(topicBuffer, payloadBuffer);
     }
