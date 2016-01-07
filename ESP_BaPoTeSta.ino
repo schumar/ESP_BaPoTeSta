@@ -77,7 +77,7 @@ void setup() {
 
     // connect to MQTT server
     mqttClient.setServer(IPServer, portServer);
-    sprintf(idBuffer, "esp8266-%08x", data.chipId);
+    sprintf(idBuffer, "esp8266-%08lx", data.chipId);
     mqttClient.connect(idBuffer);
 
 }
@@ -204,7 +204,7 @@ void sendData() {
 
     for (byte i = 0; i < data.nrMeasurements; i++) {
         snprintf(topicBuffer, 128,
-                "chip-%08x/sensor-%d/%s-%s",
+                "chip-%08lx/sensor-%d/%s-%s",
                 data.chipId, data.sensorMeasurements[i].sensorId,
                 sensorTypeName[data.sensorMeasurements[i].type],
                 unitTypeName[data.sensorMeasurements[i].unit]);
