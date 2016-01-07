@@ -131,7 +131,7 @@ void getDallas() {
     temp = dallasSensors.getTempC(addr);
 
     // use last two byte of serial as ID (addr[0] is "family code")
-    addData(addr[2]<<8 + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
+    addData((addr[2]<<8) + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
 }
 
 void getDHT() {
