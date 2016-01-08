@@ -138,8 +138,8 @@ void getDHT() {
     delay(sleepDHT);    // [XXX] should substract the time since power-up
 
     // store values, so they can be used for calculating the heat index later
+    float temp = dhtSensor.readTemperature(false, true);
     float hum = dhtSensor.readHumidity();
-    float temp = dhtSensor.readTemperature();
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
     addData(DHT_TYPE, TEMP, (int) (temp * 100.0), CENT_DEGC);
