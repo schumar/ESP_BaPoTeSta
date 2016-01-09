@@ -1,4 +1,4 @@
-update=Sat 05 Dec 2015 09:39:13 AM CET
+update=Fri 08 Jan 2016 09:58:32 AM CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=/home/martin/kicad/libraries/kicad-ESP8266/ESP8266
 LibName31=maxim
 LibName32=ESP8266
+LibName33=sensors
