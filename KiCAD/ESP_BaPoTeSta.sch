@@ -256,36 +256,10 @@ F 3 "" H 1550 3000 50  0000 C CNN
 	1    1550 3000
 	-1   0    0    1   
 $EndComp
-$Comp
-L CP_Small C1
-U 1 1 5662B5FD
-P 2500 2300
-F 0 "C1" H 2510 2370 50  0000 L CNN
-F 1 "≥1u" H 2510 2220 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2" H 2500 2300 50  0001 C CNN
-F 3 "" H 2500 2300 50  0000 C CNN
-	1    2500 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L CP_Small C2
-U 1 1 5662B72E
-P 3500 2300
-F 0 "C2" H 3510 2370 50  0000 L CNN
-F 1 "≥1u" H 3510 2220 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2" H 3500 2300 50  0001 C CNN
-F 3 "" H 3500 2300 50  0000 C CNN
-	1    3500 2300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3500 2200 3500 2100
 Connection ~ 3500 2100
 Wire Wire Line
 	3500 2400 3500 3900
 Connection ~ 3500 3900
-Wire Wire Line
-	2500 2200 2500 2100
 Connection ~ 2500 2100
 Wire Wire Line
 	2500 2400 2500 3000
@@ -347,20 +321,20 @@ Connection ~ 5050 950
 $Comp
 L CONN_01X02 P3
 U 1 1 56659295
-P 3950 3650
-F 0 "P3" H 3950 3800 50  0000 C CNN
-F 1 "Power" V 4050 3650 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 3950 3650 50  0001 C CNN
-F 3 "" H 3950 3650 50  0000 C CNN
-	1    3950 3650
+P 4250 3650
+F 0 "P3" H 4250 3800 50  0000 C CNN
+F 1 "Power" V 4350 3650 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 4250 3650 50  0001 C CNN
+F 3 "" H 4250 3650 50  0000 C CNN
+	1    4250 3650
 	1    0    0    1   
 $EndComp
 Wire Wire Line
-	3750 3900 3750 3700
-Connection ~ 3750 3900
+	4050 3900 4050 3700
+Connection ~ 4050 3900
 Wire Wire Line
-	3750 3600 3750 2100
-Connection ~ 3750 2100
+	4050 3600 4050 2100
+Connection ~ 4050 2100
 $Comp
 L R R8
 U 1 1 568D6E4C
@@ -501,4 +475,41 @@ Wire Wire Line
 Wire Wire Line
 	4950 2700 4950 2600
 Connection ~ 4950 2700
+$Comp
+L C C1
+U 1 1 56928F2E
+P 2500 2250
+F 0 "C1" H 2525 2350 50  0000 L CNN
+F 1 "≥1u" H 2525 2150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 2538 2100 50  0001 C CNN
+F 3 "" H 2500 2250 50  0000 C CNN
+	1    2500 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C3
+U 1 1 5692970C
+P 3500 2250
+F 0 "C3" H 3525 2350 50  0000 L CNN
+F 1 "≥1u" H 3525 2150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 3538 2100 50  0001 C CNN
+F 3 "" H 3500 2250 50  0000 C CNN
+	1    3500 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP C2
+U 1 1 56929DFC
+P 3800 2250
+F 0 "C2" H 3825 2350 50  0000 L CNN
+F 1 "≥10u" H 3825 2150 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2" H 3838 2100 50  0001 C CNN
+F 3 "" H 3800 2250 50  0000 C CNN
+	1    3800 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 2400 3800 3900
+Connection ~ 3800 3900
+Connection ~ 3800 2100
 $EndSCHEMATC
