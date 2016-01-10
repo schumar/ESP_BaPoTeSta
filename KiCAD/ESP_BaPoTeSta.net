@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/ESP_BaPoTeSta.sch)
-    (date "Sun 10 Jan 2016 08:45:46 PM CET")
+    (date "Sun 10 Jan 2016 09:10:15 PM CET")
     (tool "Eeschema 4.0.1-3.201512221402+6198~38~ubuntu15.04.1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -52,7 +52,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 56628A61))
     (comp (ref R1)
-      (value 68k)
+      (value 56k)
       (footprint Resistors_SMD:R_1206_HandSoldering)
       (libsource (lib device) (part R))
       (sheetpath (names /) (tstamps /))
