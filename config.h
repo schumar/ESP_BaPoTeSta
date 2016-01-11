@@ -4,7 +4,7 @@
 // network
 const char ssid[] = "tabr.org";
 const char pass[] = "";
-const IPAddress IPLocal(10, 1, 0, 35);
+const IPAddress IPLocal(10, 1, 0, 38);  // 35 + SensorID
 const IPAddress IPGateway(10, 1, 0, 1);
 const IPAddress IPSubnet(255, 255, 255, 0);
 const IPAddress IPServer(10, 1, 0, 9);
@@ -15,7 +15,7 @@ const unsigned int maxPacketSize = 1400;
 const byte sleepWifiCheck = 50;     // ms to sleep between checks if associated
 const byte maxConnRetry = 200;      // how many sleepWifiCheck sleeps
 const unsigned int noConnSleepSec = 600;
-const unsigned int SLEEPSEC = 307; // not very accurate
+const unsigned int SLEEPSEC = 310; // not very accurate, use 59/310 for 60/300
 const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
 const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
 const byte sleepUDP = 50;           // ms to sleep after each UDP packet
@@ -30,15 +30,15 @@ const float Vdd = 3.3;
 const float Voff = 0.00;        // highest V where ADC still reports "0"
 
 // Sensors
-const bool doNTC = true;
+const bool doNTC = false;
 const bool doNTCraw = true;
 const bool doDallas = true;
 const bool doDHT = true;
 const bool doDHTHI = true;
 const bool doBattery = true;
-const bool doBattraw = true;
+const bool doBattraw = false;
 const bool doPerf = true;
-const bool doPerfraw = true;
+const bool doPerfraw = false;
 
 // NTC
 const byte PIN_NTC = 5;
