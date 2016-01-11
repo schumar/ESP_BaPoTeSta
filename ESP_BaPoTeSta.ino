@@ -202,7 +202,7 @@ void addData(unsigned int sensorId, enum sensorType type,
 }
 
 void sendData() {
-    char payloadBuffer[128];
+    char payloadBuffer[16];
     char topicBuffer[128];
 
     for (byte i = 0; i < data.nrMeasurements; i++) {
@@ -212,7 +212,7 @@ void sendData() {
                 sensorTypeName[data.sensorMeasurements[i].type],
                 unitTypeName[data.sensorMeasurements[i].unit]);
 
-        snprintf(payloadBuffer, 128,
+        snprintf(payloadBuffer, 16,
                 "%d", data.sensorMeasurements[i].value);
 
         mqttClient.publish(topicBuffer, payloadBuffer);

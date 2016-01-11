@@ -61,7 +61,7 @@ const byte PIN_DHT = 13;
 const byte DHT_TYPE = DHT22;        // DHT11 / DHT21 / DHT22
 
 // Battery
-const float battDivider = 10.0/78;    // 68k + 10k
+const float battDivider = 10.0/66;    // 56k + 10k
 
 /*
     END OF CONFIGURATION
