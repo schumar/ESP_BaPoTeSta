@@ -34,8 +34,10 @@ void setup() {
     char idBuffer[32];
 
     // activate (active low) blue LED to show that we are "on"
-    pinMode(PIN_BLUELED, OUTPUT);
-    digitalWrite(PIN_BLUELED, BLUELED_ON);
+    if (PIN_BLUELED >= 0) {
+        pinMode(PIN_BLUELED, OUTPUT);
+        digitalWrite(PIN_BLUELED, BLUELED_ON);
+    }
 
     // start WiFi
     WiFi.mode(WIFI_STA);
@@ -298,7 +300,9 @@ void bubbleSort(int * analogValues, int nr) {
 
 void gotoSleep(unsigned int seconds) {
     // switch off (active low) blue LED to show that we are "off"
-    digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
+    if (PIN_BLUELED >= 0) {
+        digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
+    }
 
     // go to sleep, reboot after 'seconds' seconds
     // WAKE_RF_DEFAULT, WAKE_RFCAL, WAKE_NO_RFCAL, WAKE_RF_DISABLED

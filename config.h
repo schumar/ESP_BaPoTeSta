@@ -23,7 +23,7 @@ const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
 const byte maxSensors = 8;
 
 // hardware
-const byte PIN_BLUELED = 1;
+const byte PIN_BLUELED = 1;         // set to -1 to disable feature
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
 const byte ADC_MEASURES = 5;
 const float Vdd = 3.3;
