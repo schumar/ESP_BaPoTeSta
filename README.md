@@ -4,21 +4,24 @@
 
 Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very cheap and power-efficient WiFi-enabled weather station.
 
+### Pictures of v0.3
 
-![BaPoTeSta Board v0.3 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg) |
+![BaPoTeSta Board v0.3 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg)
 ![BaPoTeSta Board v0.3 real](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.3_real.jpg)
--|-
-v0.3 Rendering | v0.3 real
 
 ## Current state
 
-My prototype (using 2 NTCs as cheap sensors and an ESP-201 on an awfully big breadboard) is running fine for a few days now
-(powered by 3 AAA 850mAh batteries). I started to design a "real" version in KiCAD, and decided to release this WIP.
+I've already built 3 sensors of v0.3, have now improved the board massively, and am in the process
+of ordering the parts for the second run (ca. 30 pieces).
+
+The sensors are reporting their data via MQTT, so the data can be received with OpenHAB,
+or a small Perl script.
+
 "Release early, release often" -- so don't expect to be able to clone this repo and have a working IoThingy 10 minutes later :)
 
 ## Screenshot
 
-![RRD Graph](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/temp-weekly.png)
+![RRD Graph](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/temp-daily.png)
 
 ## Technical details
 
