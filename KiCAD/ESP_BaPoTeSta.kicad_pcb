@@ -998,6 +998,7 @@
       (net 10 /1Wire) (clearance 0.2032))
     (pad 2 smd rect (at 0.3556 0 90) (size 0.508 0.762) (layers B.Cu B.Mask)
       (net 10 /1Wire) (clearance 0.2032))
+  )
 
   (module Measurement_Points:Measurement_Point_Round-TH_Small (layer F.Cu) (tedit 5693EE62) (tstamp 5693EB90)
     (at 137.795 100.33)
