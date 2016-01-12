@@ -31,6 +31,7 @@ LIBS:valves
 LIBS:ESP8266
 LIBS:maxim
 LIBS:sensors
+LIBS:open-project
 LIBS:ESP_BaPoTeSta-cache
 EELAYER 25 0
 EELAYER END
@@ -156,7 +157,7 @@ F 3 "" H 2150 2750 50  0000 C CNN
 	1    2150 2750
 	1    0    0    -1  
 $EndComp
-Text Label 4950 3300 2    60   ~ 0
+Text Label 4450 3300 2    60   ~ 0
 1Wire
 Text Label 4950 1250 3    60   ~ 0
 1Wire
@@ -419,7 +420,7 @@ F 3 "" H 4150 1500 50  0000 C CNN
 	1    4000 1250
 	-1   0    0    -1  
 $EndComp
-Text Label 4950 3200 2    60   ~ 0
+Text Label 4450 3200 2    60   ~ 0
 DHTData
 Text Label 3650 1250 3    60   ~ 0
 DHTData
@@ -525,4 +526,32 @@ F 3 "" H 4750 1100 50  0000 C CNN
 $EndComp
 Connection ~ 4900 1250
 Connection ~ 4900 950 
+$Comp
+L CONN_01X02 P6
+U 1 1 569544C5
+P 4500 3000
+F 0 "P6" V 4500 3150 50  0000 C CNN
+F 1 "SP_DHT" V 4500 2750 50  0000 C CNN
+F 2 "open-project:S_JUMPER_2" H 4500 3000 50  0001 C CNN
+F 3 "" H 4500 3000 50  0000 C CNN
+	1    4500 3000
+	0    1    -1   0   
+$EndComp
+$Comp
+L CONN_01X02 P7
+U 1 1 56954571
+P 4500 3500
+F 0 "P7" V 4500 3350 50  0000 C CNN
+F 1 "SP_1W" V 4500 3750 50  0000 C CNN
+F 2 "open-project:S_JUMPER_2" H 4500 3500 50  0001 C CNN
+F 3 "" H 4500 3500 50  0000 C CNN
+	1    4500 3500
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	4450 3200 4950 3200
+Wire Wire Line
+	4450 3300 4950 3300
+Connection ~ 4550 3200
+Connection ~ 4550 3300
 $EndSCHEMATC
