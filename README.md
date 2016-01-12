@@ -33,24 +33,26 @@ or a small Perl script.
 
 ## BOM
 
-Quick calculation: 10 boards would cost 6 USD each (excl. batteries)
+Quick calculation: 1 board would cost ca. 4.81 to 7.50 USD (excl. batteries),
+depending on which sensors you want. (Calculation for an order of 30 boards)
 
-Part|need/board|URL|pcs|total Price|price/board|
-----|---------:|---|--:|----------:|----------:|
-PCB|1|http://dev.dangerousprototypes.com/store/pcbs|10|13.00|1.30
-PinHdr (angular)|2|http://www.aliexpress.com/item/x/32241048789.html|80|0.50|0.01
-DS18B20|1|http://www.aliexpress.com/item/x/32530262851.html|10|5.40|0.54
-R 10k|5|http://www.aliexpress.com/item/x/32479305609.html|100|0.82|0.04
-R 68k|1|http://www.aliexpress.com/item/x/32505283538.html|100|0.82|0.01
-R 4k7|1|http://www.aliexpress.com/item/x/32270050733.html|100|0.96|0.01
-MCP1700-330|1|http://www.aliexpress.com/item/x/32523953207.html|10|3.61|0.36
-10uF 10V|2|http://www.aliexpress.com/item/x/32260294384.html|50|3.59|0.14
-ESP-12E|1|http://www.aliexpress.com/item/x/32519328481.html|10|21.19|2.12
-Button|2|http://www.aliexpress.com/item/x/1582090411.html|100|1.38|0.03
-PinHdr (straight)|3|http://www.aliexpress.com/item/x/32537378399.html|40|0.32|0.02
-Battery Case|1|http://www.aliexpress.com/item/x/2022527017.html|10|11.68|1.17
-Battery Case|1|http://www.aliexpress.com/item/x/32522870331.html|10|8.30|0.83
-**TOTAL**||||**59.89**|**5.42**
+Part|Need/Board|URL|per piece|per board
+----|---------:|---|----------:|----------:|
+PCB|1|http://dev.dangerousprototypes.com/store/pcbs|0.50|0.50
+PinHdr|11|http://www.aliexpress.com/item/x/32537378399.html|0.01|0.09
+1uF 1206|2|http://www.aliexpress.com/store/1361740|0.03|0.06
+10uF|1|http://www.aliexpress.com/item/x/32260294384.html|0.07|0.07
+ESP8266|1|http://www.aliexpress.com/item/x/32519328481.html|1.93|1.93
+10k 1206|10|http://www.aliexpress.com/item/x/32569352008.html|0.01|0.09
+56k 1206|1|http://www.aliexpress.com/item/x/32567865953.html|0.02|0.02
+MCP1700|1|http://www.aliexpress.com/item/x/32523953207.html|0.36|0.36
+BatteryCase|1|http://www.aliexpress.com/item/x/2022527017.html|1.06|1.06
+**Sub-Total**||||**4.18**
+DS18B20|1|http://www.aliexpress.com/item/x/32576213069.html|0.63|0.63
+DHT22|1|http://www.aliexpress.com/item/x/32544057083.html|2.70|2.70
+**Only DS18B20**||||**4.81**
+**Only DHT22**||||**6.87**
+**Both**||||**7.50**
 
 ## To Do
 
