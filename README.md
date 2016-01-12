@@ -9,6 +9,10 @@ Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very
 ![BaPoTeSta Board v0.3 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg)
 ![BaPoTeSta Board v0.3 real](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.3_real.jpg)
 
+### Pictures of v0.5
+
+![BaPoTeSta Board v0.5 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.5_render.jpg)
+
 ## Current state
 
 I've already built 3 sensors of v0.3, have now improved the board massively, and am in the process
