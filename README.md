@@ -16,10 +16,10 @@ Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very
 ## Current state
 
 I've already built 3 sensors of v0.3, have now improved the board massively, and am in the process
-of ordering the parts for the second run (ca. 30 pieces).
+of ordering the parts for the second run (ca. 50 pieces).
 
-The sensors are reporting their data via MQTT, so the data can be received with OpenHAB,
-or a small Perl script.
+The sensors are reporting their data via MQTT, so the data can be received with [OpenHAB](http://www.openhab.org/),
+[FHEM](http://fhem.de/fhem.html) or a small Perl script.
 
 "Release early, release often" -- so don't expect to be able to clone this repo and have a working IoThingy 10 minutes later :)
 
