@@ -504,7 +504,7 @@ U 1 1 56929DFC
 P 3800 2250
 F 0 "C2" H 3825 2350 50  0000 L CNN
 F 1 "≥10u" H 3825 2150 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2" H 3838 2100 50  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2.5" H 3838 2100 50  0001 C CNN
 F 3 "" H 3800 2250 50  0000 C CNN
 	1    3800 2250
 	1    0    0    -1  
