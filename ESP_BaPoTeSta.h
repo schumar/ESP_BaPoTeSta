@@ -67,3 +67,5 @@ void powerSensors(bool on);
 void powerNTC(bool on);
 void powerDallas(bool on);
 void powerDHT(bool on);
+
+void webserver();

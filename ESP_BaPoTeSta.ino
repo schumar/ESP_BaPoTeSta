@@ -39,6 +39,14 @@ void setup() {
         digitalWrite(PIN_BLUELED, BLUELED_ON);
     }
 
+    // check if "config mode" jumper is set (this will enter AP-mode,
+    // so do this now)
+    if (digitalRead(PIN_CONFIG)) {
+        webserver();
+        // that should never return, but just in case...
+        gotoSleep(10);
+    }
+
     // start WiFi
     WiFi.mode(WIFI_STA);
     WiFi.config(IPLocal, IPGateway, IPSubnet);
@@ -309,5 +317,7 @@ void gotoSleep(unsigned int seconds) {
     ESP.deepSleep(1e6 * seconds, WAKE_NO_RFCAL);
 }
 
+void webserver() {
+}
 
 // vim: sw=4:expandtab:ts=4:tw=80
