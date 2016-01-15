@@ -17,6 +17,9 @@ Pins:
 #include <DallasTemperature.h>
 #include <DHT.h>
 #include <PubSubClient.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
+#include <ESP8266HTTPUpdateServer.h>
 
 #include "config.h"
 #include "ESP_BaPoTeSta.h"
@@ -318,6 +321,66 @@ void gotoSleep(unsigned int seconds) {
 }
 
 void webserver() {
+    ESP8266WebServer httpServer(80);
+    ESP8266HTTPUpdateServer httpUpdater;
+    char host[32];
+
+    const char index[] =
+R"(
+<html>
+    <head>
+    <title>ESP_BaPoTeSta Maintenance</title>
+    </head>
+    <body>
+        <form method='POST' action='/config' enctype='multipart/form-data'>
+        <h1>Network</h1>
+        ssid
+        password
+        IP
+        Subnet
+        Gateway
+        MQTT IP
+        MQTT Port
+        <h1>Measuring</h1>
+        DS18B20
+        DHT22
+        deltaT
+        <h1>Hardware</h1>
+        Pins
+        <input type='submit' value='Apply'>
+        </form>
+        <hr>
+        <h1>Firmware Update</h1>
+        <form method='POST' action='/update' enctype='multipart/form-data'>
+            Firmware: <input type='file' name='update'>
+            <input type='submit' value='Update'>
+        </form>
+    </body>
+</html>)";
+
+    unsigned long int chipId = ESP.getChipId();
+    sprintf(host, "chip-%08lx", chipId);
+
+    WiFi.mode(WIFI_AP);
+    char passwd[] = "bapotesta";
+    WiFi.begin(host, passwd);
+
+    MDNS.begin(host);
+
+    httpUpdater.setup(&httpServer);
+    httpServer.on("/",  HTTP_GET, [&](){
+            httpServer.sendHeader("Connection", "close");
+            httpServer.sendHeader("Access-Control-Allow-Origin", "*");
+            httpServer.send(200, "text/html", index);
+            });
+    httpServer.begin();
+
+    MDNS.addService("http", "tcp", 80);
+
+    while (1) {
+        httpServer.handleClient();
+        delay(1);
+    }
 }
 
 // vim: sw=4:expandtab:ts=4:tw=80
