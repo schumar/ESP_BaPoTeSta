@@ -14,6 +14,11 @@ Search for "esp82", click on the "esp8266 by ESP Community", click Install
 
 (for details, see https://github.com/esp8266/Arduino)
 
+## Add required libraries
+
+In Sketch/Include Library, Manage Libraries...
+Install "DallasTemperature", "DHT sensor library" and "PubSubClient".
+
 ## Clone this repository
 
 cd ~/Arduino
