@@ -21,6 +21,10 @@ Pins:
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPUpdateServer.h>
 
+#ifdef SERIALDEBUG
+#include <Serial.h>
+#endif
+
 #include "config.h"
 #include "ESP_BaPoTeSta.h"
 
@@ -41,6 +45,10 @@ void setup() {
         pinMode(PIN_BLUELED, OUTPUT);
         digitalWrite(PIN_BLUELED, BLUELED_ON);
     }
+
+    #ifdef SERIALDEBUG
+    Serial.begin(115200);
+    #endif
 
     // check if "config mode" jumper is set (this will enter AP-mode,
     // so do this now)
@@ -381,6 +389,12 @@ R"(
         httpServer.handleClient();
         delay(1);
     }
+}
+
+void debugPrint(char * msg) {
+    #ifdef SERIALDEBUG
+    Serial.println(msg);
+    #endif
 }
 
 // vim: sw=4:expandtab:ts=4:tw=80

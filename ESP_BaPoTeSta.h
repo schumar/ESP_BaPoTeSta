@@ -69,3 +69,5 @@ void powerDallas(bool on);
 void powerDHT(bool on);
 
 void webserver();
+
+void debugPrint(char * msg);

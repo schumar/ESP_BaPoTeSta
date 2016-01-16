@@ -22,6 +22,8 @@ const byte sleepUDP = 50;           // ms to sleep after each UDP packet
 const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
 const byte maxSensors = 8;
 
+#define SERIALDEBUG
+
 // hardware
 const byte PIN_BLUELED = 1;         // set to -1 to disable feature
 const byte BLUELED_ON = LOW;  // onboard-LED is active-LOW
