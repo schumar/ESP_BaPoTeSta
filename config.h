@@ -66,6 +66,43 @@ const byte DHT_TYPE = DHT22;        // DHT11 / DHT21 / DHT22
 // Battery
 const float battDivider = 10.0/66;    // 56k + 10k
 
+// Webserver
+const char indexPage[] =
+R"(
+<html>
+    <head>
+    <title>ESP_BaPoTeSta Maintenance</title>
+    </head>
+    <body>
+        <h1>ESP_BaPoTeSta Maintenance</h1>
+        <form method='POST' action='/config' enctype='multipart/form-data'>
+        <h2>Network</h2>
+        ssid
+        password
+        IP
+        Subnet
+        Gateway
+        MQTT IP
+        MQTT Port
+        <h2>Measuring</h2>
+        DS18B20
+        DHT22
+        deltaT
+        <h2>Hardware</h2>
+        Pins
+        <input type='submit' value='Apply'>
+        </form>
+        <hr>
+        <h2>Firmware Update</h2>
+        <form method='POST' action='/update' enctype='multipart/form-data'>
+            Firmware: <input type='file' name='update'>
+            <input type='submit' value='Update'>
+        </form>
+        <hr>
+        Current firmware was built on )" __DATE__ " at " __TIME__ R"(
+    </body>
+</html>)";
+
 /*
     END OF CONFIGURATION
  */

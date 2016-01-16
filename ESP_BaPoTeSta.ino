@@ -333,39 +333,6 @@ void webserver() {
     ESP8266HTTPUpdateServer httpUpdater;
     char host[32];
 
-    const char index[] =
-R"(
-<html>
-    <head>
-    <title>ESP_BaPoTeSta Maintenance</title>
-    </head>
-    <body>
-        <form method='POST' action='/config' enctype='multipart/form-data'>
-        <h1>Network</h1>
-        ssid
-        password
-        IP
-        Subnet
-        Gateway
-        MQTT IP
-        MQTT Port
-        <h1>Measuring</h1>
-        DS18B20
-        DHT22
-        deltaT
-        <h1>Hardware</h1>
-        Pins
-        <input type='submit' value='Apply'>
-        </form>
-        <hr>
-        <h1>Firmware Update</h1>
-        <form method='POST' action='/update' enctype='multipart/form-data'>
-            Firmware: <input type='file' name='update'>
-            <input type='submit' value='Update'>
-        </form>
-    </body>
-</html>)";
-
     unsigned long int chipId = ESP.getChipId();
     sprintf(host, "chip-%08lx", chipId);
 
