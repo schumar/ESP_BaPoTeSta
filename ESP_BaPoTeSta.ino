@@ -36,10 +36,17 @@ PubSubClient mqttClient(espClient);
 OneWire oneWire(PIN_1WIRE);
 DallasTemperature dallasSensors(&oneWire);
 DHT dhtSensor(PIN_DHT, DHT_TYPE);
+bool configmode = false;
+ESP8266WebServer httpServer(80);
+
+#ifdef SERIALDEBUG
+ESP8266HTTPUpdateServer httpUpdater(true);
+#else
+ESP8266HTTPUpdateServer httpUpdater;
+#endif
+
 
 void setup() {
-    char idBuffer[32];
-
     // activate (active low) blue LED to show that we are "on"
     if (PIN_BLUELED >= 0) {
         pinMode(PIN_BLUELED, OUTPUT);
@@ -50,13 +57,23 @@ void setup() {
     Serial.begin(115200);
     #endif
 
-    // check if "config mode" jumper is set (this will enter AP-mode,
-    // so do this now)
+    // check if "config mode" jumper is set
     if (digitalRead(PIN_CONFIG)) {
-        webserver();
-        // that should never return, but just in case...
-        gotoSleep(10);
+        debugPrint("\nStarting webserver");
+
+        configmode = true;
+        setupWebserver();
+
+    } else {
+        debugPrint("\nStarting normally");
+
+        configmode = false;
+        setupNormal();
     }
+}
+
+void setupNormal() {
+    char idBuffer[32];
 
     // start WiFi
     WiFi.mode(WIFI_STA);
@@ -104,23 +121,28 @@ void setup() {
 }
 
 
-// this won't actually "loop", as the last command leads to a reset
 void loop() {
-    data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
-    data.nrMeasurements = 0;
+    if (configmode) {
+        httpServer.handleClient();
+        delay(1);
+    } else {
+        // this won't actually "loop", as the last command leads to a reset
+        data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
+        data.nrMeasurements = 0;
 
-    mqttClient.loop();
+        mqttClient.loop();
 
-    collectData();          // make mesurements
-    powerSensors(false);    // deactivate power to sensors again
+        collectData();          // make mesurements
+        powerSensors(false);    // deactivate power to sensors again
 
-    sendData();
-    mqttClient.loop();
+        sendData();
+        mqttClient.loop();
 
-    // wait a little bit, to ensure that everything is sent
-    delay(sleepEnd);
-    mqttClient.loop();
-    gotoSleep(SLEEPSEC);
+        // wait a little bit, to ensure that everything is sent
+        delay(sleepEnd);
+        mqttClient.loop();
+        gotoSleep(SLEEPSEC);
+    }
 }
 
 void collectData() {
@@ -328,9 +350,7 @@ void gotoSleep(unsigned int seconds) {
     ESP.deepSleep(1e6 * seconds, WAKE_NO_RFCAL);
 }
 
-void webserver() {
-    ESP8266WebServer httpServer(80);
-    ESP8266HTTPUpdateServer httpUpdater;
+void setupWebserver() {
     char host[32];
 
     unsigned long int chipId = ESP.getChipId();
@@ -338,24 +358,22 @@ void webserver() {
 
     WiFi.mode(WIFI_AP);
     char passwd[] = "bapotesta";
-    WiFi.begin(host, passwd);
+    WiFi.softAP(host, passwd);
 
     MDNS.begin(host);
 
     httpUpdater.setup(&httpServer);
     httpServer.on("/",  HTTP_GET, [&](){
-            httpServer.sendHeader("Connection", "close");
-            httpServer.sendHeader("Access-Control-Allow-Origin", "*");
-            httpServer.send(200, "text/html", index);
+            httpServer.send(200, "text/html", indexPage);
             });
     httpServer.begin();
 
     MDNS.addService("http", "tcp", 80);
 
-    while (1) {
-        httpServer.handleClient();
-        delay(1);
-    }
+    #ifdef SERIALDEBUG
+    Serial.printf("Ready! Connect to SSID %s with password '%s'"
+            " and visit http://%s.local/update\n", host, passwd, host);
+    #endif
 }
 
 void debugPrint(char * msg) {

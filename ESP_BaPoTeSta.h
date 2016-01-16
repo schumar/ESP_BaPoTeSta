@@ -68,6 +68,7 @@ void powerNTC(bool on);
 void powerDallas(bool on);
 void powerDHT(bool on);
 
-void webserver();
+void setupNormal();
+void setupWebserver();
 
 void debugPrint(char * msg);
