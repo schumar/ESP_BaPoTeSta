@@ -90,7 +90,7 @@ R"(
     </head>
     <body>
         <h1>ESP_BaPoTeSta Maintenance</h1>
-        <form method='POST' action='/config' enctype='multipart/form-data'>
+        <form method="POST" action="/config" enctype="multipart/form-data">
         <h2>Network</h2>
         <ul>
             <li>ssid: <input type="text" name="ssid" /></li>
@@ -126,14 +126,14 @@ R"(
             <li>Pin for DHT data: <input type="text" maxlen="4" name="pindhtdata" /></li>
             <li>Number of ADC measurements: <input type="text" maxlen="4" name="adcmeas" /></li>
         </ul>
-        <input type='submit' value='Apply'>
+        <input type="submit" value="Apply">
         </form>
         <hr>
         <h2>Firmware Update</h2>
         Firmware needs to be compiled for %d KiB flash size!<br />
-        <form method='POST' action='/update' enctype='multipart/form-data'>
-            Firmware: <input type='file' name='update'>
-            <input type='submit' value='Update'>
+        <form method="POST" action="/update" enctype="multipart/form-data">
+            Firmware: <input type="file" name="update">
+            <input type="submit" value="Update">
         </form>
         <hr>
         Current firmware was built on )" __DATE__ " at " __TIME__ R"(
