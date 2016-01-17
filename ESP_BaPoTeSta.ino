@@ -378,14 +378,10 @@ void webForm() {
     // called when client does a  GET /
     String buf;
 
-    Serial.println(sizeof(indexPage));
-    Serial.println(sizeof(buf));
-    delay(100);
     buf = indexPage;
     buf.replace("${flashsize}", String(ESP.getFlashChipRealSize()/1024));
     buf.replace("${buildtime}", String(__DATE__ + String(" at ") + __TIME__));
-    Serial.print(buf);
-    delay(100);
+
     httpServer.send(200, "text/html", buf);
 }
 
