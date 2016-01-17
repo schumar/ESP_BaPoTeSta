@@ -107,7 +107,7 @@ R"(
             <li>&nbsp; resolution: <input type="text" name="dallasres" /></li>
             <li>&nbsp; wait for result: <input type="checkbox" name="dallaswait" /></li>
             <li>Use DHT: <input type="checkbox" name="usedht" /></li>
-            <li>&nbsp; type: <input type="text" name="dhttype" />/li>
+            <li>&nbsp; type: <input type="text" name="dhttype" /></li>
             <li>&nbsp; report HI: <input type="checkbox" name="dhthi" /></li>
             <li>Report battery: <input type="checkbox" name="battery" /></li>
             <li>&nbsp; divider: <input type="text" name="battdiv" /></li>
