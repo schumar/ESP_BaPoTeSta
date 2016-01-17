@@ -72,4 +72,4 @@ void setupNormal();
 void setupWebserver();
 void webForm();
 
-void debugPrint(char * msg);
+void debugPrint(const char * msg);

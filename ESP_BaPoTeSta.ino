@@ -399,7 +399,7 @@ void webForm() {
 
 
 
-void debugPrint(char * msg) {
+void debugPrint(const char * msg) {
     #ifdef SERIALDEBUG
     Serial.println(msg);
     #endif
