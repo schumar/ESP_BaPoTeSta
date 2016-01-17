@@ -71,29 +71,66 @@ const char indexPage[] =
 R"(
 <html>
     <head>
-    <title>ESP_BaPoTeSta Maintenance</title>
+        <title>ESP_BaPoTeSta Maintenance</title>
+        <style type="text/css">
+            body {
+                background-color: #eee;
+                color: black;
+            }
+            h1, h2 {
+                color: #220;
+            }
+            h2 {
+                border-left:1px black solid;
+                border-top:1px black solid;
+                margin-left:4px;
+                margin-top:4px;
+            }
+        </style>
     </head>
     <body>
         <h1>ESP_BaPoTeSta Maintenance</h1>
         <form method='POST' action='/config' enctype='multipart/form-data'>
         <h2>Network</h2>
-        ssid
-        password
-        IP
-        Subnet
-        Gateway
-        MQTT IP
-        MQTT Port
+        <ul>
+            <li>ssid: <input type="text" name="ssid" /></li>
+            <li>password: <input type="text" name="passwd" /></li>
+            <li>IP: <input type="text" name="ip" /></li>
+            <li>Subnet: <input type="text" name="subnet" maxlen=2 /></li>
+            <li>Gateway: <input type="text" name="gw" /></li>
+            <li>MQTT IP: <input type="text" name="mqttip" /></li>
+            <li>MQTT Port: <input type="text" name="mqttport" /></li>
+        </ul>
         <h2>Measuring</h2>
-        DS18B20
-        DHT22
-        deltaT
+        <ul>
+            <li>Use DS18B20: <input type="checkbox" name="usedallas" /></li>
+            <li>&nbsp; resolution: <input type="text" name="dallasres" /></li>
+            <li>&nbsp; wait for result: <input type="checkbox" name="dallaswait" /></li>
+            <li>Use DHT: <input type="checkbox" name="usedht" /></li>
+            <li>&nbsp; type: <input type="text" name="dhttype" />/li>
+            <li>&nbsp; report HI: <input type="checkbox" name="dhthi" /></li>
+            <li>Report battery: <input type="checkbox" name="battery" /></li>
+            <li>&nbsp; divider: <input type="text" name="battdiv" /></li>
+            <li>&nbsp; incl. raw value: <input type="checkbox" name="battraw" /></li>
+            <li>Report performance: <input type="checkbox" name="doperf" /></li>
+            <li>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" /></li>
+            <li>Measure every <input type="text" maxlen="4" name="deltat" /> seconds</li>
+        </ul>
         <h2>Hardware</h2>
-        Pins
+        <ul>
+            <li>Pin for blue LED: <input type="text" maxlen="4" name="pinblue" /></li>
+            <li>&nbsp; invert: <input type="checkbox" name="invblue" /></li>
+            <li>Pin for config-mode: <input type="text" maxlen="4" name="pinconfig" /></li>
+            <li>Pin for sensor power: <input type="text" maxlen="4" name="pinpwrsens" /></li>
+            <li>Pin for Dallas data: <input type="text" maxlen="4" name="pindallas" /></li>
+            <li>Pin for DHT data: <input type="text" maxlen="4" name="pindhtdata" /></li>
+            <li>Number of ADC measurements: <input type="text" maxlen="4" name="adcmeas" /></li>
+        </ul>
         <input type='submit' value='Apply'>
         </form>
         <hr>
         <h2>Firmware Update</h2>
+        Firmware needs to be compiled for %d KiB flash size!<br />
         <form method='POST' action='/update' enctype='multipart/form-data'>
             Firmware: <input type='file' name='update'>
             <input type='submit' value='Update'>
