@@ -93,39 +93,40 @@ R"(
         <form method="POST" action="/config" enctype="multipart/form-data">
         <h2>Network</h2>
         <ul>
-            <li>ssid: <input type="text" name="ssid" value="${ssid}" /></li>
-            <li>password: <input type="text" name="password" placeholder="empty or at least 8 chars" value="${password}" /></li>
-            <li>IP: <input type="text" name="ip" /></li>
-            <li>Subnet: <input type="text" name="subnet" maxlen=2 /></li>
-            <li>Gateway: <input type="text" name="gw" /></li>
-            <li>MQTT IP: <input type="text" name="mqttip" /></li>
-            <li>MQTT Port: <input type="text" name="mqttport" /></li>
+            <li><label>ssid: <input type="text" name="ssid" value="${ssid}" /></label></li>
+            <li><label>password: <input type="text" name="password" placeholder="empty or at least 8 chars" value="${password}" /></label></li>
+            <li><label>IP: <input type="text" name="ip" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" /></label></li>
+            <li><label>Subnet: <input type="number" min="0" max="31" name="subnet" /></label></li>
+            <li><label>Gateway: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="gw" /></label></li>
+            <li><label>MQTT IP: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="mqttip" /></label></li>
+            <li><label>MQTT Port: <input type="number" min="1" max="65535" name="mqttport" /></label></li>
         </ul>
         <h2>Measuring</h2>
         <ul>
-            <li>Use DS18B20: <input type="checkbox" name="usedallas" /></li>
-            <li>&nbsp; resolution: <input type="text" name="dallasres" /></li>
-            <li>&nbsp; wait for result: <input type="checkbox" name="dallaswait" /></li>
-            <li>Use DHT: <input type="checkbox" name="usedht" /></li>
-            <li>&nbsp; type: <input type="text" name="dhttype" /></li>
-            <li>&nbsp; report HI: <input type="checkbox" name="dhthi" /></li>
-            <li>Report battery: <input type="checkbox" name="battery" /></li>
-            <li>&nbsp; divider: <input type="text" name="battdiv" /></li>
-            <li>&nbsp; incl. raw value: <input type="checkbox" name="battraw" /></li>
-            <li>Report performance: <input type="checkbox" name="doperf" /></li>
-            <li>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" /></li>
-            <li>Measure every <input type="text" maxlen="4" name="deltat" /> seconds</li>
+            <li><label>Use DS18B20: <input type="checkbox" name="usedallas" /></label></li>
+            <li><label>&nbsp; resolution: <input type="number" min="10" max="13" name="dallasres" /></label></li>
+            <li><label>&nbsp; wait for result: <input type="checkbox" name="dallaswait" /></label></li>
+            <li><label>Use DHT: <input type="checkbox" name="usedht" /></label></li>
+            <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" /></label></li>
+            <li><label>&nbsp; report HI: <input type="checkbox" name="dhthi" /></label></li>
+            <li><label>Report battery: <input type="checkbox" name="battery" /></label></li>
+            <li><label>&nbsp; divider: <input type="number" min="0" max="1" step="0.0001" name="battdiv" /></label></li>
+            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="battraw" /></label></li>
+            <li><label>Report performance: <input type="checkbox" name="doperf" /></label></li>
+            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" /></label></li>
+            <li><label>Measure every <input type="number" min="1" max="9999" name="deltat" /> seconds</label></li>
         </ul>
         <h2>Hardware</h2>
         <ul>
-            <li>Pin for blue LED: <input type="text" maxlen="4" name="pinblue" /></li>
-            <li>&nbsp; invert: <input type="checkbox" name="invblue" /></li>
-            <li>Pin for config-mode: <input type="text" maxlen="4" name="pinconfig" /></li>
-            <li>Pin for sensor power: <input type="text" maxlen="4" name="pinpwrsens" /></li>
-            <li>Pin for Dallas data: <input type="text" maxlen="4" name="pindallas" /></li>
-            <li>Pin for DHT data: <input type="text" maxlen="4" name="pindhtdata" /></li>
-            <li>Number of ADC measurements: <input type="text" maxlen="4" name="adcmeas" /></li>
+            <li><label>Pin for blue LED: <input type="number" min="0" max="16" name="pinblue" /></label></li>
+            <li><label>&nbsp; invert: <input type="checkbox" name="invblue" /></label></li>
+            <li><label>Pin for config-mode: <input type="number" min="0" max="16" name="pinconfig" /></label></li>
+            <li><label>Pin for sensor power: <input type="number" min="0" max="16" name="pinpwrsens" /></label></li>
+            <li><label>Pin for Dallas data: <input type="number" min="0" max="16" name="pindallas" /></label></li>
+            <li><label>Pin for DHT data: <input type="number" min="0" max="16" name="pindhtdata" /></label></li>
+            <li><label>Number of ADC measurements: <input type="number" min="1" max="13" step="2" name="adcmeas" /></label></li>
         </ul>
+        <input type="reset" value="Revert">
         <input type="submit" value="Apply">
         </form>
         <hr>
