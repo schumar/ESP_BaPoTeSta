@@ -363,9 +363,7 @@ void setupWebserver() {
     MDNS.begin(host);
 
     httpUpdater.setup(&httpServer);
-    httpServer.on("/",  HTTP_GET, [&](){
-            httpServer.send(200, "text/html", indexPage);
-            });
+    httpServer.on("/",  HTTP_GET, &webForm);
     httpServer.begin();
 
     MDNS.addService("http", "tcp", 80);
@@ -375,6 +373,31 @@ void setupWebserver() {
             " and visit http://%s.local/update\n", host, passwd, host);
     #endif
 }
+
+void webForm() {
+    // called when client does a  GET /
+    char buf[4000];
+
+    Serial.println(sizeof(indexPage));
+    Serial.println(sizeof(buf));
+    for (int i=0; i<16; i++) {
+        Serial.print(i);
+        Serial.print(": ");
+        Serial.println((int) buf[i]);
+    }
+    delay(100);
+    snprintf(buf, sizeof(buf), indexPage, ESP.getFlashChipRealSize()/1024);
+    buf[3999] = '\0';
+    for (int i=0; i<16; i++) {
+        Serial.print(i);
+        Serial.print(": ");
+        Serial.println((int) buf[i]);
+    }
+    delay(100);
+    httpServer.send(200, "text/html", buf);
+}
+
+
 
 void debugPrint(char * msg) {
     #ifdef SERIALDEBUG

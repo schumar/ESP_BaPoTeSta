@@ -70,5 +70,6 @@ void powerDHT(bool on);
 
 void setupNormal();
 void setupWebserver();
+void webForm();
 
 void debugPrint(char * msg);
