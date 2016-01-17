@@ -47,6 +47,11 @@ struct allMeasurements {
     struct sensorMeasurement * sensorMeasurements;
 };
 
+struct config {
+    char ssid[32];
+    char password[32];
+};
+
 void sendTemp(float temp);
 float calcNTCTemp(unsigned int raw);
 int readADC();
@@ -71,5 +76,7 @@ void powerDHT(bool on);
 void setupNormal();
 void setupWebserver();
 void webForm();
+
+void getConfig();
 
 void debugPrint(const char * msg);

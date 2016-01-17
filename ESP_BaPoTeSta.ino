@@ -20,6 +20,7 @@ Pins:
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPUpdateServer.h>
+#include <EEPROM.h>
 
 #ifdef SERIALDEBUG
 #include <Serial.h>
@@ -31,6 +32,7 @@ Pins:
 // globals
 struct sensorMeasurement sensorMeasurements[maxSensors];
 struct allMeasurements data;
+struct config config;
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 OneWire oneWire(PIN_1WIRE);
@@ -56,6 +58,9 @@ void setup() {
     #ifdef SERIALDEBUG
     Serial.begin(115200);
     #endif
+
+    EEPROM.begin(1024);
+    getConfig();
 
     // check if "config mode" jumper is set
     if (digitalRead(PIN_CONFIG)) {
@@ -381,8 +386,24 @@ void webForm() {
     buf = indexPage;
     buf.replace("${flashsize}", String(ESP.getFlashChipRealSize()/1024));
     buf.replace("${buildtime}", String(__DATE__ + String(" at ") + __TIME__));
+    buf.replace("${ssid}", config.ssid);
+    buf.replace("${password}", config.password);
 
     httpServer.send(200, "text/html", buf);
+}
+
+void getConfig() {
+    // read config from EEPROM
+
+    // check if the first byte is "magic" (i.e. EEPROM has been written before)
+    if (EEPROM.read(0) == 0x42) {
+        // read config
+        EEPROM.get(1, config);
+    } else {
+        // fill config with some defaults
+        strlcpy(config.ssid, "tabr.org", sizeof(config.ssid));
+        strlcpy(config.password, "", sizeof(config.password));
+    }
 }
 
 

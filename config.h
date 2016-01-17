@@ -93,8 +93,8 @@ R"(
         <form method="POST" action="/config" enctype="multipart/form-data">
         <h2>Network</h2>
         <ul>
-            <li>ssid: <input type="text" name="ssid" /></li>
-            <li>password: <input type="text" name="passwd" /></li>
+            <li>ssid: <input type="text" name="ssid" value="${ssid}" /></li>
+            <li>password: <input type="text" name="password" placeholder="empty or at least 8 chars" value="${password}" /></li>
             <li>IP: <input type="text" name="ip" /></li>
             <li>Subnet: <input type="text" name="subnet" maxlen=2 /></li>
             <li>Gateway: <input type="text" name="gw" /></li>
