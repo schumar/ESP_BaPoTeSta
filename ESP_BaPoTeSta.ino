@@ -376,23 +376,15 @@ void setupWebserver() {
 
 void webForm() {
     // called when client does a  GET /
-    char buf[4000];
+    String buf;
 
     Serial.println(sizeof(indexPage));
     Serial.println(sizeof(buf));
-    for (int i=0; i<16; i++) {
-        Serial.print(i);
-        Serial.print(": ");
-        Serial.println((int) buf[i]);
-    }
     delay(100);
-    snprintf(buf, sizeof(buf), indexPage, ESP.getFlashChipRealSize()/1024);
-    buf[3999] = '\0';
-    for (int i=0; i<16; i++) {
-        Serial.print(i);
-        Serial.print(": ");
-        Serial.println((int) buf[i]);
-    }
+    buf = indexPage;
+    buf.replace("${flashsize}", String(ESP.getFlashChipRealSize()/1024));
+    buf.replace("${buildtime}", String(__DATE__ + String(" at ") + __TIME__));
+    Serial.print(buf);
     delay(100);
     httpServer.send(200, "text/html", buf);
 }

@@ -130,13 +130,13 @@ R"(
         </form>
         <hr>
         <h2>Firmware Update</h2>
-        Firmware needs to be compiled for %d KiB flash size!<br />
+        Firmware needs to be compiled for ${flashsize} KiB flash size!<br />
         <form method="POST" action="/update" enctype="multipart/form-data">
             Firmware: <input type="file" name="update">
             <input type="submit" value="Update">
         </form>
         <hr>
-        Current firmware was built on )" __DATE__ " at " __TIME__ R"(
+        Current firmware was built on ${buildtime}
     </body>
 </html>)";
 
