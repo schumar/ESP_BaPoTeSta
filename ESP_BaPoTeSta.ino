@@ -434,13 +434,15 @@ void getConfig() {
 
     // check if the first byte is "magic" (i.e. EEPROM has been written before)
     if (EEPROM.read(0) == 0x42) {
-        // read config
-        EEPROM.get(1, config);
-    } else {
-        // fill config with some defaults
-        strlcpy(config.ssid, "tabr.org", sizeof(config.ssid));
-        strlcpy(config.password, "", sizeof(config.password));
+        // check version of config storage
+        if (EEPROM.read(1) == 1) {
+            // read config
+            EEPROM.get(1, config);
+        } else {
+            debugPrint("Ignoring EEPROM, cfg version >1");
+        }
     }
+    // otherwise we rely on the defaults
 }
 
 
