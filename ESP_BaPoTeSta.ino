@@ -379,6 +379,13 @@ void setupWebserver() {
     #endif
 }
 
+String ipToString (IPAddress ip) {
+    const String delim = ".";
+    return String(
+            ip[0] + delim + ip[1] + delim + ip[2] + delim + ip[3]
+            );
+}
+
 void webForm() {
     // called when client does a  GET /
     String buf;

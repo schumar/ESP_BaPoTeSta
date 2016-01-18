@@ -110,6 +110,7 @@ void powerDHT(bool on);
 
 void setupNormal();
 void setupWebserver();
+String ipToString (IPAddress ip);
 void webForm();
 
 void getConfig();
