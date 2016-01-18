@@ -104,7 +104,7 @@ R"(
         <h2>Measuring</h2>
         <ul>
             <li><label>Use DS18B20: <input type="checkbox" name="usedallas" ${usedallas} /></label></li>
-            <li><label>&nbsp; resolution: <input type="number" min="10" max="13" name="dallasres" value="${dallasres}" /></label></li>
+            <li><label>&nbsp; resolution: <input type="number" min="9" max="12" name="dallasres" value="${dallasres}" /></label></li>
             <li><label>&nbsp; check for result: <input type="checkbox" name="dallaswait" ${dallaswait} /></label></li>
             <li><label>Use DHT: <input type="checkbox" name="usedht" ${usedht} /></label></li>
             <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" value="${dhttype}" /></label></li>
