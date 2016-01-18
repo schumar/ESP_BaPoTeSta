@@ -48,8 +48,43 @@ struct allMeasurements {
 };
 
 struct config {
-    char ssid[32];
-    char password[32];
+    byte cfgversion = 1;
+
+    char ssid[32] = "tabr.org";
+    char password[32] = "";
+    IPAddress ip = {10, 1, 0, 38};
+    byte netmask = 24;
+    IPAddress gw = {10, 1, 0, 1};
+    IPAddress mqttip = {10, 1, 0, 9};
+    unsigned int mqttport = 1883;
+
+    bool usedallas = true;
+    byte dallasres = 12;
+    bool dallaswait = false;
+    bool usedht = true;
+    byte dhttype = DHT22;
+    bool dhthi = true;
+    bool battery = true;
+    bool battraw = false;
+    bool doperf = true;
+    bool perfraw = false;
+
+    unsigned int deltat = 300;
+
+    byte pinblue = 1;
+    bool invblue = true;
+    byte pinconfig = 5;
+    byte pinpwrsens = 14;
+    byte pindallas = 13;
+    byte pindhtdata = 12;
+
+    byte adcmeas = 5;
+    float battdiv = 10.0/66;
+    float ntcrfix = 4.7e3;
+    float ntc_b = 3950;
+    float ntc_r0 = 20e3;
+    float ntc_rinf = ntc_r0*exp(-ntc_b/298.15);  // (T0 = 25 + 273.15 = 298.15)
+
 };
 
 void sendTemp(float temp);
