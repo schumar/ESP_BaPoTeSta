@@ -95,36 +95,39 @@ R"(
         <ul>
             <li><label>ssid: <input type="text" name="ssid" value="${ssid}" /></label></li>
             <li><label>password: <input type="text" name="password" placeholder="empty or at least 8 chars" value="${password}" /></label></li>
-            <li><label>IP: <input type="text" name="ip" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" /></label></li>
-            <li><label>Subnet: <input type="number" min="0" max="31" name="subnet" /></label></li>
-            <li><label>Gateway: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="gw" /></label></li>
-            <li><label>MQTT IP: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="mqttip" /></label></li>
-            <li><label>MQTT Port: <input type="number" min="1" max="65535" name="mqttport" /></label></li>
+            <li><label>IP: <input type="text" name="ip" value="${ip}" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" /></label></li>
+            <li><label>Netmask: <input type="number" min="0" max="31" name="netmask" value="${netmask}" /></label></li>
+            <li><label>Gateway: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="gw" value="${gw}" /></label></li>
+            <li><label>MQTT IP: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="mqttip" value="${mqttip}" /></label></li>
+            <li><label>MQTT Port: <input type="number" min="1" max="65535" name="mqttport" value="${mqttport}" /></label></li>
         </ul>
         <h2>Measuring</h2>
         <ul>
-            <li><label>Use DS18B20: <input type="checkbox" name="usedallas" /></label></li>
-            <li><label>&nbsp; resolution: <input type="number" min="10" max="13" name="dallasres" /></label></li>
-            <li><label>&nbsp; wait for result: <input type="checkbox" name="dallaswait" /></label></li>
-            <li><label>Use DHT: <input type="checkbox" name="usedht" /></label></li>
-            <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" /></label></li>
-            <li><label>&nbsp; report HI: <input type="checkbox" name="dhthi" /></label></li>
-            <li><label>Report battery: <input type="checkbox" name="battery" /></label></li>
-            <li><label>&nbsp; divider: <input type="number" min="0" max="1" step="0.0001" name="battdiv" /></label></li>
-            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="battraw" /></label></li>
-            <li><label>Report performance: <input type="checkbox" name="doperf" /></label></li>
-            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" /></label></li>
-            <li><label>Measure every <input type="number" min="1" max="9999" name="deltat" /> seconds</label></li>
+            <li><label>Use DS18B20: <input type="checkbox" name="usedallas" ${usedallas} /></label></li>
+            <li><label>&nbsp; resolution: <input type="number" min="10" max="13" name="dallasres" value="${dallasres}" /></label></li>
+            <li><label>&nbsp; check for result: <input type="checkbox" name="dallaswait" ${dallaswait} /></label></li>
+            <li><label>Use DHT: <input type="checkbox" name="usedht" ${usedht} /></label></li>
+            <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" value="${dhttype}" /></label></li>
+            <li><label>&nbsp; report HI: <input type="checkbox" name="dhthi" ${dhthi} /></label></li>
+            <li><label>Report battery: <input type="checkbox" name="battery" ${battery} /></label></li>
+            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="battraw" ${battraw} /></label></li>
+            <li><label>Report performance: <input type="checkbox" name="doperf" ${doperf} /></label></li>
+            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" ${perfraw} /></label></li>
+            <li><label>Measure every <input type="number" min="1" max="9999" name="deltat" value="${deltat}" /> seconds</label></li>
         </ul>
         <h2>Hardware</h2>
         <ul>
-            <li><label>Pin for blue LED: <input type="number" min="0" max="16" name="pinblue" /></label></li>
-            <li><label>&nbsp; invert: <input type="checkbox" name="invblue" /></label></li>
-            <li><label>Pin for config-mode: <input type="number" min="0" max="16" name="pinconfig" /></label></li>
-            <li><label>Pin for sensor power: <input type="number" min="0" max="16" name="pinpwrsens" /></label></li>
-            <li><label>Pin for Dallas data: <input type="number" min="0" max="16" name="pindallas" /></label></li>
-            <li><label>Pin for DHT data: <input type="number" min="0" max="16" name="pindhtdata" /></label></li>
-            <li><label>Number of ADC measurements: <input type="number" min="1" max="13" step="2" name="adcmeas" /></label></li>
+            <li><label>Pin for blue LED: <input type="number" min="0" max="16" name="pinblue" value="${pinblue}" /></label></li>
+            <li><label>&nbsp; invert: <input type="checkbox" name="invblue" ${invblue} /></label></li>
+            <li><label>Pin for config-mode: <input type="number" min="0" max="16" name="pinconfig" value="${pinconfig}" /></label></li>
+            <li><label>Pin for sensor power: <input type="number" min="0" max="16" name="pinpwrsens" value="${pinpwrsens}" /></label></li>
+            <li><label>Pin for Dallas data: <input type="number" min="0" max="16" name="pindallas" value="${pindallas}" /></label></li>
+            <li><label>Pin for DHT data: <input type="number" min="0" max="16" name="pindhtdata" value="${pindhtdata}" /></label></li>
+            <li><label>Number of ADC measurements: <input type="number" min="1" max="13" step="2" name="adcmeas" value="${adcmeas}" /></label></li>
+            <li><label>Battery divider: <input type="number" min="0" max="1" step="0.0001" name="battdiv" value="${battdiv}" /></label></li>
+            <li><label>NTC fixed R: <input type="number" name="ntcrfix" value="${ntcrfix}" /> Ohm</label></li>
+            <li><label>NTC B: <input type="number" name="ntc_b" value="${ntc_b}" /></label></li>
+            <li><label>NTC R0: <input type="number" name="ntc_r0" value="${ntc_r0}" /></label> Ohm</li>
         </ul>
         <input type="reset" value="Revert">
         <input type="submit" value="Apply">

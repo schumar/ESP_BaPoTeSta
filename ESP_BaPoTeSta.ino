@@ -393,8 +393,38 @@ void webForm() {
     buf = indexPage;
     buf.replace("${flashsize}", String(ESP.getFlashChipRealSize()/1024));
     buf.replace("${buildtime}", String(__DATE__ + String(" at ") + __TIME__));
-    buf.replace("${ssid}", config.ssid);
-    buf.replace("${password}", config.password);
+
+    buf.replace("${ssid}", String(config.ssid));
+    buf.replace("${password}", String(config.password));
+    buf.replace("${ssid}", String(config.ssid));
+    buf.replace("${password}", String(config.password));
+    buf.replace("${ip}", ipToString(config.ip));
+    buf.replace("${netmask}", String(config.netmask));
+    buf.replace("${gw}", ipToString(config.gw));
+    buf.replace("${mqttip}", ipToString(config.mqttip));
+    buf.replace("${mqttport}", String(config.mqttport));
+    buf.replace("${usedallas}", config.usedallas ? "checked" : "");
+    buf.replace("${dallasres}", String(config.dallasres));
+    buf.replace("${dallaswait}", config.dallaswait ? "checked" : "");
+    buf.replace("${usedht}", config.usedht ? "checked" : "");
+    buf.replace("${dhttype}", String(config.dhttype));
+    buf.replace("${dhthi}", config.dhthi ? "checked" : "");
+    buf.replace("${battery}", config.battery ? "checked" : "");
+    buf.replace("${battraw}", config.battraw ? "checked" : "");
+    buf.replace("${doperf}", config.doperf ? "checked" : "");
+    buf.replace("${perfraw}", config.perfraw ? "checked" : "");
+    buf.replace("${deltat}", String(config.deltat));
+    buf.replace("${pinblue}", String(config.pinblue));
+    buf.replace("${invblue}", config.invblue ? "checked" : "");
+    buf.replace("${pinconfig}", String(config.pinconfig));
+    buf.replace("${pinpwrsens}", String(config.pinpwrsens));
+    buf.replace("${pindallas}", String(config.pindallas));
+    buf.replace("${pindhtdata}", String(config.pindhtdata));
+    buf.replace("${adcmeas}", String(config.adcmeas));
+    buf.replace("${battdiv}", String(config.battdiv));
+    buf.replace("${ntcrfix}", String(config.ntcrfix));
+    buf.replace("${ntc_b}", String(config.ntc_b));
+    buf.replace("${ntc_r0}", String(config.ntc_r0));
 
     httpServer.send(200, "text/html", buf);
 }
