@@ -35,11 +35,13 @@ struct allMeasurements data;
 struct config config;
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
-OneWire oneWire(PIN_1WIRE);
+OneWire oneWire(0xff);
 DallasTemperature dallasSensors(&oneWire);
 DHT dhtSensor(PIN_DHT, DHT_TYPE);
 bool configmode = false;
 ESP8266WebServer httpServer(80);
+IPAddress IPSubnet(255, 255, 255, 0);
+float ntc_rinf;
 
 #ifdef SERIALDEBUG
 ESP8266HTTPUpdateServer httpUpdater(true);
@@ -50,9 +52,9 @@ ESP8266HTTPUpdateServer httpUpdater;
 
 void setup() {
     // activate (active low) blue LED to show that we are "on"
-    if (PIN_BLUELED >= 0) {
-        pinMode(PIN_BLUELED, OUTPUT);
-        digitalWrite(PIN_BLUELED, BLUELED_ON);
+    if (config.pinblue >= 0) {
+        pinMode(config.pinblue, OUTPUT);
+        digitalWrite(config.pinblue, config.invblue ? LOW : HIGH);
     }
 
     #ifdef SERIALDEBUG
@@ -63,7 +65,7 @@ void setup() {
     getConfig();
 
     // check if "config mode" jumper is set
-    if (digitalRead(PIN_CONFIG)) {
+    if (digitalRead(config.pinconfig)) {
         debugPrint("\nStarting webserver");
 
         configmode = true;
@@ -82,11 +84,11 @@ void setupNormal() {
 
     // start WiFi
     WiFi.mode(WIFI_STA);
-    WiFi.config(IPLocal, IPGateway, IPSubnet);
-    if (pass == NULL || pass[0] == 0) {
-        WiFi.begin(ssid);
+    WiFi.config(config.ip, config.gw, IPSubnet);
+    if (config.password == NULL || config.password[0] == 0) {
+        WiFi.begin(config.ssid);
     } else {
-        WiFi.begin(ssid, pass);
+        WiFi.begin(config.ssid, config.password);
     }
 
     // now is a perfect time for "other" stuff, as WiFi will need some time
@@ -95,14 +97,15 @@ void setupNormal() {
     powerSensors(true);     // activate power to sensors
 
     // setup Dallas sensors
-    if (doDallas) {
+    if (config.usedallas) {
+        oneWire = OneWire(config.pindallas);
         dallasSensors.begin();
         dallasSensors.setResolution(DALLAS_RESOLUTION);
         dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
     }
 
     // setup DHT sensor
-    if (doDHT)
+    if (config.usedht)
         dhtSensor.begin();
 
     // get ChipID, will be used as unique ID when sending data
@@ -119,7 +122,7 @@ void setupNormal() {
         gotoSleep(noConnSleepSec);
 
     // connect to MQTT server
-    mqttClient.setServer(IPServer, portServer);
+    mqttClient.setServer(config.mqttip, config.mqttport);
     sprintf(idBuffer, "esp8266-%08lx", data.chipId);
     mqttClient.connect(idBuffer);
 
@@ -146,16 +149,16 @@ void loop() {
         // wait a little bit, to ensure that everything is sent
         delay(sleepEnd);
         mqttClient.loop();
-        gotoSleep(SLEEPSEC);
+        gotoSleep(config.deltat);
     }
 }
 
 void collectData() {
     if (doNTC) getNTC();
-    if (doDallas) getDallas();
-    if (doDHT) getDHT();
-    if (doBattery) getBattery();
-    if (doPerf) getPerf();
+    if (config.usedallas) getDallas();
+    if (config.usedht) getDHT();
+    if (config.battery) getBattery();
+    if (config.doperf) getPerf();
 }
 
 void getNTC() {
@@ -193,26 +196,26 @@ void getDHT() {
     addData(DHT_TYPE, TEMP, (int) (temp * 100.0), CENT_DEGC);
     addData(DHT_TYPE, HUMIDITY, (int) (hum * 100.0), CENT_PERC);
 
-    if (doDHTHI)
+    if (config.dhthi)
         addData(DHT_TYPE, TEMPHI,
                 (int) (dhtSensor.computeHeatIndex(temp, hum, false) * 100.0),
                 CENT_DEGC);
 }
 
 int readADC() {
-    int sensorValue[ADC_MEASURES];
+    int sensorValue[config.adcmeas];
 
     // measure multiple times
-    for (byte c=0; c<ADC_MEASURES; c++) {
+    for (byte c=0; c<config.adcmeas; c++) {
         delay(sleepADCmeasure);
         sensorValue[c] = analogRead(A0);
     }
 
     // calculate median
-    bubbleSort(sensorValue, ADC_MEASURES);
+    bubbleSort(sensorValue, config.adcmeas);
 
-    // as ADC_MEASURES is odd, we can just take the middle sample
-    return(sensorValue[ADC_MEASURES/2]);
+    // as config.adcmeas is odd, we can just take the middle sample
+    return(sensorValue[config.adcmeas/2]);
 }
 
 void getBattery() {
@@ -223,7 +226,7 @@ void getBattery() {
 
     raw = readADC();
     addData(0, BATTERY, (int) (calcBattery(raw) * 1000.0), MVOLT);
-    if (doBattraw)
+    if (config.battraw)
         addData(0, BATTERY, raw, RAW);
 }
 
@@ -232,7 +235,7 @@ void getPerf() {
     unsigned long int cycles;
     cycles = ESP.getCycleCount();
     addData(0, TIME, cycles/(F_CPU/1e6), USEC);
-    if (doPerfraw)
+    if (config.perfraw)
         addData(0, TIME, cycles, RAW);
 }
 
@@ -268,8 +271,7 @@ void sendData() {
 
 void powerSensors(bool on) {
     if (doNTC) powerNTC(on);
-    if (doDallas) powerDallas(on);
-    if (doDHT) powerDHT(on);
+    if (config.usedallas || config.usedht) powerSensorss(on);
 }
 
 void powerNTC(bool on) {
@@ -277,14 +279,9 @@ void powerNTC(bool on) {
     digitalWrite(PIN_NTC, on ? HIGH : LOW);
 }
 
-void powerDallas(bool on) {
-    pinMode(PIN_DALLAS_POWER, OUTPUT);
-    digitalWrite(PIN_DALLAS_POWER, on ? HIGH : LOW);
-}
-
-void powerDHT(bool on) {
-    pinMode(PIN_DHT_POWER, OUTPUT);
-    digitalWrite(PIN_DHT_POWER, on ? HIGH : LOW);
+void powerSensorss(bool on) {
+    pinMode(config.pinpwrsens, OUTPUT);
+    digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
 }
 
 
@@ -298,8 +295,8 @@ float calcNTCTemp(unsigned int raw) {
 
        T = B / ln(R/Rinf)
      */
-    float ntc = Vdd * Rfix / (raw/1024. + Voff) - Rfix;
-    float temp = NTC_B / log(ntc/Rinf) - 273.15;
+    float ntc = Vdd * config.ntcrfix / (raw/1024. + Voff) - config.ntcrfix;
+    float temp = config.ntc_b / log(ntc/ntc_rinf) - 273.15;
     // float temp = raw * 0.01;  // use this to test ADC
     // float temp = ntc * 1e-3;  // use this to test the NTC
     return temp;
@@ -346,8 +343,8 @@ void bubbleSort(int * analogValues, int nr) {
 
 void gotoSleep(unsigned int seconds) {
     // switch off (active low) blue LED to show that we are "off"
-    if (PIN_BLUELED >= 0) {
-        digitalWrite(PIN_BLUELED, 1 - BLUELED_ON);
+    if (config.pinblue >= 0) {
+        digitalWrite(config.pinblue, config.invblue ? HIGH : LOW);
     }
 
     // go to sleep, reboot after 'seconds' seconds
@@ -438,6 +435,28 @@ void getConfig() {
         if (EEPROM.read(1) == 1) {
             // read config
             EEPROM.get(1, config);
+
+            // conversions
+
+            // convert netmask "/25" -> "255.255.255.128"
+            // [XXX] there must be an easier way to do this
+            if (config.netmask < 8+1) {
+                IPSubnet = { (uint8_t)(0xff - (0xff >> config.netmask)),
+                    0, 0, 0};
+            } else if (config.netmask < 16+1) {
+                IPSubnet = { 0xff,
+                    (uint8_t)(0xff - (0xff >> (config.netmask-8))), 0, 0};
+            } else if (config.netmask < 24+1) {
+                IPSubnet = { 0xff, 0xff,
+                    (uint8_t)(0xff - ((uint8_t)0xff >> (config.netmask-16))), 0};
+            } else {
+                IPSubnet = { 0xff, 0xff, 0xff,
+                    (uint8_t)(0xff - ((uint8_t)0xff >> (config.netmask-24)))};
+            }
+
+            // (T0 = 25 + 273.15 = 298.15)
+            ntc_rinf = config.ntc_r0*exp(-config.ntc_b/298.15);
+
         } else {
             debugPrint("Ignoring EEPROM, cfg version >1");
         }

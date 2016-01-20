@@ -71,7 +71,7 @@ struct config {
 
     unsigned int deltat = 300;
 
-    byte pinblue = 1;
+    int8_t pinblue = 1;
     bool invblue = true;
     byte pinconfig = 5;
     byte pinpwrsens = 14;
@@ -83,7 +83,6 @@ struct config {
     float ntcrfix = 4.7e3;
     float ntc_b = 3950;
     float ntc_r0 = 20e3;
-    float ntc_rinf = ntc_r0*exp(-ntc_b/298.15);  // (T0 = 25 + 273.15 = 298.15)
 
 };
 
@@ -105,8 +104,7 @@ void addData(unsigned int sensorId, enum sensorType type,
 void sendData();
 void powerSensors(bool on);
 void powerNTC(bool on);
-void powerDallas(bool on);
-void powerDHT(bool on);
+void powerSensorss(bool on);
 
 void setupNormal();
 void setupWebserver();
