@@ -106,7 +106,7 @@ void setupNormal() {
 
     // setup DHT sensor
     if (config.usedht)
-        dhtSensor = DHT(config.pindhtdata, dhttype);
+        dhtSensor = DHT(config.pindhtdata, config.dhttype);
         dhtSensor.begin();
 
     // get ChipID, will be used as unique ID when sending data
@@ -194,11 +194,11 @@ void getDHT() {
     float hum = dhtSensor.readHumidity();
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
-    addData(DHT_TYPE, TEMP, (int) (temp * 100.0), CENT_DEGC);
-    addData(DHT_TYPE, HUMIDITY, (int) (hum * 100.0), CENT_PERC);
+    addData(config.dhttype, TEMP, (int) (temp * 100.0), CENT_DEGC);
+    addData(config.dhttype, HUMIDITY, (int) (hum * 100.0), CENT_PERC);
 
     if (config.dhthi)
-        addData(DHT_TYPE, TEMPHI,
+        addData(config.dhttype, TEMPHI,
                 (int) (dhtSensor.computeHeatIndex(temp, hum, false) * 100.0),
                 CENT_DEGC);
 }
