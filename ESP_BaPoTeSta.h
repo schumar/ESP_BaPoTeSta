@@ -64,6 +64,8 @@ struct config {
     bool usedht = true;
     byte dhttype = DHT22;
     bool dhthi = true;
+    bool usentc = false;
+    bool ntcraw = true;
     bool battery = true;
     bool battraw = false;
     bool doperf = true;
@@ -104,7 +106,6 @@ void addData(unsigned int sensorId, enum sensorType type,
 void sendData();
 void powerSensors(bool on);
 void powerNTC(bool on);
-void powerSensorss(bool on);
 
 void setupNormal();
 void setupWebserver();

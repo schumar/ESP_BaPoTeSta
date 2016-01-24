@@ -155,7 +155,7 @@ void loop() {
 }
 
 void collectData() {
-    if (doNTC) getNTC();
+    if (config.usentc) getNTC();
     if (config.usedallas) getDallas();
     if (config.usedht) getDHT();
     if (config.battery) getBattery();
@@ -168,7 +168,7 @@ void getNTC() {
     raw = readADC();
 
     addData(NTC_ID, TEMP, (int) (100.0*calcNTCTemp(raw)), CENT_DEGC);
-    if (doNTCraw)
+    if (config.ntcraw)
         addData(NTC_ID, TEMP, raw, RAW);
 }
 
@@ -223,7 +223,7 @@ void getBattery() {
     int raw;
 
     // Sanity check: We only have 1 ADC, so we can't measure battery AND NTC
-    if (doNTC) return;
+    if (config.usentc) return;
 
     raw = readADC();
     addData(0, BATTERY, (int) (calcBattery(raw) * 1000.0), MVOLT);
@@ -271,18 +271,11 @@ void sendData() {
 }
 
 void powerSensors(bool on) {
-    if (doNTC) powerNTC(on);
-    if (config.usedallas || config.usedht) powerSensorss(on);
-}
-
-void powerNTC(bool on) {
-    pinMode(PIN_NTC, OUTPUT);
-    digitalWrite(PIN_NTC, on ? HIGH : LOW);
-}
-
-void powerSensorss(bool on) {
-    pinMode(config.pinpwrsens, OUTPUT);
-    digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
+    // only power the pin if actually needed
+    if (config.usentc || config.usedallas || config.usedht) {
+        pinMode(config.pinpwrsens, OUTPUT);
+        digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
+    }
 }
 
 
@@ -407,6 +400,8 @@ void webForm() {
     buf.replace("${usedht}", config.usedht ? "checked" : "");
     buf.replace("${dhttype}", String(config.dhttype));
     buf.replace("${dhthi}", config.dhthi ? "checked" : "");
+    buf.replace("${usentc}", config.usentc ? "checked" : "");
+    buf.replace("${ntcraw}", config.ntcraw ? "checked" : "");
     buf.replace("${battery}", config.battery ? "checked" : "");
     buf.replace("${battraw}", config.battraw ? "checked" : "");
     buf.replace("${doperf}", config.doperf ? "checked" : "");

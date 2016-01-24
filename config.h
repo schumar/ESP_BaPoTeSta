@@ -17,13 +17,8 @@ const byte maxSensors = 8;
 const float Vdd = 3.3;
 const float Voff = 0.00;        // highest V where ADC still reports "0"
 
-// Sensors
-const bool doNTC = false;
-const bool doNTCraw = true;
-
 // NTC
-const byte PIN_NTC = 5;
-const unsigned int NTC_ID = 42;
+const unsigned int NTC_ID = 42; // NTC doesn't have a special "id" -> use 42
 
 // Webserver
 const char indexPage[] =
@@ -68,6 +63,8 @@ R"(
             <li><label>Use DHT: <input type="checkbox" name="usedht" ${usedht} /></label></li>
             <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" value="${dhttype}" /></label></li>
             <li><label>&nbsp; report HI: <input type="checkbox" name="dhthi" ${dhthi} /></label></li>
+            <li><label>Use NTC: <input type="checkbox" name="usentc" ${usentc} /></label></li>
+            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="ntcraw" ${ntcraw} /></label></li>
             <li><label>Report battery: <input type="checkbox" name="battery" ${battery} /></label></li>
             <li><label>&nbsp; incl. raw value: <input type="checkbox" name="battraw" ${battraw} /></label></li>
             <li><label>Report performance: <input type="checkbox" name="doperf" ${doperf} /></label></li>
