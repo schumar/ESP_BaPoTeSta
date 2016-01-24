@@ -26,17 +26,6 @@ const bool doNTCraw = true;
 const byte PIN_NTC = 5;
 const unsigned int NTC_ID = 42;
 
-// Dallas
-const byte DALLAS_RESOLUTION = 12;
-const bool DALLAS_CHECKCONVERSION = false;  // set to false if sensor returns 85
-
-// DHT
-const byte PIN_DHT = 13;
-const byte DHT_TYPE = DHT22;        // DHT11 / DHT21 / DHT22
-
-// Battery
-const float battDivider = 10.0/66;    // 56k + 10k
-
 // Webserver
 const char indexPage[] =
 R"(

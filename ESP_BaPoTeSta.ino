@@ -37,7 +37,7 @@ WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 OneWire oneWire(0xff);
 DallasTemperature dallasSensors(&oneWire);
-DHT dhtSensor(PIN_DHT, DHT_TYPE);
+DHT dhtSensor(0,0);
 bool configmode = false;
 ESP8266WebServer httpServer(80);
 IPAddress IPSubnet(255, 255, 255, 0);
@@ -100,12 +100,13 @@ void setupNormal() {
     if (config.usedallas) {
         oneWire = OneWire(config.pindallas);
         dallasSensors.begin();
-        dallasSensors.setResolution(DALLAS_RESOLUTION);
-        dallasSensors.setCheckForConversion(DALLAS_CHECKCONVERSION);
+        dallasSensors.setResolution(config.dallasres);
+        dallasSensors.setCheckForConversion(config.dallaswait);
     }
 
     // setup DHT sensor
     if (config.usedht)
+        dhtSensor = DHT(config.pindhtdata, dhttype);
         dhtSensor.begin();
 
     // get ChipID, will be used as unique ID when sending data
@@ -310,7 +311,7 @@ float calcBattery(int raw) {
        Vbatt = V / battDivider
 
      */
-    return ((raw/1024. + Voff) / battDivider);
+    return ((raw/1024. + Voff) / config.battdiv);
 }
 
 void bubbleSort(float * analogValues, int nr) {
