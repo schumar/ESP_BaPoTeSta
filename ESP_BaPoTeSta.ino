@@ -360,6 +360,7 @@ void setupWebserver() {
 
     httpUpdater.setup(&httpServer);
     httpServer.on("/",  HTTP_GET, &webForm);
+    httpServer.on("/config",  HTTP_POST, &storeConfig);
     httpServer.begin();
 
     MDNS.addService("http", "tcp", 80);
@@ -460,6 +461,11 @@ void getConfig() {
     // otherwise we rely on the defaults
 }
 
+void storeConfig() {
+    String buf;
+    buf = "Number of received args: " + httpServer.args();
+    httpServer.send(200, "text/plain", buf);
+}
 
 
 void debugPrint(const char * msg) {
