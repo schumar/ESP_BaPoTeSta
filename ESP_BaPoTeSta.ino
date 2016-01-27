@@ -475,8 +475,128 @@ void getConfig() {
 }
 
 void storeConfig() {
-    String buf;
-    buf = "Number of received args: " + httpServer.args();
+    String buf = "";
+
+    buf += (String)"Number of received args: " + httpServer.args() + "\n";
+    for (int i = 0; i < httpServer.args(); i++) {
+        buf += httpServer.argName(i) + ": " + httpServer.arg(i) + "\n";
+    }
+
+    if (httpServer.hasArg("ssid"))
+        httpServer.arg("ssid").toCharArray(config.ssid, 32);
+
+    if (httpServer.hasArg("password"))
+        httpServer.arg("password").toCharArray(config.password, 32);
+
+    if (httpServer.hasArg("ip"))
+        config.ip = stringToIP(httpServer.arg("ip"));
+
+    if (httpServer.hasArg("netmask"))
+        config.netmask = httpServer.arg("netmask").toInt();
+
+    if (httpServer.hasArg("gw"))
+        config.gw = stringToIP(httpServer.arg("gw"));
+
+    if (httpServer.hasArg("mqttip"))
+        config.mqttip = stringToIP(httpServer.arg("mqttip"));
+
+    if (httpServer.hasArg("mqttport"))
+        config.mqttport = httpServer.arg("mqttport").toInt();
+
+    if (httpServer.hasArg("usedallas"))
+        config.usedallas = true;
+    else
+        config.usedallas = false;
+
+    if (httpServer.hasArg("dallasres"))
+        config.dallasres = httpServer.arg("dallasres").toInt();
+
+    if (httpServer.hasArg("dallaswait"))
+        config.dallaswait = true;
+    else
+        config.dallaswait = false;
+
+    if (httpServer.hasArg("usedht"))
+        config.usedht = true;
+    else
+        config.usedht = false;
+
+    if (httpServer.hasArg("dhttype"))
+        config.dhttype = httpServer.arg("dhttype").toInt();
+
+    if (httpServer.hasArg("dhthi"))
+        config.dhthi = true;
+    else
+        config.dhthi = false;
+
+    if (httpServer.hasArg("usentc"))
+        config.usentc = true;
+    else
+        config.usentc = false;
+
+    if (httpServer.hasArg("ntcraw"))
+        config.ntcraw = true;
+    else
+        config.ntcraw = false;
+
+    if (httpServer.hasArg("battery"))
+        config.battery = true;
+    else
+        config.battery = false;
+
+    if (httpServer.hasArg("battraw"))
+        config.battraw = true;
+    else
+        config.battraw = false;
+
+    if (httpServer.hasArg("doperf"))
+        config.doperf = true;
+    else
+        config.doperf = false;
+
+    if (httpServer.hasArg("perfraw"))
+        config.perfraw = true;
+    else
+        config.perfraw = false;
+
+    if (httpServer.hasArg("deltat"))
+        config.deltat = httpServer.arg("deltat").toInt();
+
+    if (httpServer.hasArg("pinblue"))
+        config.pinblue = httpServer.arg("pinblue").toInt();
+
+    if (httpServer.hasArg("invblue"))
+        config.invblue = true;
+    else
+        config.invblue = false;
+
+    if (httpServer.hasArg("pinconfig"))
+        config.pinconfig = httpServer.arg("pinconfig").toInt();
+
+    if (httpServer.hasArg("pinpwrsens"))
+        config.pinpwrsens = httpServer.arg("pinpwrsens").toInt();
+
+    if (httpServer.hasArg("pindallas"))
+        config.pindallas = httpServer.arg("pindallas").toInt();
+
+    if (httpServer.hasArg("pindhtdata"))
+        config.pindhtdata = httpServer.arg("pindhtdata").toInt();
+
+    if (httpServer.hasArg("adcmeas"))
+        config.adcmeas = httpServer.arg("adcmeas").toInt();
+
+    if (httpServer.hasArg("battdiv"))
+        config.battdiv = httpServer.arg("battdiv").toFloat();
+
+    if (httpServer.hasArg("ntcrfix"))
+        config.ntcrfix = httpServer.arg("ntcrfix").toFloat();
+
+    if (httpServer.hasArg("ntc_b"))
+        config.ntc_b = httpServer.arg("ntc_b").toFloat();
+
+    if (httpServer.hasArg("ntc_r0"))
+        config.ntc_r0 = httpServer.arg("ntc_r0").toFloat();
+
     httpServer.send(200, "text/plain", buf);
 }
 
