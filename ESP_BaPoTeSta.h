@@ -110,6 +110,7 @@ void powerNTC(bool on);
 void setupNormal();
 void setupWebserver();
 String ipToString (IPAddress ip);
+IPAddress stringToIP (String text);
 void webForm();
 
 void getConfig();

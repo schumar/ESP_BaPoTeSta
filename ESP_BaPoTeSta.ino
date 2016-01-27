@@ -378,6 +378,19 @@ String ipToString (IPAddress ip) {
             );
 }
 
+IPAddress stringToIP (String text) {
+    byte octet[4];
+    byte pos = 0;
+
+    for (byte i = 0; i < 4; i++) {
+        byte dot = text.indexOf('.', pos);
+        octet[i++] = text.substring(pos, dot).toInt();
+        pos = dot + 1;
+    }
+
+    return IPAddress(octet[0], octet[1], octet[2], octet[3]);
+}
+
 void webForm() {
     // called when client does a  GET /
     String buf;
