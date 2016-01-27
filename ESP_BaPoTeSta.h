@@ -113,5 +113,6 @@ String ipToString (IPAddress ip);
 void webForm();
 
 void getConfig();
+void storeConfig();
 
 void debugPrint(const char * msg);
