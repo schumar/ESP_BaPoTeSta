@@ -597,6 +597,10 @@ void storeConfig() {
     if (httpServer.hasArg("ntc_r0"))
         config.ntc_r0 = httpServer.arg("ntc_r0").toFloat();
 
+    EEPROM.put(0, 0x42);        // magic byte
+    EEPROM.put(1, config);
+    EEPROM.commit();            // ESP8266 EEPROM library needs this
+
     httpServer.send(200, "text/plain", buf);
 }
 
