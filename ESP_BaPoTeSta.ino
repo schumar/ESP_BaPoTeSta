@@ -441,6 +441,7 @@ void getConfig() {
 
     // check if the first byte is "magic" (i.e. EEPROM has been written before)
     if (EEPROM.read(0) == 0x42) {
+        debugPrint("EEPROM magic byte 0x42 found.");
         // check version of config storage
         if (EEPROM.read(1) == 1) {
             // read config
