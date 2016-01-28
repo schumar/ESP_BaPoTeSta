@@ -384,7 +384,7 @@ IPAddress stringToIP (String text) {
 
     for (byte i = 0; i < 4; i++) {
         byte dot = text.indexOf('.', pos);
-        octet[i++] = text.substring(pos, dot).toInt();
+        octet[i] = text.substring(pos, dot).toInt();
         pos = dot + 1;
     }
 
