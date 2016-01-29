@@ -22,81 +22,167 @@ const unsigned int NTC_ID = 42; // NTC doesn't have a special "id" -> use 42
 
 // Webserver
 const char indexPage[] =
-R"(
+R"(<!DOCTYPE html>
 <html>
     <head>
         <title>ESP_BaPoTeSta Maintenance</title>
         <style type="text/css">
-            body {
-                background-color: #eee;
-                color: black;
-            }
-            h1, h2 {
-                color: #220;
+            /*! Pure v0.6.0 || Copyright 2014 Yahoo! Inc. All rights reserved. || Licensed under the BSD License. || https://github.com/yahoo/pure/blob/master/LICENSE.md */
+            html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}.hidden,[hidden]{display:none!important}.pure-img{max-width:100%;height:auto;display:block}
+
+            html {
+                margin: 0em 1em;
             }
             h2 {
-                border-left:1px black solid;
-                border-top:1px black solid;
-                margin-left:4px;
-                margin-top:4px;
+                border-top:1px solid;
+                padding-top:0.5em;
+            }
+            fieldset {
+                border:none;
+                width: 23em;
+                float: left;
+                margin: 0em 1em;
+            }
+            legend {
+                border-bottom: 1px solid #e5e5e5;
+                color: #333;
+                display: block;
+                margin-bottom: 0.3em;
+                padding: 0.3em 0;
+                width: 100%;
+            }
+            label {
+                display: inline-block;
+                margin: 0 1em 0 0;
+                text-align: right;
+                vertical-align: middle;
+                width: 12em;
+            }
+            input {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-shadow: 0 1px 3px #ddd inset;
+                box-sizing: border-box;
+                display: inline-block;
+                padding: 0.5em 0.6em;
+                vertical-align: middle;
+                width: 10em;
+            }
+            input[type="number"] {
+                width:7em;
+            }
+            input[type="checkbox"] {
+                margin: 0.7em 0.5em;
+                width: 1em;
+            }
+            input[type="file"] {
+                width: 30em;
+            }
+            button {
+                -moz-user-select: none;
+                background-color: #e6e6e6;
+                border-radius: 2px;
+                border: 0 none rgba(0, 0, 0, 0);
+                box-sizing: border-box;
+                color: rgba(0, 0, 0, 0.8);
+                cursor: pointer;
+                display: inline-block;
+                padding: 0.5em 1em;
+                text-align: center;
+                text-decoration: none;
+                vertical-align: middle;
+                white-space: nowrap;
+            }
+            button.primary {
+                background-color: #0078e7;
+                color: #fff;
+            }
+            div.inputgroup {
+                margin:0.5em 0em;
             }
         </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <h1>ESP_BaPoTeSta Maintenance</h1>
-        <form method="POST" action="/config" enctype="multipart/form-data">
-        <h2>Network</h2>
-        <ul>
-            <li><label>ssid: <input type="text" name="ssid" value="${ssid}" /></label></li>
-            <li><label>password: <input type="text" name="password" placeholder="empty or at least 8 chars" value="${password}" /></label></li>
-            <li><label>IP: <input type="text" name="ip" value="${ip}" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" /></label></li>
-            <li><label>Netmask: <input type="number" min="0" max="31" name="netmask" value="${netmask}" /></label></li>
-            <li><label>Gateway: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="gw" value="${gw}" /></label></li>
-            <li><label>MQTT IP: <input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" name="mqttip" value="${mqttip}" /></label></li>
-            <li><label>MQTT Port: <input type="number" min="1" max="65535" name="mqttport" value="${mqttport}" /></label></li>
-        </ul>
-        <h2>Measuring</h2>
-        <ul>
-            <li><label>Use DS18B20: <input type="checkbox" name="usedallas" ${usedallas} /></label></li>
-            <li><label>&nbsp; resolution: <input type="number" min="9" max="12" name="dallasres" value="${dallasres}" /></label></li>
-            <li><label>&nbsp; check for result: <input type="checkbox" name="dallaswait" ${dallaswait} /></label></li>
-            <li><label>Use DHT: <input type="checkbox" name="usedht" ${usedht} /></label></li>
-            <li><label>&nbsp; type: <input type="number" min="11" max="33" name="dhttype" value="${dhttype}" /></label></li>
-            <li><label>&nbsp; report HI: <input type="checkbox" name="dhthi" ${dhthi} /></label></li>
-            <li><label>Use NTC: <input type="checkbox" name="usentc" ${usentc} /></label></li>
-            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="ntcraw" ${ntcraw} /></label></li>
-            <li><label>Report battery: <input type="checkbox" name="battery" ${battery} /></label></li>
-            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="battraw" ${battraw} /></label></li>
-            <li><label>Report performance: <input type="checkbox" name="doperf" ${doperf} /></label></li>
-            <li><label>&nbsp; incl. raw value: <input type="checkbox" name="perfraw" ${perfraw} /></label></li>
-            <li><label>Measure every <input type="number" min="1" max="9999" name="deltat" value="${deltat}" /> seconds</label></li>
-        </ul>
-        <h2>Hardware</h2>
-        <ul>
-            <li><label>Pin for blue LED: <input type="number" min="0" max="16" name="pinblue" value="${pinblue}" /></label></li>
-            <li><label>&nbsp; invert: <input type="checkbox" name="invblue" ${invblue} /></label></li>
-            <li><label>Pin for config-mode: <input type="number" min="0" max="16" name="pinconfig" value="${pinconfig}" /></label></li>
-            <li><label>Pin for sensor power: <input type="number" min="0" max="16" name="pinpwrsens" value="${pinpwrsens}" /></label></li>
-            <li><label>Pin for Dallas data: <input type="number" min="0" max="16" name="pindallas" value="${pindallas}" /></label></li>
-            <li><label>Pin for DHT data: <input type="number" min="0" max="16" name="pindhtdata" value="${pindhtdata}" /></label></li>
-            <li><label>Number of ADC measurements: <input type="number" min="1" max="13" step="2" name="adcmeas" value="${adcmeas}" /></label></li>
-            <li><label>Battery divider: <input type="number" min="0" max="1" step="0.0001" name="battdiv" value="${battdiv}" /></label></li>
-            <li><label>NTC fixed R: <input type="number" name="ntcrfix" value="${ntcrfix}" /> Ohm</label></li>
-            <li><label>NTC B: <input type="number" name="ntc_b" value="${ntc_b}" /></label></li>
-            <li><label>NTC R0: <input type="number" name="ntc_r0" value="${ntc_r0}" /></label> Ohm</li>
-        </ul>
-        <input type="reset" value="Revert">
-        <input type="submit" value="Apply">
+        <h2>Configuration</h2>
+        <form method="POST" action="/config" enctype="multipart/form-data"  class="pure-form pure-form-aligned">
+            <fieldset>
+                <legend>Network</legend>
+                <div class="inputgroup">
+                    <label for="ssid">ssid</label><input type="text" id="ssid" value="${ssid}" />
+                    <label for="password">password</label><input type="text" id="password" placeholder="0 or 8+ chars" value="${password}" />
+                    <label for="ip">IP</label><input type="text" id="ip" value="${ip}" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" />
+                    <label for="netmask">Netmask</label><input type="number" min="0" max="31" id="netmask" value="${netmask}" />
+                    <label for="gw">Gateway</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="gw" value="${gw}" />
+                </div>
+                <div class="inputgroup">
+                    <label for="mqttip">MQTT IP</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="mqttip" value="${mqttip}" />
+                    <label for="mqttport">MQTT Port</label><input type="number" min="1" max="65535" id="mqttport" value="${mqttport}" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Measuring</legend>
+                <div class="inputgroup">
+                    <label for="usedallas">Use DS18B20</label><input type="checkbox" id="usedallas" ${usedallas} />
+                    <label for="dallasres"> resolution</label><input type="number" min="9" max="12" id="dallasres" value="${dallasres}" />
+                    <label for="dallaswait"> check for result</label><input type="checkbox" id="dallaswait" ${dallaswait} />
+                </div>
+                <div class="inputgroup">
+                    <label for="usedht">Use DHT</label><input type="checkbox" id="usedht" ${usedht} />
+                    <label for="dhttype"> type</label><input type="number" min="11" max="33" id="dhttype" value="${dhttype}" />
+                    <label for="dhthi"> report HI</label><input type="checkbox" id="dhthi" ${dhthi} />
+                </div>
+                <div class="inputgroup">
+                    <label for="usentc">Use NTC</label><input type="checkbox" id="usentc" ${usentc} />
+                    <label for="ntcraw"> incl. raw value</label><input type="checkbox" id="ntcraw" ${ntcraw} />
+                </div>
+                <div class="inputgroup">
+                    <label for="battery">Report battery</label><input type="checkbox" id="battery" ${battery} />
+                    <label for="battraw"> incl. raw value</label><input type="checkbox" id="battraw" ${battraw} />
+                </div>
+                <div class="inputgroup">
+                    <label for="doperf">Report performance</label><input type="checkbox" id="doperf" ${doperf} />
+                    <label for="perfraw"> incl. raw value</label><input type="checkbox" id="perfraw" ${perfraw} />
+                </div>
+                <div class="inputgroup">
+                    <label for="deltat">Period (secs)</label><input type="number" min="1" max="9999" id="deltat" value="${deltat}" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Hardware</legend>
+                <div class="inputgroup">
+                    <label for="pinblue">Pin for blue LED</label><input type="number" min="0" max="16" id="pinblue" value="${pinblue}" />
+                    <label for="invblue"> invert</label><input type="checkbox" id="invblue" ${invblue} />
+                    <label for="pinconfig">Pin for config-mode</label><input type="number" min="0" max="16" id="pinconfig" value="${pinconfig}" />
+                    <label for="pinpwrsens">Pin for sensor power</label><input type="number" min="0" max="16" id="pinpwrsens" value="${pinpwrsens}" />
+                    <label for="pindallas">Pin for Dallas data</label><input type="number" min="0" max="16" id="pindallas" value="${pindallas}" />
+                    <label for="pindhtdata">Pin for DHT data</label><input type="number" min="0" max="16" id="pindhtdata" value="${pindhtdata}" />
+                </div>
+                <div class="inputgroup">
+                    <label for="adcmeas">Number of ADC measurements</label><input type="number" min="1" max="13" step="2" id="adcmeas" value="${adcmeas}" />
+                    <label for="battdiv">Battery divider</label><input type="number" min="0" max="1" step="0.0001" id="battdiv" value="${battdiv}" />
+                    <label for="ntcrfix">NTC fixed R (&Omega;)</label><input type="number" id="ntcrfix" value="${ntcrfix}" />
+                    <label for="ntc_b">NTC B</label><input type="number" id="ntc_b" value="${ntc_b}" />
+                    <label for="ntc_r0">NTC R0 (&Omega;)</label><input type="number" id="ntc_r0" value="${ntc_r0}" />
+                </div>
+            </fieldset>
+
+            <div style="clear:left">
+                <button type="reset">Revert</button>
+                <button type="submit" class="primary">Apply</button>
+            </div>
         </form>
-        <hr>
+
         <h2>Firmware Update</h2>
-        Firmware needs to be compiled for ${flashsize} KiB flash size!<br />
         <form method="POST" action="/update" enctype="multipart/form-data">
-            Firmware: <input type="file" name="update">
-            <input type="submit" value="Update">
+            <label for="update">Firmware:</label><input type="file" id="update" />
+            <button type="submit" class="primary">Update</button>
         </form>
-        <hr>
-        Current firmware was built on ${buildtime}
+        <p>Firmware needs to be compiled for ${flashsize} KiB flash size!</p>
+
+        <h2>Info</h2>
+        <p>Current firmware was built on ${buildtime}</p>
     </body>
 </html>)";
 
