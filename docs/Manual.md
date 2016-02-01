@@ -168,7 +168,13 @@ protect the solder joints from tension).
 
 ### Finish
 
-Make one last visual inspection of all soldering joints
+Make one last visual inspection of all soldering joints.
+
+If you want, you can switch on your board now -- it should briefly flash the
+blue LED on the module. If the LED doesn't flash, switch off the board, take
+your multimeter and test all connections :(  
+If it does flash, switch the board off again; no use in wasting energy.
+
 Tin, clean, re-tin you soldering iron, switch it off, clean the board, put back
 any unused parts.
 
