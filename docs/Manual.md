@@ -3,7 +3,17 @@
 ## Read This First!
 
 If you have acquired a finished BaPoTesTa, you can skip ahead to
-(Configuration)[#Configuration]
+(Configuration)[#configuration] now!
+
+The following instructions are for the board as I designed it -- if you are
+using another PCB, or have modified the schematics, they might still be a good
+rough guideline.
+
+If you want to attach other sensors, actuators, MOSFETs or whatever: There is
+one unused pin (GPIO 4) which even has a through-hole you can solder a wire
+into, and on the bottom of the board there are 2 solder bridges for GPIO 12
+and GPIO 13 which you can cut to use those pins (originally for the DS18B20 and
+DHT22, respecticely) too.
 
 ## Parts List
 
@@ -27,7 +37,7 @@ You also need either either
 
 or, if you want to plug in some other power source:
 
-* 2 more pin headers
+* 2 additional pin headers
 
 ### Sensors
 
@@ -38,7 +48,7 @@ One or both of
 ## Soldering
 
 If you haven't done any soldering before (or your knowledge is a little rusty),
-you might want to check the Internet for tutorials :) People seem to like
+you might want to check the Internet for tutorials :) e.g.
 * https://learn.sparkfun.com/tutorials/how-to-solder---through-hole-soldering
 * https://learn.sparkfun.com/tutorials/how-to-solder---castellated-mounting-holes
 
@@ -48,7 +58,13 @@ check out
 (it's American, so prepare to snicker whenever the presenter pronounces
 soldering as "soddering" :)
 
-### SMD parts
+### Label your Board
+
+Take a non water-solvable pen and write an ID on the white boxes on the front
+and back of the board. Feel free to choose whatever scheme you want (most
+people will go with "1, 2, 3,...", but why not use Klingon letters instead? ;)
+
+### SMD Parts
 
 For an aesthetically pleasing result, I suggest to stick with the convention I
 already used for the board itself: "down" for text is South or East, i.e. the
@@ -132,5 +148,31 @@ reading will be rather influenced by the air temperature than by the temperature
 of the PCB.
 
 When inserting the DHT22, make absolutely sure that the grill points outwards!
+
+### Mounting Screw
+
+Now is a good time to prepare a hole where the mounting screw will go through,
+e.g. if you plan to put the board directly on a battery case, drill a hole
+in that.
+
+The antenna of the ESP-12 module (at the right border of the board) shouldn't
+be covered by metal, if possible!
+
+### Power
+
+If you want to plug the power supply onto the board, solder in 2 pin headers.
+
+Otherwise, solder the cables directly in the two pins. There are 2 small
+mounting holes just left of the pins, which you can put the cables through (to
+protect the solder joints from tension).
+
+### Finish
+
+Make one last visual inspection of all soldering joints
+Tin, clean, re-tin you soldering iron, switch it off, clean the board, put back
+any unused parts.
+
+Congratulations :)  
+You are now ready for the initial configuration of your board!
 
 
