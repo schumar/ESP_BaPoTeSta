@@ -1,13 +1,13 @@
-= Manual =
+# Manual
 
-== Read This First! ==
+## Read This First!
 
 If you have acquired a finished BaPoTesTa, you can skip ahead to
 (Configuration)[#Configuration]
 
-== Parts List ==
+## Parts List
 
-=== Basic parts ===
+### Basic parts
 
 * 1 PCB
 * 10 SMD (1206) 10k&Omega; resistors
@@ -18,7 +18,7 @@ If you have acquired a finished BaPoTesTa, you can skip ahead to
 * 1 ESP-12/12E/12F module
 * 9 pin headers
 
-=== Power ===
+### Power
 
 You also need either either
 
@@ -29,25 +29,26 @@ or, if you want to plug in some other power source:
 
 * 2 more pin headers
 
-=== Sensors ===
+### Sensors
 
 One or both of
 * 1 DS18B20 temperature sensor
 * 1 DHT22 temperature&amp;humidity sensor
 
-== Soldering ==
+## Soldering
 
 If you haven't done any soldering before (or your knowledge is a little rusty),
 you might want to check the Internet for tutorials :) People seem to like
 * https://learn.sparkfun.com/tutorials/how-to-solder---through-hole-soldering
 * https://learn.sparkfun.com/tutorials/how-to-solder---castellated-mounting-holes
+
 but if you have some time, and want to have a good understanding of soldering,
 check out
 [PACE: Basic Soldering Lesson 1](https://www.youtube.com/watch?v=vIT4ra6Mo0s)  
 (it's American, so prepare to snicker whenever the presenter pronounces
 soldering as "soddering" :)
 
-=== SMD parts ===
+### SMD parts
 
 For an aesthetically pleasing result, I suggest to stick with the convention I
 already used for the board itself: "down" for text is South or East, i.e. the
@@ -69,7 +70,7 @@ The only SMD parts left are the 2 1&mu;F capacitors (C1 and C3) -- add those.
 Now is a good time to take some isopropanol, maybe mixed 1:1 with acetone,
 and, using a brush, clean flux residue from the board (the ugly brown stuff).
 
-=== MCP 1700 ===
+### MCP 1700
 
 That should be a no-brainer. Just make sure to put it in correctly (flat side
 of the case points left/outward).
@@ -77,7 +78,7 @@ of the case points left/outward).
 After soldering, cut off the 3 wires, and try to keep those short pieces, we'll
 need them in the next step!
 
-=== ESP-12 ===
+### ESP-12
 
 I've found this to be a good way to solder the ESP-12:
 
@@ -100,13 +101,13 @@ and improve this documentation ;)
 
 This is again a good time to clean your board.
 
-=== Buffer Capacitor ===
+### Buffer Capacitor
 
 This one should be easy again, just make sure that you don't swap the pins --
 this is an electrolytic cap, so it has a plus- and a minus-pin, and swapping
 those two can lead to Rapid Unplanned Disassembly.
 
-=== Pin Headers ===
+### Pin Headers
 
 Speaking from experience:
 * Make sure that you count correctly! You need 3+2+2+2, and possibly 2 again
@@ -118,7 +119,7 @@ Speaking from experience:
 * Soldering might take a little more patience than usual, because the pins have
   a high thermal mass.
 
-=== Sensors ===
+### Sensors
 
 I've decided to use a "wide" footprint for the DS18B20, to make it easier to
 solder in a cable instead of the sensor. But this means that if you want to put
