@@ -1,0 +1,135 @@
+= Manual =
+
+== Read This First! ==
+
+If you have acquired a finished BaPoTesTa, you can skip ahead to
+(Configuration)[#Configuration]
+
+== Parts List ==
+
+=== Basic parts ===
+
+* 1 PCB
+* 10 SMD (1206) 10k&Omega; resistors
+* 1 SMD (1206) 56k&Omega; resistor
+* 2 SMD (1206) 1&mu;F capacitors
+* 1 MCP1700 voltage regulator
+* 1 100&mu;F buffer capacitor
+* 1 ESP-12/12E/12F module
+* 9 pin headers
+
+=== Power ===
+
+You also need either either
+
+* 1 case for 4 AA batteries
+* 1 3mm screw+nut
+
+or, if you want to plug in some other power source:
+
+* 2 more pin headers
+
+=== Sensors ===
+
+One or both of
+* 1 DS18B20 temperature sensor
+* 1 DHT22 temperature&amp;humidity sensor
+
+== Soldering ==
+
+If you haven't done any soldering before (or your knowledge is a little rusty),
+you might want to check the Internet for tutorials :) People seem to like
+* https://learn.sparkfun.com/tutorials/how-to-solder---through-hole-soldering
+* https://learn.sparkfun.com/tutorials/how-to-solder---castellated-mounting-holes
+but if you have some time, and want to have a good understanding of soldering,
+check out
+[PACE: Basic Soldering Lesson 1](https://www.youtube.com/watch?v=vIT4ra6Mo0s)  
+(it's American, so prepare to snicker whenever the presenter pronounces
+soldering as "soddering" :)
+
+=== SMD parts ===
+
+For an aesthetically pleasing result, I suggest to stick with the convention I
+already used for the board itself: "down" for text is South or East, i.e. the
+labels of the SMD parts should be left-to-right or bottom-to-top, not
+right-to-left or top-to-bottom.
+
+Start with R1 (the only 56k&Omega; resistor, labelled "5602").  
+Then do the 10k&Omega; resistors.
+
+If you have a multi-meter, measure the resistance of R2, and the resistance
+between the two left pins of R1 and R2 (R1+R2, as their right pins are
+connected). Divide the first measurement (around 10k) by the second (around
+66k), and note down the number (4 significant digits, i.e. "0.1534", not "0.15"
+or "0.1533782")  
+This will be the "battery divider" you can configure in the web-interface.
+
+The only SMD parts left are the 2 1&mu;F capacitors (C1 and C3) -- add those.
+
+Now is a good time to take some isopropanol, maybe mixed 1:1 with acetone,
+and, using a brush, clean flux residue from the board (the ugly brown stuff).
+
+=== MCP 1700 ===
+
+That should be a no-brainer. Just make sure to put it in correctly (flat side
+of the case points left/outward).
+
+After soldering, cut off the 3 wires, and try to keep those short pieces, we'll
+need them in the next step!
+
+=== ESP-12 ===
+
+I've found this to be a good way to solder the ESP-12:
+
+* Tin the RST and GND pin of the PCB
+* Put the module on the PCB
+* Put 2 of the wires from the previous step through the little holes of the
+  module, next to the VCC and TX pins (i.e. the corner pins which you *didn't*
+  tin)
+* Now heat the RST pin a little while pressing (gently!) down on the module.  
+  This should fix that corner
+* Do the same for GND
+* Now the module is perfectly aligned and can't move anymore -- remove the 2
+  wires.
+* Solder all pins (do RST/GND last!)
+* If you aren't an experiences solderer/ess(?), shortly heat each pin again
+  (until the solder melts again), to ensure that all connections are flawless
+
+But I'm just an amateur, so feel free to do it better! (and fork this project,
+and improve this documentation ;)
+
+This is again a good time to clean your board.
+
+=== Buffer Capacitor ===
+
+This one should be easy again, just make sure that you don't swap the pins --
+this is an electrolytic cap, so it has a plus- and a minus-pin, and swapping
+those two can lead to Rapid Unplanned Disassembly.
+
+=== Pin Headers ===
+
+Speaking from experience:
+* Make sure that you count correctly! You need 3+2+2+2, and possibly 2 again
+  for the power connection
+* Those little bastards are really hard to separate! Using a good knife is the
+  best way, but make sure not to cut yourself, and be aware that both parts will
+  jump away the moment you separate them
+* After soldering, those things are *hot* (d'uh). Touching them is bad
+* Soldering might take a little more patience than usual, because the pins have
+  a high thermal mass.
+
+=== Sensors ===
+
+I've decided to use a "wide" footprint for the DS18B20, to make it easier to
+solder in a cable instead of the sensor. But this means that if you want to put
+the DS18B20 right on the board, you need to bend its pins a little bit. Tweezers
+are quite useful for that.
+
+While it's usually a good thing to keep pins as short as possible, I recommend
+to keep the pins of the DS18B20 as *long* as possible, so the temperature
+reading will be rather influenced by the air temperature than by the temperature
+of the PCB.
+
+When inserting the DHT22, make absolutely sure that the grill points outwards!
+
+
