@@ -179,6 +179,60 @@ Tin, clean, re-tin you soldering iron, switch it off, clean the board, put back
 any unused parts.
 
 Congratulations :)  
-You are now ready for the initial configuration of your board!
+You are now ready to flash the firmware!
+
+## Flashing
+
+Right now, your ESP-12 has the stock firmware, which is useless for what we want
+to do.
+
+### Firmware
+
+If you want to compile the firmware yourself, see the [Hacking doc](Hacking.md)
+on how to do this.
+
+But there are only a few reason to do so:
+
+* Your ESP8266-module has a flash size other than 4MiB
+* You have modified the board (or using a completely different one), and can't
+  use GPIO 5 for entering the Maintenance mode
+* While you can change the WiFi-password for the Maintenance mode directly in
+  the Maintenance web-interface, the board will still start with the default
+  password the first time. If you are worried about that, you are even more
+  paranoid than me :)
+* You don't trust binaries you haven't compiled yourself -- good for you!
+
+Otherwise, just take the [precompiled firmware](../precompiled/).
+
+### Connect a Serial-to-USB adapter to your board
+
+You need a Serial-to-USB adapter with support for 3.3V levels instead
+of 5V, e.g. [FTL232](XXX)
+
+* Switch off your board.
+* Ensure that your adapter is set to 3.3V!
+* Connect the "GND" pin of the adapter to the "GND" pin of the ESP.
+* Connect the "TX" pin of the adapter to the "RX" pin of the ESP, and vice versa.
+  Do *not* connect VCC, unless you know what you are doing!
+
+### Connect the adapter to your PC
+
+I guess you can figure out how to do this :)
+
+Check dmesg for the device name of the adapter (e.g. /dev/ttyUSB0)
+
+### Transfer firmware
+
+You will also need the [esptool](XXX), and of course 
+* Put a jumper bridge on the 2 "Upload" pins.
+* Type the command
+  esptool [XXX]
+  but don't press enter yet
+* Switch on the board
+* Press Enter
+
+If it doesn't work the first time, make sure that you have specified the correct
+device name, and that you haven't swapped TX and RX. Try again.
+
 
 
