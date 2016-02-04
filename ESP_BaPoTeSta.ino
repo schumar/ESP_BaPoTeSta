@@ -232,7 +232,7 @@ void getBattery() {
 }
 
 void getPerf() {
-    // simple "measure" the number of CPU cycles since bootup
+    // simply "measure" the number of CPU cycles since bootup
     unsigned long int cycles;
     cycles = ESP.getCycleCount();
     addData(0, TIME, cycles/(F_CPU/1e6), USEC);
