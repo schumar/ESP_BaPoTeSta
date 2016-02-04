@@ -123,12 +123,13 @@ void setupNormal() {
     if (WiFi.status() != WL_CONNECTED)
         gotoSleep(noConnSleepSec);
 
-    debugPrint("Connected.");
+    debugPrint("Connected to WiFi.");
 
     // connect to MQTT server
     mqttClient.setServer(config.mqttip, config.mqttport);
     sprintf(idBuffer, "esp8266-%08lx", data.chipId);
     mqttClient.connect(idBuffer);
+    debugPrint("Connected to MQTT server.");
 
 }
 
@@ -339,6 +340,9 @@ void bubbleSort(int * analogValues, int nr) {
 }
 
 void gotoSleep(unsigned int seconds) {
+
+    debugPrint("Going to sleep.");
+
     // switch off (active low) blue LED to show that we are "off"
     if (config.pinblue >= 0) {
         digitalWrite(config.pinblue, config.invblue ? HIGH : LOW);
