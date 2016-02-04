@@ -36,61 +36,61 @@ R"(<!DOCTYPE html>
             <fieldset>
                 <legend>Network</legend>
                 <div class="inputgroup">
-                    <label for="ssid">ssid</label><input type="text" id="ssid" value="${ssid}" />
-                    <label for="password">password</label><input type="text" id="password" placeholder="0 or 8+ chars" value="${password}" />
-                    <label for="ip">IP</label><input type="text" id="ip" value="${ip}" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" />
-                    <label for="netmask">Netmask</label><input type="number" min="0" max="31" id="netmask" value="${netmask}" />
-                    <label for="gw">Gateway</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="gw" value="${gw}" />
+                    <label for="ssid">ssid</label><input type="text" id="ssid" name="ssid" value="${ssid}" />
+                    <label for="password">password</label><input type="text" id="password" name="password" placeholder="0 or 8+ chars" value="${password}" />
+                    <label for="ip">IP</label><input type="text" id="ip" name="ip" value="${ip}" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" />
+                    <label for="netmask">Netmask</label><input type="number" min="0" max="31" id="netmask" name="netmask" value="${netmask}" />
+                    <label for="gw">Gateway</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="gw" name="gw" value="${gw}" />
                 </div>
                 <div class="inputgroup">
-                    <label for="mqttip">MQTT IP</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="mqttip" value="${mqttip}" />
-                    <label for="mqttport">MQTT Port</label><input type="number" min="1" max="65535" id="mqttport" value="${mqttport}" />
+                    <label for="mqttip">MQTT IP</label><input type="text" pattern="\d\d?\d?.\d\d?\d?.\d\d?\d?.\d\d?\d?" id="mqttip" name="mqttip" value="${mqttip}" />
+                    <label for="mqttport">MQTT Port</label><input type="number" min="1" max="65535" id="mqttport" name="mqttport" value="${mqttport}" />
                 </div>
             </fieldset>
             <fieldset>
                 <legend>Measuring</legend>
                 <div class="inputgroup">
-                    <label for="usedallas">Use DS18B20</label><input type="checkbox" id="usedallas" ${usedallas} />
-                    <label for="dallasres"> resolution</label><input type="number" min="9" max="12" id="dallasres" value="${dallasres}" />
-                    <label for="dallaswait"> check for result</label><input type="checkbox" id="dallaswait" ${dallaswait} />
+                    <label for="usedallas">Use DS18B20</label><input type="checkbox" id="usedallas" name="usedallas" ${usedallas} />
+                    <label for="dallasres"> resolution</label><input type="number" min="9" max="12" id="dallasres" name="dallasres" value="${dallasres}" />
+                    <label for="dallaswait"> check for result</label><input type="checkbox" id="dallaswait" name="dallaswait" ${dallaswait} />
                 </div>
                 <div class="inputgroup">
-                    <label for="usedht">Use DHT</label><input type="checkbox" id="usedht" ${usedht} />
-                    <label for="dhttype"> type</label><input type="number" min="11" max="33" id="dhttype" value="${dhttype}" />
-                    <label for="dhthi"> report HI</label><input type="checkbox" id="dhthi" ${dhthi} />
+                    <label for="usedht">Use DHT</label><input type="checkbox" id="usedht" name="usedht" ${usedht} />
+                    <label for="dhttype"> type</label><input type="number" min="11" max="33" id="dhttype" name="dhttype" value="${dhttype}" />
+                    <label for="dhthi"> report HI</label><input type="checkbox" id="dhthi" name="dhthi" ${dhthi} />
                 </div>
                 <div class="inputgroup">
-                    <label for="usentc">Use NTC</label><input type="checkbox" id="usentc" ${usentc} />
-                    <label for="ntcraw"> incl. raw value</label><input type="checkbox" id="ntcraw" ${ntcraw} />
+                    <label for="usentc">Use NTC</label><input type="checkbox" id="usentc" name="usentc" ${usentc} />
+                    <label for="ntcraw"> incl. raw value</label><input type="checkbox" id="ntcraw" name="ntcraw" ${ntcraw} />
                 </div>
                 <div class="inputgroup">
-                    <label for="battery">Report battery</label><input type="checkbox" id="battery" ${battery} />
-                    <label for="battraw"> incl. raw value</label><input type="checkbox" id="battraw" ${battraw} />
+                    <label for="battery">Report battery</label><input type="checkbox" id="battery" name="battery" ${battery} />
+                    <label for="battraw"> incl. raw value</label><input type="checkbox" id="battraw" name="battraw" ${battraw} />
                 </div>
                 <div class="inputgroup">
-                    <label for="doperf">Report performance</label><input type="checkbox" id="doperf" ${doperf} />
-                    <label for="perfraw"> incl. raw value</label><input type="checkbox" id="perfraw" ${perfraw} />
+                    <label for="doperf">Report performance</label><input type="checkbox" id="doperf" name="doperf" ${doperf} />
+                    <label for="perfraw"> incl. raw value</label><input type="checkbox" id="perfraw" name="perfraw" ${perfraw} />
                 </div>
                 <div class="inputgroup">
-                    <label for="deltat">Period (secs)</label><input type="number" min="1" max="9999" id="deltat" value="${deltat}" />
+                    <label for="deltat">Period (secs)</label><input type="number" min="1" max="9999" id="deltat" name="deltat" value="${deltat}" />
                 </div>
             </fieldset>
             <fieldset>
                 <legend>Hardware</legend>
                 <div class="inputgroup">
-                    <label for="pinblue">Pin for blue LED</label><input type="number" min="-1" max="16" id="pinblue" value="${pinblue}" />
-                    <label for="invblue"> invert</label><input type="checkbox" id="invblue" ${invblue} />
-                    <label for="pinconfig">Pin for config-mode</label><input type="number" min="0" max="16" id="pinconfig" value="${pinconfig}" />
-                    <label for="pinpwrsens">Pin for sensor power</label><input type="number" min="0" max="16" id="pinpwrsens" value="${pinpwrsens}" />
-                    <label for="pindallas">Pin for Dallas data</label><input type="number" min="0" max="16" id="pindallas" value="${pindallas}" />
-                    <label for="pindhtdata">Pin for DHT data</label><input type="number" min="0" max="16" id="pindhtdata" value="${pindhtdata}" />
+                    <label for="pinblue">Pin for blue LED</label><input type="number" min="-1" max="16" id="pinblue" name="pinblue" value="${pinblue}" />
+                    <label for="invblue"> invert</label><input type="checkbox" id="invblue" name="invblue" ${invblue} />
+                    <label for="pinconfig">Pin for config-mode</label><input type="number" min="0" max="16" id="pinconfig" name="pinconfig" value="${pinconfig}" />
+                    <label for="pinpwrsens">Pin for sensor power</label><input type="number" min="0" max="16" id="pinpwrsens" name="pinpwrsens" value="${pinpwrsens}" />
+                    <label for="pindallas">Pin for Dallas data</label><input type="number" min="0" max="16" id="pindallas" name="pindallas" value="${pindallas}" />
+                    <label for="pindhtdata">Pin for DHT data</label><input type="number" min="0" max="16" id="pindhtdata" name="pindhtdata" value="${pindhtdata}" />
                 </div>
                 <div class="inputgroup">
-                    <label for="adcmeas">Number of ADC measurements</label><input type="number" min="1" max="13" step="2" id="adcmeas" value="${adcmeas}" />
-                    <label for="battdiv">Battery divider</label><input type="number" min="0" max="1" step="0.0001" id="battdiv" value="${battdiv}" />
-                    <label for="ntcrfix">NTC fixed R (&Omega;)</label><input type="number" id="ntcrfix" value="${ntcrfix}" />
-                    <label for="ntc_b">NTC B</label><input type="number" id="ntc_b" value="${ntc_b}" />
-                    <label for="ntc_r0">NTC R0 (&Omega;)</label><input type="number" id="ntc_r0" value="${ntc_r0}" />
+                    <label for="adcmeas">Number of ADC measurements</label><input type="number" min="1" max="13" step="2" id="adcmeas" name="adcmeas" value="${adcmeas}" />
+                    <label for="battdiv">Battery divider</label><input type="number" min="0" max="1" step="0.0001" id="battdiv" name="battdiv" value="${battdiv}" />
+                    <label for="ntcrfix">NTC fixed R (&Omega;)</label><input type="number" id="ntcrfix" name="ntcrfix" value="${ntcrfix}" />
+                    <label for="ntc_b">NTC B</label><input type="number" id="ntc_b" name="ntc_b" value="${ntc_b}" />
+                    <label for="ntc_r0">NTC R0 (&Omega;)</label><input type="number" id="ntc_r0" name="ntc_r0" value="${ntc_r0}" />
                 </div>
             </fieldset>
 
@@ -102,7 +102,7 @@ R"(<!DOCTYPE html>
 
         <h2>Firmware Update</h2>
         <form method="POST" action="/update" enctype="multipart/form-data">
-            <label for="update">Firmware:</label><input type="file" id="update" />
+            <label for="update">Firmware:</label><input type="file" id="update" name="update" />
             <button type="submit" class="primary">Update</button>
         </form>
         <p>Firmware needs to be compiled for ${flashsize} KiB flash size!</p>
