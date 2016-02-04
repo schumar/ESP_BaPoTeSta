@@ -152,7 +152,7 @@ R"(<!DOCTYPE html>
             <fieldset>
                 <legend>Hardware</legend>
                 <div class="inputgroup">
-                    <label for="pinblue">Pin for blue LED</label><input type="number" min="0" max="16" id="pinblue" value="${pinblue}" />
+                    <label for="pinblue">Pin for blue LED</label><input type="number" min="-1" max="16" id="pinblue" value="${pinblue}" />
                     <label for="invblue"> invert</label><input type="checkbox" id="invblue" ${invblue} />
                     <label for="pinconfig">Pin for config-mode</label><input type="number" min="0" max="16" id="pinconfig" value="${pinconfig}" />
                     <label for="pinpwrsens">Pin for sensor power</label><input type="number" min="0" max="16" id="pinpwrsens" value="${pinpwrsens}" />
