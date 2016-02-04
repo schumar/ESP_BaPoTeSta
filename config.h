@@ -11,7 +11,7 @@ const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
 const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
 const byte maxSensors = 8;
 
-#define SERIALDEBUG
+// #define SERIALDEBUG
 
 // hardware
 const float Vdd = 3.3;
