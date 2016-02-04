@@ -443,7 +443,7 @@ void getConfig() {
     if (EEPROM.read(0) == 0x42) {
         debugPrint("EEPROM magic byte 0x42 found.");
         // check version of config storage
-        if (EEPROM.read(1) == 1) {
+        if (EEPROM.read(1) == config.cfgversion) {
             // read config
             EEPROM.get(1, config);
 
@@ -469,7 +469,7 @@ void getConfig() {
             ntc_rinf = config.ntc_r0*exp(-config.ntc_b/298.15);
 
         } else {
-            debugPrint("Ignoring EEPROM, cfg version >1");
+            debugPrint("Ignoring EEPROM, wrong cfg version");
         }
     }
     // otherwise we rely on the defaults
