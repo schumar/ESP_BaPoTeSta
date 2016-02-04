@@ -363,6 +363,7 @@ void setupWebserver() {
 
     httpUpdater.setup(&httpServer);
     httpServer.on("/",  HTTP_GET, &webForm);
+    httpServer.on("/style.css",  HTTP_GET, &webCSS);
     httpServer.on("/config",  HTTP_POST, &storeConfig);
     httpServer.begin();
 
@@ -437,6 +438,10 @@ void webForm() {
     buf.replace("${ntc_r0}", String(config.ntc_r0));
 
     httpServer.send(200, "text/html", buf);
+}
+
+void webCSS() {
+    httpServer.send(200, "text/css", css);
 }
 
 void getConfig() {

@@ -112,6 +112,7 @@ void setupWebserver();
 String ipToString (IPAddress ip);
 IPAddress stringToIP (String text);
 void webForm();
+void webCSS();
 
 void getConfig();
 void storeConfig();

@@ -26,81 +26,7 @@ R"(<!DOCTYPE html>
 <html>
     <head>
         <title>ESP_BaPoTeSta Maintenance</title>
-        <style type="text/css">
-            /*! Pure v0.6.0 || Copyright 2014 Yahoo! Inc. All rights reserved. || Licensed under the BSD License. || https://github.com/yahoo/pure/blob/master/LICENSE.md */
-            html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}.hidden,[hidden]{display:none!important}.pure-img{max-width:100%;height:auto;display:block}
-
-            html {
-                margin: 0em 1em;
-            }
-            h2 {
-                border-top:1px solid;
-                padding-top:0.5em;
-            }
-            fieldset {
-                border:none;
-                width: 23em;
-                float: left;
-                margin: 0em 1em;
-            }
-            legend {
-                border-bottom: 1px solid #e5e5e5;
-                color: #333;
-                display: block;
-                margin-bottom: 0.3em;
-                padding: 0.3em 0;
-                width: 100%;
-            }
-            label {
-                display: inline-block;
-                margin: 0 1em 0 0;
-                text-align: right;
-                vertical-align: middle;
-                width: 12em;
-            }
-            input {
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-shadow: 0 1px 3px #ddd inset;
-                box-sizing: border-box;
-                display: inline-block;
-                padding: 0.5em 0.6em;
-                vertical-align: middle;
-                width: 10em;
-            }
-            input[type="number"] {
-                width:7em;
-            }
-            input[type="checkbox"] {
-                margin: 0.7em 0.5em;
-                width: 1em;
-            }
-            input[type="file"] {
-                width: 30em;
-            }
-            button {
-                -moz-user-select: none;
-                background-color: #e6e6e6;
-                border-radius: 2px;
-                border: 0 none rgba(0, 0, 0, 0);
-                box-sizing: border-box;
-                color: rgba(0, 0, 0, 0.8);
-                cursor: pointer;
-                display: inline-block;
-                padding: 0.5em 1em;
-                text-align: center;
-                text-decoration: none;
-                vertical-align: middle;
-                white-space: nowrap;
-            }
-            button.primary {
-                background-color: #0078e7;
-                color: #fff;
-            }
-            div.inputgroup {
-                margin:0.5em 0em;
-            }
-        </style>
+        <link href="style.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
@@ -185,6 +111,84 @@ R"(<!DOCTYPE html>
         <p>Current firmware was built on ${buildtime}</p>
     </body>
 </html>)";
+
+const PROGMEM char css[] =
+R"(
+/*! Pure v0.6.0 || Copyright 2014 Yahoo! Inc. All rights reserved. || Licensed under the BSD License. || https://github.com/yahoo/pure/blob/master/LICENSE.md */
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}.hidden,[hidden]{display:none!important}.pure-img{max-width:100%;height:auto;display:block}
+
+html {
+    margin: 0em 1em;
+}
+h2 {
+    border-top:1px solid;
+    padding-top:0.5em;
+}
+fieldset {
+    border:none;
+    width: 23em;
+    float: left;
+    margin: 0em 1em;
+}
+legend {
+    border-bottom: 1px solid #e5e5e5;
+    color: #333;
+    display: block;
+    margin-bottom: 0.3em;
+    padding: 0.3em 0;
+    width: 100%;
+}
+label {
+    display: inline-block;
+    margin: 0 1em 0 0;
+    text-align: right;
+    vertical-align: middle;
+    width: 12em;
+}
+input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px #ddd inset;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0.5em 0.6em;
+    vertical-align: middle;
+    width: 10em;
+}
+input[type="number"] {
+    width:7em;
+}
+input[type="checkbox"] {
+    margin: 0.7em 0.5em;
+    width: 1em;
+}
+input[type="file"] {
+    width: 30em;
+}
+button {
+    -moz-user-select: none;
+    background-color: #e6e6e6;
+    border-radius: 2px;
+    border: 0 none rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+button.primary {
+    background-color: #0078e7;
+    color: #fff;
+}
+div.inputgroup {
+    margin:0.5em 0em;
+}
+)"
+;
 
 /*
     END OF CONFIGURATION
