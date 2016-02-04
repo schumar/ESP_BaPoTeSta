@@ -83,6 +83,7 @@ void setupNormal() {
     char idBuffer[32];
 
     // start WiFi
+    debugPrint("Connecting to WiFi...");
     WiFi.mode(WIFI_STA);
     WiFi.config(config.ip, config.gw, IPSubnet);
     if (config.password == NULL || config.password[0] == 0) {
@@ -121,6 +122,8 @@ void setupNormal() {
     // if this didn't work, go back to sleep
     if (WiFi.status() != WL_CONNECTED)
         gotoSleep(noConnSleepSec);
+
+    debugPrint("Connected.");
 
     // connect to MQTT server
     mqttClient.setServer(config.mqttip, config.mqttport);
@@ -478,6 +481,8 @@ void getConfig() {
 void storeConfig() {
     String buf = "";
 
+    debugPrint("Received form data");
+
     buf += (String)"Number of received args: " + httpServer.args() + "\n";
     for (int i = 0; i < httpServer.args(); i++) {
         buf += httpServer.argName(i) + ": " + httpServer.arg(i) + "\n";
@@ -598,6 +603,7 @@ void storeConfig() {
     if (httpServer.hasArg("ntc_r0"))
         config.ntc_r0 = httpServer.arg("ntc_r0").toFloat();
 
+    debugPrint("Saving form data");
     EEPROM.put(0, 0x42);        // magic byte
     EEPROM.put(1, config);
     EEPROM.commit();            // ESP8266 EEPROM library needs this
