@@ -52,11 +52,14 @@ R"(<!DOCTYPE html>
                 <div class="inputgroup">
                     <label for="usedallas">Use DS18B20</label><input type="checkbox" id="usedallas" name="usedallas" ${usedallas} />
                     <label for="dallasres"> resolution</label><input type="number" min="9" max="12" id="dallasres" name="dallasres" value="${dallasres}" />
+                    <label for="biasdallastemp"> bias</label><input type="number" min="-0.5" max="0.5" step="0.01" id="biasdallastemp" name="biasdallastemp" value="${biasdallastemp}" />
                     <label for="dallaswait"> check for result</label><input type="checkbox" id="dallaswait" name="dallaswait" ${dallaswait} />
                 </div>
                 <div class="inputgroup">
                     <label for="usedht">Use DHT</label><input type="checkbox" id="usedht" name="usedht" ${usedht} />
                     <label for="dhttype"> type</label><input type="number" min="11" max="33" id="dhttype" name="dhttype" value="${dhttype}" />
+                    <label for="biasdhttemp"> temp bias</label><input type="number" min="-0.5" max="0.5" step="0.01" id="biasdhttemp" name="biasdhttemp" value="${biasdhttemp}" />
+                    <label for="biasdhthumid"> hum bias</label><input type="number" min="-5" max="5" step="0.1" id="biasdhthumid" name="biasdhthumid" value="${biasdhthumid}" />
                     <label for="dhthi"> report HI</label><input type="checkbox" id="dhthi" name="dhthi" ${dhthi} />
                 </div>
                 <div class="inputgroup">

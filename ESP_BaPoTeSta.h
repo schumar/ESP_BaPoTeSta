@@ -48,7 +48,7 @@ struct allMeasurements {
 };
 
 struct config {
-    byte cfgversion = 1;
+    byte cfgversion = 2;
 
     char ssid[32] = "tabr.org";
     char password[32] = "";
@@ -60,10 +60,13 @@ struct config {
 
     bool usedallas = true;
     byte dallasres = 12;
+    float biasDallasTemp = 0.0;
     bool dallaswait = false;
 
     bool usedht = true;
     byte dhttype = DHT22;
+    float biasDHTTemp = 0.0;
+    float biasDHTHumid = 0.0;
     bool dhthi = true;
 
     bool usentc = false;

@@ -184,7 +184,7 @@ void getDallas() {
     if (dallasSensors.getAddress(addr, 0) == 0) return;
 
     dallasSensors.requestTemperaturesByAddress(addr);
-    temp = dallasSensors.getTempC(addr);
+    temp = dallasSensors.getTempC(addr) + config.biasDallasTemp;
 
     // use last two byte of serial as ID (addr[0] is "family code")
     addData((addr[2]<<8) + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
@@ -194,8 +194,8 @@ void getDHT() {
     delay(sleepDHT);    // [XXX] should substract the time since power-up
 
     // store values, so they can be used for calculating the heat index later
-    float temp = dhtSensor.readTemperature(false, true);
-    float hum = dhtSensor.readHumidity();
+    float temp = dhtSensor.readTemperature(false, true) + config.biasDHTTemp;
+    float hum = dhtSensor.readHumidity() + config.biasDHTHumid;
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
     addData(config.dhttype, TEMP, (int) (temp * 100.0), CENT_DEGC);
@@ -417,10 +417,13 @@ void webForm() {
 
     buf.replace("${usedallas}", config.usedallas ? "checked" : "");
     buf.replace("${dallasres}", String(config.dallasres));
+    buf.replace("${biasdallastemp}", String(config.biasDallasTemp));
     buf.replace("${dallaswait}", config.dallaswait ? "checked" : "");
 
     buf.replace("${usedht}", config.usedht ? "checked" : "");
     buf.replace("${dhttype}", String(config.dhttype));
+    buf.replace("${biasdhttemp}", String(config.biasDHTTemp));
+    buf.replace("${biasdhthumid}", String(config.biasDHTHumid));
     buf.replace("${dhthi}", config.dhthi ? "checked" : "");
 
     buf.replace("${usentc}", config.usentc ? "checked" : "");
