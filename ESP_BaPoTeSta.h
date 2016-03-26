@@ -61,13 +61,17 @@ struct config {
     bool usedallas = true;
     byte dallasres = 12;
     bool dallaswait = false;
+
     bool usedht = true;
     byte dhttype = DHT22;
     bool dhthi = true;
+
     bool usentc = false;
     bool ntcraw = true;
+
     bool battery = true;
     bool battraw = false;
+
     bool doperf = true;
     bool perfraw = false;
 

@@ -414,18 +414,24 @@ void webForm() {
     buf.replace("${gw}", ipToString(config.gw));
     buf.replace("${mqttip}", ipToString(config.mqttip));
     buf.replace("${mqttport}", String(config.mqttport));
+
     buf.replace("${usedallas}", config.usedallas ? "checked" : "");
     buf.replace("${dallasres}", String(config.dallasres));
     buf.replace("${dallaswait}", config.dallaswait ? "checked" : "");
+
     buf.replace("${usedht}", config.usedht ? "checked" : "");
     buf.replace("${dhttype}", String(config.dhttype));
     buf.replace("${dhthi}", config.dhthi ? "checked" : "");
+
     buf.replace("${usentc}", config.usentc ? "checked" : "");
     buf.replace("${ntcraw}", config.ntcraw ? "checked" : "");
+
     buf.replace("${battery}", config.battery ? "checked" : "");
     buf.replace("${battraw}", config.battraw ? "checked" : "");
+
     buf.replace("${doperf}", config.doperf ? "checked" : "");
     buf.replace("${perfraw}", config.perfraw ? "checked" : "");
+
     buf.replace("${deltat}", String(config.deltat));
     buf.replace("${pinblue}", String(config.pinblue));
     buf.replace("${invblue}", config.invblue ? "checked" : "");
