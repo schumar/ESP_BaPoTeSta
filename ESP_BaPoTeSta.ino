@@ -409,8 +409,6 @@ void webForm() {
 
     buf.replace("${ssid}", String(config.ssid));
     buf.replace("${password}", String(config.password));
-    buf.replace("${ssid}", String(config.ssid));
-    buf.replace("${password}", String(config.password));
     buf.replace("${ip}", ipToString(config.ip));
     buf.replace("${netmask}", String(config.netmask));
     buf.replace("${gw}", ipToString(config.gw));
