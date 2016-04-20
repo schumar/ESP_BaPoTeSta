@@ -184,7 +184,15 @@ void getDallas() {
     if (dallasSensors.getAddress(addr, 0) == 0) return;
 
     dallasSensors.requestTemperaturesByAddress(addr);
-    temp = dallasSensors.getTempC(addr) + config.biasDallasTemp;
+    temp = dallasSensors.getTempC(addr);
+
+    // sanity check; valid range taken from datasheet
+    // "85" is the "reset value", ignore it too
+    if (temp < -55.0 || temp > 125.0 || (temp > 84.95 && temp < 85.05))
+        return;
+
+    // add the bias after checking for "85" above
+    temp += config.biasDallasTemp;
 
     // use last two byte of serial as ID (addr[0] is "family code")
     addData((addr[2]<<8) + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
@@ -196,6 +204,10 @@ void getDHT() {
     // store values, so they can be used for calculating the heat index later
     float temp = dhtSensor.readTemperature(false, true) + config.biasDHTTemp;
     float hum = dhtSensor.readHumidity() + config.biasDHTHumid;
+
+    // sanity check; valid range taken from datasheet
+    if (temp < -40.0 || temp > 80.0 || hum < 0.0 || hum > 100.0)
+        return;
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
     addData(config.dhttype, TEMP, (int) (temp * 100.0), CENT_DEGC);
