@@ -80,9 +80,9 @@ struct config {
 
     unsigned int deltat = 300;
 
-    int8_t pinblue = 1;
+    int8_t pinblue = -1;
     bool invblue = true;
-    byte pinconfig = 5;
+    byte pinconfig = 4;
     byte pinpwrsens = 14;
     byte pindallas = 13;
     byte pindhtdata = 12;
