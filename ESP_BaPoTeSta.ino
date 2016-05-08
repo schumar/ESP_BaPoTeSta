@@ -179,6 +179,7 @@ void getNTC() {
 void getDallas() {
     uint8_t addr[8];
     float temp;
+    uint16_t id;
 
     // try to find address of first sensor
     if (dallasSensors.getAddress(addr, 0) == 0) return;
@@ -194,8 +195,14 @@ void getDallas() {
     // add the bias after checking for "85" above
     temp += config.biasDallasTemp;
 
+    if (DALLAS_ID > 0) {
+        id = DALLAS_ID;
+    } else {
+        id = (addr[2]<<8) + addr[1];
+    }
+
     // use last two byte of serial as ID (addr[0] is "family code")
-    addData((addr[2]<<8) + addr[1], TEMP, (int) (temp * 100.0), CENT_DEGC);
+    addData(id, TEMP, (int) (temp * 100.0), CENT_DEGC);
 }
 
 void getDHT() {

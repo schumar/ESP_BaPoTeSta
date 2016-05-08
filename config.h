@@ -22,6 +22,12 @@ const float VLowBat = 3.0;      // don't take/send measurements if Vbat < this
 // NTC
 const unsigned int NTC_ID = 42; // NTC doesn't have a special "id" -> use 42
 
+// Dallas
+/* Each DS18B20 has its own ID, but as the rest of the software can't handle
+ * more than 1 Dallas (yet), we can just stick to a hardcoded Id. Set to 0
+ * to use the actual ID */
+const unsigned int DALLAS_ID = 0x1820;
+
 // Webserver
 const char indexPage[] =
 R"(<!DOCTYPE html>
