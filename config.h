@@ -6,6 +6,7 @@
 const byte sleepWifiCheck = 50;     // ms to sleep between checks if associated
 const byte maxConnRetry = 200;      // how many sleepWifiCheck sleeps
 const unsigned int noConnSleepSec = 600;
+const unsigned int lowBattSleepSec = 600;
 const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
 const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
 const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
@@ -16,6 +17,7 @@ const byte maxSensors = 8;
 // hardware
 const float Vdd = 3.3;
 const float Voff = 0.00;        // highest V where ADC still reports "0"
+const float VLowBat = 3.0;      // don't take/send measurements if Vbat < this
 
 // NTC
 const unsigned int NTC_ID = 42; // NTC doesn't have a special "id" -> use 42

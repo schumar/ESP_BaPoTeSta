@@ -160,9 +160,9 @@ void loop() {
 
 void collectData() {
     if (config.usentc) getNTC();
+    if (config.battery) getBattery();
     if (config.usedallas) getDallas();
     if (config.usedht) getDHT();
-    if (config.battery) getBattery();
     if (config.doperf) getPerf();
 }
 
@@ -237,12 +237,19 @@ int readADC() {
 
 void getBattery() {
     int raw;
+    float volt;
 
     // Sanity check: We only have 1 ADC, so we can't measure battery AND NTC
     if (config.usentc) return;
 
     raw = readADC();
-    addData(0, BATTERY, (int) (calcBattery(raw) * 1000.0), MVOLT);
+    volt = calcBattery(raw);
+
+    // If battery voltage is below 3.0V, the results from most sensors will
+    // be totally off -> don't even try anymore
+    if (volt < VLowBat) gotoSleep(lowBattSleepSec);
+
+    addData(0, BATTERY, (int) (volt * 1000.0), MVOLT);
     if (config.battraw)
         addData(0, BATTERY, raw, RAW);
 }
