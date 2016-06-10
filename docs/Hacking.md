@@ -7,7 +7,7 @@ Get Arduino from https://www.arduino.cc/en/Main/Software
 ## Add ESP8266 to Arduino
 
 Start the Arduino IDE, go to File/Preferences, and add the following line to "Additional Boards Manager URLs:"
- http://arduino.esp8266.com/staging/package_esp8266com_index.json
+ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 
 Go to Tools/Board: "something"/Boards Manager...
 Search for "esp82", click on the "esp8266 by ESP Community", click Install
