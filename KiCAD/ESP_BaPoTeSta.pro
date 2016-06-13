@@ -1,4 +1,4 @@
-update=Tue 12 Jan 2016 05:22:33 PM CET
+update=Sat 11 Jun 2016 01:06:32 PM CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,4 @@ LibName31=maxim
 LibName32=ESP8266
 LibName33=sensors
 LibName34=bytelabs_library/open-project
+LibName35=ir
