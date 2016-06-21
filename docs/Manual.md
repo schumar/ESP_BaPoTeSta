@@ -226,7 +226,7 @@ Check dmesg for the device name of the adapter (e.g. /dev/ttyUSB0)
 You will also need the [esptool](XXX), and of course 
 * Put a jumper bridge on the 2 "Upload" pins.
 * Type the command
-  esptool [XXX]
+  esptool -vv -cd ck -cb 115200 -cp /dev/ttyUSB0 -ca 0x00000 -cf ESP_BaPoTeSta.ino.bin
   but don't press enter yet
 * Switch on the board
 * Press Enter
