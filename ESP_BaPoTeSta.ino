@@ -213,7 +213,7 @@ void getDHT() {
     float hum = dhtSensor.readHumidity() + config.biasDHTHumid;
 
     // sanity check; valid range taken from datasheet
-    if (temp < -40.0 || temp > 80.0 || hum < 0.0 || hum > 100.0)
+    if (temp < -40.0 || temp > 80.0 || hum < 0.0 || hum > 100.0 || isnan(temp) || isnan(hum))
         return;
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
