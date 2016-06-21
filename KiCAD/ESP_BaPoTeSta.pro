@@ -1,4 +1,4 @@
-update=Sat 11 Jun 2016 01:06:32 PM CEST
+update=Mon 13 Jun 2016 09:56:06 PM CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -20,9 +20,6 @@ SolderMaskMinWidth=0.000000000000
 DrawSegmentWidth=0.200000000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
-[cvpcb]
-version=1
-NetIExt=net
 [general]
 version=1
 [eeschema]
@@ -64,3 +61,6 @@ LibName32=ESP8266
 LibName33=sensors
 LibName34=bytelabs_library/open-project
 LibName35=ir
+[cvpcb]
+version=1
+NetIExt=net

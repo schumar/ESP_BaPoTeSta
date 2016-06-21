@@ -95,23 +95,23 @@ $EndComp
 $Comp
 L VCC #PWR01
 U 1 1 566291DB
-P 4050 2100
-F 0 "#PWR01" H 4050 1950 50  0001 C CNN
-F 1 "VCC" H 4050 2250 50  0000 C CNN
-F 2 "" H 4050 2100 50  0000 C CNN
-F 3 "" H 4050 2100 50  0000 C CNN
-	1    4050 2100
+P 5850 2100
+F 0 "#PWR01" H 5850 1950 50  0001 C CNN
+F 1 "VCC" H 5850 2250 50  0000 C CNN
+F 2 "" H 5850 2100 50  0000 C CNN
+F 3 "" H 5850 2100 50  0000 C CNN
+	1    5850 2100
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR02
 U 1 1 56629270
-P 4050 4400
-F 0 "#PWR02" H 4050 4150 50  0001 C CNN
-F 1 "GND" H 4050 4250 50  0000 C CNN
-F 2 "" H 4050 4400 50  0000 C CNN
-F 3 "" H 4050 4400 50  0000 C CNN
-	1    4050 4400
+P 5850 4400
+F 0 "#PWR02" H 5850 4150 50  0001 C CNN
+F 1 "GND" H 5850 4250 50  0000 C CNN
+F 2 "" H 5850 4400 50  0000 C CNN
+F 3 "" H 5850 4400 50  0000 C CNN
+	1    5850 4400
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -136,8 +136,6 @@ F 3 "" H 2000 4150 50  0000 C CNN
 	1    2000 4150
 	1    0    0    -1  
 $EndComp
-Text Label 4950 3100 2    60   ~ 0
-1Wire
 $Comp
 L CONN_01X03 P1
 U 1 1 5662AE2D
@@ -191,7 +189,7 @@ F 1 "Battery" V 1450 2550 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Angled_1x02" H 1350 2550 50  0001 C CNN
 F 3 "" H 1350 2550 50  0000 C CNN
 	1    1350 2550
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L +BATT #PWR06
@@ -204,8 +202,6 @@ F 3 "" H 1550 2100 50  0000 C CNN
 	1    1550 2100
 	0    -1   -1   0   
 $EndComp
-Text Label 4950 3300 2    60   ~ 0
-PwrSens
 $Comp
 L R R8
 U 1 1 568D6E4C
@@ -261,8 +257,6 @@ F 3 "" H 7150 3450 50  0000 C CNN
 	1    7150 3450
 	-1   0    0    1   
 $EndComp
-Text Label 4950 3200 2    60   ~ 0
-DHTData
 $Comp
 L C C1
 U 1 1 56928F2E
@@ -288,35 +282,13 @@ $EndComp
 $Comp
 L CP C2
 U 1 1 56929DFC
-P 4050 3850
-F 0 "C2" H 4075 3950 50  0000 L CNN
-F 1 "≥10u" H 4075 3750 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2.5" H 4088 3700 50  0001 C CNN
-F 3 "" H 4050 3850 50  0000 C CNN
-	1    4050 3850
+P 4050 3350
+F 0 "C2" H 4075 3450 50  0000 L CNN
+F 1 "≥10u" H 4075 3250 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D5_L11_P2.5" H 4088 3200 50  0001 C CNN
+F 3 "" H 4050 3350 50  0000 C CNN
+	1    4050 3350
 	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_01X04 P12
-U 1 1 575B19AD
-P 3700 7050
-F 0 "P12" H 3700 7300 50  0000 C CNN
-F 1 "CONN_01X04" V 3800 7050 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_1x04" H 3700 7050 50  0001 C CNN
-F 3 "" H 3700 7050 50  0000 C CNN
-	1    3700 7050
-	0    -1   1    0   
-$EndComp
-$Comp
-L CONN_01X04 P11
-U 1 1 575B1CFD
-P 3150 7050
-F 0 "P11" H 3150 7300 50  0000 C CNN
-F 1 "CONN_01X04" V 3250 7050 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_1x04" H 3150 7050 50  0001 C CNN
-F 3 "" H 3150 7050 50  0000 C CNN
-	1    3150 7050
-	0    -1   1    0   
 $EndComp
 $Comp
 L CONN_01X04 P10
@@ -339,32 +311,6 @@ F 2 "Socket_Strips:Socket_Strip_Straight_1x03" H 4450 7050 50  0001 C CNN
 F 3 "" H 4450 7050 50  0000 C CNN
 	1    4450 7050
 	0    -1   1    0   
-$EndComp
-$Comp
-L CONN_01X03 P14
-U 1 1 575B25F4
-P 4850 7050
-F 0 "P14" H 4850 7250 50  0000 C CNN
-F 1 "CONN_01X03" V 4950 7050 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_1x03" H 4850 7050 50  0001 C CNN
-F 3 "" H 4850 7050 50  0000 C CNN
-	1    4850 7050
-	0    -1   1    0   
-$EndComp
-Text Label 5800 3900 3    60   ~ 0
-SDA
-Text Label 5900 3900 3    60   ~ 0
-SCL
-$Comp
-L ESP-12E U2
-U 1 1 575B817F
-P 5850 3000
-F 0 "U2" H 5850 2900 50  0000 C CNN
-F 1 "ESP-12E" H 5850 3100 50  0000 C CNN
-F 2 "ESP8266:ESP-12E" H 5850 3000 50  0001 C CNN
-F 3 "" H 5850 3000 50  0001 C CNN
-	1    5850 3000
-	1    0    0    -1  
 $EndComp
 $Comp
 L CONN_01X04 P15
@@ -421,17 +367,6 @@ F 3 "" H 2100 6300 50  0000 C CNN
 	1    2100 6300
 	-1   0    0    1   
 $EndComp
-$Comp
-L VCC #PWR08
-U 1 1 575C35C9
-P 1400 6150
-F 0 "#PWR08" H 1400 6000 50  0001 C CNN
-F 1 "VCC" H 1400 6300 50  0000 C CNN
-F 2 "" H 1400 6150 50  0000 C CNN
-F 3 "" H 1400 6150 50  0000 C CNN
-	1    1400 6150
-	0    -1   -1   0   
-$EndComp
 NoConn ~ 5550 6850
 $Comp
 L R R12
@@ -442,17 +377,6 @@ F 1 "4k7" V 4450 6300 50  0000 C CNN
 F 2 "Resistors_SMD:R_1206_HandSoldering" V 4380 6300 50  0001 C CNN
 F 3 "" H 4450 6300 50  0000 C CNN
 	1    4450 6300
-	-1   0    0    1   
-$EndComp
-$Comp
-L R R13
-U 1 1 575C4560
-P 5650 6300
-F 0 "R13" V 5730 6300 50  0000 C CNN
-F 1 "10k" V 5650 6300 50  0000 C CNN
-F 2 "Resistors_SMD:R_1206_HandSoldering" V 5580 6300 50  0001 C CNN
-F 3 "" H 5650 6300 50  0000 C CNN
-	1    5650 6300
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -497,7 +421,7 @@ Wire Wire Line
 	1550 2600 1550 4400
 Wire Wire Line
 	3550 2100 7600 2100
-Connection ~ 4050 2100
+Connection ~ 5850 2100
 Connection ~ 7600 3100
 Wire Wire Line
 	4650 3000 4950 3000
@@ -523,16 +447,8 @@ Wire Wire Line
 	4950 2700 4950 2600
 Connection ~ 4950 2700
 Wire Wire Line
-	4050 4000 4050 4400
+	4050 3500 4050 4400
 Connection ~ 4050 4400
-Wire Wire Line
-	6750 3400 6750 4400
-Connection ~ 6750 4400
-Wire Wire Line
-	4950 3400 4050 3400
-Wire Wire Line
-	6750 2900 6750 3000
-Connection ~ 6750 3000
 Wire Wire Line
 	1500 7000 1500 6750
 Wire Wire Line
@@ -543,104 +459,53 @@ Wire Wire Line
 	4350 6850 4350 6750
 Connection ~ 4350 6750
 Wire Wire Line
-	4750 6850 4750 6750
-Connection ~ 4750 6750
-Wire Wire Line
 	2000 6850 2000 6750
 Connection ~ 2000 6750
 Wire Wire Line
 	2550 6850 2550 6750
 Connection ~ 2550 6750
 Wire Wire Line
-	3100 6850 3100 6750
-Connection ~ 3100 6750
-Wire Wire Line
-	3650 6850 3650 6750
-Connection ~ 3650 6750
-Wire Wire Line
 	1900 6150 1900 6850
-Wire Wire Line
-	3550 6150 3550 6850
 Wire Wire Line
 	1400 6150 5750 6150
 Wire Wire Line
-	3000 6850 3000 6150
-Connection ~ 3000 6150
-Wire Wire Line
 	2450 6850 2450 6150
 Connection ~ 2450 6150
-Wire Wire Line
-	3750 6550 3750 6850
 Wire Wire Line
 	2100 6450 2100 6850
 Wire Wire Line
 	2650 6850 2650 6550
 Connection ~ 2650 6550
 Wire Wire Line
-	3200 6550 3200 6850
-Connection ~ 3200 6550
-Wire Wire Line
-	3850 6450 3850 6850
-Wire Wire Line
-	2200 6450 3950 6450
+	2200 6450 2850 6450
 Wire Wire Line
 	2200 6850 2200 6450
 Wire Wire Line
 	2750 6850 2750 6450
 Connection ~ 2750 6450
-Wire Wire Line
-	3300 6850 3300 6450
-Connection ~ 3300 6450
 Connection ~ 1900 6150
 Connection ~ 2100 6150
 Wire Wire Line
 	4550 6150 4550 6850
-Connection ~ 3550 6150
-Wire Wire Line
-	4950 6150 4950 6850
 Connection ~ 4550 6150
 Wire Wire Line
 	5750 6150 5750 6850
-Connection ~ 4950 6150
-Wire Wire Line
-	4850 6450 4850 6850
 Wire Wire Line
 	4450 6450 4450 6850
 Wire Wire Line
-	4450 6450 5050 6450
+	4450 6450 4650 6450
 Connection ~ 4450 6450
 Connection ~ 4450 6150
 Connection ~ 2750 6150
-Wire Wire Line
-	2100 6550 3950 6550
 Connection ~ 2100 6550
 Wire Wire Line
 	5650 6850 5650 6450
 Wire Wire Line
-	5650 6450 5850 6450
-Connection ~ 5650 6450
-Connection ~ 5650 6150
-Text Label 3950 6450 0    60   ~ 0
-SDA
-Text Label 3950 6550 0    60   ~ 0
-SCL
-Connection ~ 3750 6550
-Connection ~ 3850 6450
-Text Label 5050 6450 0    60   ~ 0
-1Wire
-Connection ~ 4850 6450
-Text Label 5850 6450 0    60   ~ 0
-DHTData
-Wire Wire Line
-	4050 2100 4050 3700
-Text Label 4950 2800 2    60   ~ 0
-ADC
+	4050 2100 4050 3200
 Wire Wire Line
 	2000 4400 2000 4300
 Wire Wire Line
 	2000 3800 2000 4000
-Text Label 2100 3900 0    60   ~ 0
-ADC
 Wire Wire Line
 	2100 3900 2000 3900
 Connection ~ 2000 3900
@@ -665,15 +530,12 @@ L C C4
 U 1 1 575EF38B
 P 2550 3100
 F 0 "C4" H 2575 3200 50  0000 L CNN
-F 1 "100n" H 2575 3000 50  0000 L CNN
+F 1 "0u1" H 2575 3000 50  0000 L CNN
 F 2 "Capacitors_SMD:C_1206_HandSoldering" H 2588 2950 50  0001 C CNN
 F 3 "" H 2550 3100 50  0000 C CNN
 	1    2550 3100
 	0    1    1    0   
 $EndComp
-Text Label 2700 3100 0    60   ~ 0
-PwrSens
-Connection ~ 4050 3400
 $Comp
 L R R10
 U 1 1 575EF7E6
@@ -697,52 +559,70 @@ Wire Wire Line
 	2350 3050 2350 3100
 Connection ~ 2350 3100
 Wire Wire Line
-	4650 3000 4650 2950
+	4650 2700 4650 3000
 Wire Wire Line
-	4650 2700 4650 2750
-$Comp
-L D_Schottky_Small D1
-U 1 1 575F0C6C
-P 4650 2850
-F 0 "D1" H 4600 2930 50  0000 L CNN
-F 1 "BAT43W" H 4500 2750 50  0000 L CNN
-F 2 "Diodes_SMD:SOD-123" V 4650 2850 50  0001 C CNN
-F 3 "" V 4650 2850 50  0000 C CNN
-	1    4650 2850
-	0    -1   -1   0   
-$EndComp
-$Comp
-L CONN_01X04 P3
-U 1 1 575F1488
-P 5200 4100
-F 0 "P3" H 5200 4350 50  0000 C CNN
-F 1 "CONN_01X04" V 5300 4100 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_1x04" H 5200 4100 50  0001 C CNN
-F 3 "" H 5200 4100 50  0000 C CNN
-	1    5200 4100
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	5400 3950 5600 3950
-Wire Wire Line
-	5600 3950 5600 3900
-Wire Wire Line
-	5400 4050 5700 4050
-Wire Wire Line
-	5700 4050 5700 3900
-Wire Wire Line
-	5400 4150 6000 4150
-Wire Wire Line
-	6000 4150 6000 3900
-Wire Wire Line
-	5400 4250 6100 4250
-Wire Wire Line
-	6100 4250 6100 3900
-Wire Wire Line
-	6750 3200 7050 3200
+	6750 3200 7250 3200
 Wire Wire Line
 	7050 3200 7050 2900
 Wire Wire Line
 	7050 2600 7050 2100
 Connection ~ 7050 2100
+Wire Wire Line
+	2100 6550 2850 6550
+Text Label 6750 3200 0    30   ~ 0
+GPIO2
+Text Label 7250 3100 0    30   ~ 0
+GPIO0
+Text Label 6750 3000 0    30   ~ 0
+GPIO4
+Text Label 6750 3300 0    30   ~ 0
+GPIO15
+Text GLabel 2700 3100 2    40   Input ~ 0
+PwrSens
+Text GLabel 4950 3300 0    40   Input ~ 0
+PwrSens
+Text GLabel 6750 2900 2    40   Input ~ 0
+1Wire
+Text GLabel 4950 2800 0    40   Input ~ 0
+ADC
+Text Label 4950 2900 2    30   ~ 0
+CH_PD
+Text Label 2300 3100 2    30   ~ 0
+G
+Text GLabel 2100 3900 2    40   Input ~ 0
+ADC
+Text GLabel 5850 6450 2    40   Input ~ 0
+DHTData
+Text GLabel 4650 6450 2    40   Input ~ 0
+1Wire
+Text GLabel 2850 6550 2    40   Input ~ 0
+SCL
+Text GLabel 2850 6450 2    40   Input ~ 0
+SDA
+Text GLabel 1400 6150 0    30   Input ~ 0
+PwrSens
+$Comp
+L ESP-12 U2
+U 1 1 5764BF50
+P 5850 3000
+F 0 "U2" H 5850 2900 50  0000 C CNN
+F 1 "ESP-12" H 5850 3100 50  0000 C CNN
+F 2 "ESP8266:ESP-12" H 5850 3000 50  0001 C CNN
+F 3 "" H 5850 3000 50  0001 C CNN
+	1    5850 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4400 5850 3900
+Connection ~ 5850 4400
+Text GLabel 7250 3200 2    40   Input ~ 0
+DHTData
+Text GLabel 4950 3100 0    40   Input ~ 0
+SDA
+Text GLabel 4950 3200 0    40   Input ~ 0
+SCL
+Connection ~ 7050 3200
+Wire Wire Line
+	5650 6450 5850 6450
+Connection ~ 4050 2100
 $EndSCHEMATC
