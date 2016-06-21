@@ -318,6 +318,9 @@ void powerSensors(bool on) {
     if (config.usentc || config.usedallas || config.usedht) {
         pinMode(config.pinpwrsens, OUTPUT);
         digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
+        // when switching "off", ensure that the pin is not connected to GND or Vcc anymore
+        // by changing it to INPUT
+        if (! on) pinMode(config.pinpwrsens, INPUT);
     }
 }
 
