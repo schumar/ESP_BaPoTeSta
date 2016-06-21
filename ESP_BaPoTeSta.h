@@ -83,6 +83,7 @@ struct config {
     bool perfraw = false;
 
     bool usebmp280 = true;
+    byte bmp280addr = 0x76;     // 0 or 0x77 for SDO=HIGH, 0x76 for SDO=LOW
 
     unsigned int deltat = 300;
 

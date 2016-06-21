@@ -125,7 +125,9 @@ void setupNormal() {
 
     // setup BMP280
     if (config.usebmp280) {
-        if (!bmp280.begin()) {
+        // if bmp280addr is set, use it, otherwise stick to the default (0x77)
+        if (! (config.bmp280addr > 0 ?
+                    bmp280.begin(config.bmp280addr) : bmp280.begin())) {
             debugPrint("BMP280 not found.");
         }
     }
