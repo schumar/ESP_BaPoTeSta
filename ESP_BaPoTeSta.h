@@ -4,7 +4,8 @@ enum sensorType {
     BATTERY,
     HUMIDITY,
     TIME,
-    TEMPHI
+    TEMPHI,
+    PRESSURE
 };
 
 const char* sensorTypeName[] = {
@@ -12,7 +13,8 @@ const char* sensorTypeName[] = {
     "battery",
     "humidity",
     "time",
-    "tempHI"
+    "tempHI",
+    "pressure"
 };
 
 enum unitType {
@@ -21,7 +23,8 @@ enum unitType {
     RAW,
     MVOLT,
     USEC,
-    CENT_PERC
+    CENT_PERC,
+    PASCAL
 };
 
 const char* unitTypeName[] = {
@@ -30,7 +33,8 @@ const char* unitTypeName[] = {
     "raw",
     "millivolt",
     "microsec",
-    "centpercent"
+    "centpercent",
+    "pascal"
 };
 
 struct sensorMeasurement {
@@ -48,7 +52,7 @@ struct allMeasurements {
 };
 
 struct config {
-    byte cfgversion = 2;
+    byte cfgversion = 3;
 
     char ssid[32] = "tabr.org";
     char password[32] = "";
@@ -78,6 +82,8 @@ struct config {
     bool doperf = true;
     bool perfraw = false;
 
+    bool usebmp280 = true;
+
     unsigned int deltat = 300;
 
     int8_t pinblue = -1;
@@ -85,7 +91,9 @@ struct config {
     byte pinconfig = 4;
     byte pinpwrsens = 14;
     byte pindallas = 13;
-    byte pindhtdata = 12;
+    byte pindhtdata = 2;
+    byte pini2cscl = 13;
+    byte pini2csda = 12;
 
     byte adcmeas = 5;
     float battdiv = 10.0/66;
