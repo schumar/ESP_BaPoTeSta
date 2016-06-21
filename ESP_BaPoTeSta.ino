@@ -249,7 +249,15 @@ void getBMP280() {
         return;
 
     addData(0x0280, TEMP, (int) (temp * 100.0), CENT_DEGC);
-    addData(0x0280, PRESSURE, (int) (pres), PASCAL);
+
+    if (config.bmppress) {
+        // report measured pressure (current height)
+        addData(0x0280, PRESSURE, (int) (pres), PASCAL);
+    }
+    if (config.bmpslp && config.heightASL > 0) {
+        // report pressure at sea level
+        addData(0x0280, PRESSUREASL, (int) (sealevelPressure(pres)), PASCAL);
+    }
 }
 
 void getDHT() {
@@ -418,6 +426,17 @@ void bubbleSort(int * analogValues, int nr) {
             }
         }
     }
+}
+
+float sealevelPressure(float pressure) {
+    // calculate the pressure at sea level, given the measured pressure
+    // and the height it was measured at
+    float slp;
+
+    slp = pressure / (
+            exp( log(1 - 1.0*config.heightASL/44330) / 0.1903 )
+            );
+    return slp;
 }
 
 void gotoSleep(unsigned int seconds) {

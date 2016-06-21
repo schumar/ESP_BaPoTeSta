@@ -5,7 +5,8 @@ enum sensorType {
     HUMIDITY,
     TIME,
     TEMPHI,
-    PRESSURE
+    PRESSURE,
+    PRESSUREASL
 };
 
 const char* sensorTypeName[] = {
@@ -14,7 +15,8 @@ const char* sensorTypeName[] = {
     "humidity",
     "time",
     "tempHI",
-    "pressure"
+    "pressure",
+    "pressureASL"
 };
 
 enum unitType {
@@ -84,6 +86,9 @@ struct config {
 
     bool usebmp280 = true;
     byte bmp280addr = 0x76;     // 0 or 0x77 for SDO=HIGH, 0x76 for SDO=LOW
+    bool bmppress = true;       // calculate pressure at current height?
+    bool bmpslp = true;         // calculate pressure at sea level?
+    int16_t heightASL = 500;    // height above sea level (meter)
 
     unsigned int deltat = 300;
 
