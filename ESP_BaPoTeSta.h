@@ -124,4 +124,4 @@ void webCSS();
 void getConfig();
 void storeConfig();
 
-void debugPrint(const char * msg);
+void debugPrint(String msg);
