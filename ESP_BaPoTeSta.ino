@@ -108,9 +108,10 @@ void setupNormal() {
     }
 
     // setup DHT sensor
-    if (config.usedht)
+    if (config.usedht) {
         dhtSensor = DHT(config.pindhtdata, config.dhttype);
         dhtSensor.begin();
+    }
 
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
