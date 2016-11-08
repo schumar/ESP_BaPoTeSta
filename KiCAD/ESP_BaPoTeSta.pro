@@ -22,6 +22,9 @@ BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
 [general]
 version=1
+[cvpcb]
+version=1
+NetIExt=net
 [eeschema]
 version=1
 LibDir=kicad-ESP8266
@@ -59,6 +62,3 @@ LibName30=maxim
 LibName31=ESP8266
 LibName32=sensors
 LibName33=ir
-[cvpcb]
-version=1
-NetIExt=net

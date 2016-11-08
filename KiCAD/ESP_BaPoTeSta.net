@@ -320,12 +320,12 @@
         (pin (num 1) (name ~) (type passive))
         (pin (num 2) (name ~) (type passive)))))
   (libraries
+    (library (logical regul)
+      (uri /usr/share/kicad/library/regul.lib))
     (library (logical device)
       (uri /usr/share/kicad/library/device.lib))
     (library (logical conn)
       (uri /usr/share/kicad/library/conn.lib))
-    (library (logical regul)
-      (uri /usr/share/kicad/library/regul.lib))
     (library (logical ESP8266)
       (uri /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/kicad-ESP8266/ESP8266.lib)))
   (nets
