@@ -1290,7 +1290,7 @@
   (gr_text GND (at 145.415 103.759) (layer B.SilkS) (tstamp 56658DD0)
     (effects (font (size 0.8 0.8) (thickness 0.16)) (justify mirror))
   )
-  (gr_text "Sensor ID" (at 143.51 78.74) (layer F.SilkS) (tstamp 566583CE)
+  (gr_text "Sensor\nID" (at 149.86 78.74 90) (layer F.SilkS) (tstamp 566583CE)
     (effects (font (size 0.8 0.8) (thickness 0.1)))
   )
   (gr_text "Sensor ID" (at 151.13 85.09 270) (layer B.SilkS)
@@ -1915,12 +1915,12 @@
     (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
     (polygon
       (pts
-        (xy 140.97 76.2) (xy 147.32 76.2) (xy 147.32 81.28) (xy 140.97 81.28)
+        (xy 141.697901 76.2) (xy 148.047901 76.2) (xy 148.047901 81.28) (xy 141.697901 81.28)
       )
     )
     (filled_polygon
       (pts
-        (xy 147.193 81.153) (xy 141.097 81.153) (xy 141.097 76.327) (xy 147.193 76.327)
+        (xy 147.920901 81.153) (xy 141.824901 81.153) (xy 141.824901 76.327) (xy 147.920901 76.327)
       )
     )
   )
