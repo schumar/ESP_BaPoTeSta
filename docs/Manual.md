@@ -66,11 +66,6 @@ people will go with "1, 2, 3,...", but why not use Klingon letters instead? ;)
 
 ### SMD Parts
 
-For an aesthetically pleasing result, I suggest to stick with the convention I
-already used for the board itself: "down" for text is South or East, i.e. the
-labels of the SMD parts should be left-to-right or bottom-to-top, not
-right-to-left or top-to-bottom.
-
 Start with R1 (the only 56k&Omega; resistor, labelled "5602").  
 Then do the 10k&Omega; resistors.
 
