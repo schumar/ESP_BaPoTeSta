@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/ESP_BaPoTeSta.sch)
-    (date "Tue 08 Nov 2016 08:48:16 PM CET")
+    (date "Tue 08 Nov 2016 09:28:44 PM CET")
     (tool "Eeschema 4.0.2+dfsg1-2~bpo8+1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -71,7 +71,7 @@
       (tstamp 568D6E4C))
     (comp (ref U1)
       (value MCP1700-330)
-      (footprint TO_SOT_Packages_THT:TO-92_Inline_Wide)
+      (footprint TO_SOT_Packages_SMD:SOT-23_Handsoldering)
       (libsource (lib regul) (part LM7905CT))
       (sheetpath (names /) (tstamps /))
       (tstamp 568D771E))
