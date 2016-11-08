@@ -624,4 +624,6 @@ Connection ~ 7050 3200
 Wire Wire Line
 	5650 6450 5850 6450
 Connection ~ 4050 2100
+Text Label 4800 2700 2    30   ~ 0
+RST
 $EndSCHEMATC
