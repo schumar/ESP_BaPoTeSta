@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/ESP_BaPoTeSta.sch)
-    (date "Mon 20 Jun 2016 09:47:00 PM CEST")
+    (date "Tue 08 Nov 2016 07:39:03 PM CET")
     (tool "Eeschema 4.0.2+dfsg1-2~bpo8+1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -252,7 +252,7 @@
     (libpart (lib ESP8266) (part ESP-12)
       (aliases
         (alias ESP-07v2))
-      (description "ESP8622 ESP-12 module, 16 pins, 2mm, PCB antenna")
+      (description "ESP8266 ESP-12 module, 16 pins, 2mm, PCB antenna")
       (docs http://l0l.org.uk/2014/12/esp8266-modules-hardware-guide-gotta-catch-em-all/)
       (footprints
         (fp ESP-07*)
