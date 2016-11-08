@@ -24,7 +24,7 @@ ModuleOutlineThickness=0.150000000000
 version=1
 [eeschema]
 version=1
-LibDir=../../../kicad/kicad-ESP8266
+LibDir=kicad-ESP8266
 [eeschema/libraries]
 LibName1=power
 LibName2=device
