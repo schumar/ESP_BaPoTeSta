@@ -31,7 +31,6 @@ LIBS:valves
 LIBS:ESP8266
 LIBS:maxim
 LIBS:sensors
-LIBS:open-project
 LIBS:ir
 LIBS:ESP_BaPoTeSta-cache
 EELAYER 25 0

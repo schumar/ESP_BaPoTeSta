@@ -1,4 +1,4 @@
-update=Mon 13 Jun 2016 09:56:06 PM CEST
+update=Tue 08 Nov 2016 07:41:11 PM CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -55,12 +55,10 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/martin/kicad/libraries/kicad-ESP8266/ESP8266
-LibName31=maxim
-LibName32=ESP8266
-LibName33=sensors
-LibName34=bytelabs_library/open-project
-LibName35=ir
+LibName30=maxim
+LibName31=ESP8266
+LibName32=sensors
+LibName33=ir
 [cvpcb]
 version=1
 NetIExt=net

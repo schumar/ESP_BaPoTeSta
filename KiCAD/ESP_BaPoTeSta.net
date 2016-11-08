@@ -327,7 +327,7 @@
     (library (logical regul)
       (uri /usr/share/kicad/library/regul.lib))
     (library (logical ESP8266)
-      (uri /home/martin/kicad/kicad-ESP8266/ESP8266.lib)))
+      (uri /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/kicad-ESP8266/ESP8266.lib)))
   (nets
     (net (code 1) (name GND)
       (node (ref P9) (pin 2))
