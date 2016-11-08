@@ -22,7 +22,7 @@ Install "DallasTemperature", "DHT sensor library" and "PubSubClient".
 ## Clone this repository
 
 cd ~/Arduino
-git clone https://github.com/schumar/ESP_BaPoTeSta.git
+git clone --recursive https://github.com/schumar/ESP_BaPoTeSta.git
 
 ## Start coding
 
