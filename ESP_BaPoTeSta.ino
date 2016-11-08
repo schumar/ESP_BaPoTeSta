@@ -59,6 +59,8 @@ void setup() {
 
     #ifdef SERIALDEBUG
     Serial.begin(115200);
+    delay(10);
+    debugPrint("\nSYNCSYNC\n");
     #endif
 
     EEPROM.begin(1024);
@@ -66,13 +68,13 @@ void setup() {
 
     // check if "config mode" jumper is set
     if (digitalRead(config.pinconfig)) {
-        debugPrint("\nStarting webserver");
+        debugPrint("Starting webserver");
 
         configmode = true;
         setupWebserver();
 
     } else {
-        debugPrint("\nStarting normally");
+        debugPrint("Starting normally");
 
         configmode = false;
         setupNormal();
@@ -106,9 +108,10 @@ void setupNormal() {
     }
 
     // setup DHT sensor
-    if (config.usedht)
+    if (config.usedht) {
         dhtSensor = DHT(config.pindhtdata, config.dhttype);
         dhtSensor.begin();
+    }
 
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
@@ -159,6 +162,7 @@ void loop() {
 }
 
 void collectData() {
+    debugPrint("Collecting data...");
     if (config.usentc) getNTC();
     if (config.battery) getBattery();
     if (config.usedallas) getDallas();
@@ -181,11 +185,15 @@ void getDallas() {
     float temp;
     uint16_t id;
 
+    debugPrint("Searching for DS18B20");
+
     // try to find address of first sensor
     if (dallasSensors.getAddress(addr, 0) == 0) return;
 
     dallasSensors.requestTemperaturesByAddress(addr);
     temp = dallasSensors.getTempC(addr);
+
+    debugPrint("DSTmp=" + (String)temp);
 
     // sanity check; valid range taken from datasheet
     // "85" is the "reset value", ignore it too
@@ -212,8 +220,10 @@ void getDHT() {
     float temp = dhtSensor.readTemperature(false, true) + config.biasDHTTemp;
     float hum = dhtSensor.readHumidity() + config.biasDHTHumid;
 
+    debugPrint("DHTHum=" + (String)hum);
+    debugPrint("DHTTmp=" + (String)temp);
     // sanity check; valid range taken from datasheet
-    if (temp < -40.0 || temp > 80.0 || hum < 0.0 || hum > 100.0)
+    if (temp < -40.0 || temp > 80.0 || hum < 0.0 || hum > 100.0 || isnan(temp) || isnan(hum))
         return;
 
     // use the DHT_TYPE as sensor ID, as the DHT doesn't have a real ID
@@ -254,7 +264,10 @@ void getBattery() {
 
     // If battery voltage is below 3.0V, the results from most sensors will
     // be totally off -> don't even try anymore
-    if (volt < VLowBat) gotoSleep(lowBattSleepSec);
+    if (volt < VLowBat) {
+        debugPrint("LOW BATTERY");
+        gotoSleep(lowBattSleepSec);
+    }
 
     addData(0, BATTERY, (int) (volt * 1000.0), MVOLT);
     if (config.battraw)
@@ -305,6 +318,9 @@ void powerSensors(bool on) {
     if (config.usentc || config.usedallas || config.usedht) {
         pinMode(config.pinpwrsens, OUTPUT);
         digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
+        // when switching "off", ensure that the pin is not connected to GND or Vcc anymore
+        // by changing it to INPUT
+        if (! on) pinMode(config.pinpwrsens, INPUT);
     }
 }
 
@@ -516,8 +532,10 @@ void getConfig() {
         } else {
             debugPrint("Ignoring EEPROM, wrong cfg version");
         }
+    } else {
+        // otherwise we rely on the defaults
+        debugPrint("No config found, using hardcoded defaults.");
     }
-    // otherwise we rely on the defaults
 }
 
 void storeConfig() {
@@ -654,7 +672,7 @@ void storeConfig() {
 }
 
 
-void debugPrint(const char * msg) {
+void debugPrint(String msg) {
     #ifdef SERIALDEBUG
     Serial.println(msg);
     #endif
