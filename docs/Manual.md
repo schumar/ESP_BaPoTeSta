@@ -176,7 +176,7 @@ your multimeter and test all connections :(
 If it does flash, switch the board off again; no use in wasting energy.
 
 Tin, clean, re-tin you soldering iron, switch it off, clean the board, put back
-any unused parts.
+any unused parts. Wash your hands if you aren't using lead-free solder!
 
 Congratulations :)  
 You are now ready to flash the firmware!
