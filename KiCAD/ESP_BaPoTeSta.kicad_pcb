@@ -1,14 +1,14 @@
 (kicad_pcb (version 4) (host pcbnew 4.0.2+dfsg1-2~bpo8+1-stable)
 
   (general
-    (links 61)
+    (links 0)
     (no_connects 47)
     (area 123.114999 65.964999 162.635001 115.645001)
     (thickness 1.6)
     (drawings 79)
     (tracks 1)
     (zones 0)
-    (modules 30)
+    (modules 32)
     (nets 19)
   )
 
@@ -141,6 +141,21 @@
     (add_net +BATT)
     (add_net GND)
     (add_net VCC)
+  )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO7380 (layer F.Cu) (tedit 58223073) (tstamp 58245B19)
+    (at 138.43 101.6)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO7380")
+    (tags "mounting hole 3.2mm no annular m3 iso7380")
+    (fp_text reference REF** (at 0 -3.85) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO7380 (at 0 3.85) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.85 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3.1 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask F.SilkS))
   )
 
   (module Mounting_Holes:MountingHole_2.2mm_M2 (layer F.Cu) (tedit 5764640B) (tstamp 576656F9)
@@ -1122,6 +1137,21 @@
       (scale (xyz 0.3937 0.3937 0.3937))
       (rotate (xyz 0 0 0))
     )
+  )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO7380 (layer F.Cu) (tedit 58223070) (tstamp 58245B17)
+    (at 157.48 83.82)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO7380")
+    (tags "mounting hole 3.2mm no annular m3 iso7380")
+    (fp_text reference REF** (at 0 -3.85) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO7380 (at 0 3.85) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.85 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3.1 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask F.SilkS))
   )
 
   (gr_line (start 137.16 76.2) (end 138.43 76.2) (layer F.SilkS) (width 0.2))
