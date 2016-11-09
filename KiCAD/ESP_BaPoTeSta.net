@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/martin/Arduino/ESP_BaPoTeSta/KiCAD/ESP_BaPoTeSta.sch)
-    (date "Tue 08 Nov 2016 09:28:44 PM CET")
+    (date "Wed 09 Nov 2016 10:12:48 PM CET")
     (tool "Eeschema 4.0.2+dfsg1-2~bpo8+1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -331,7 +331,7 @@
   (nets
     (net (code 1) (name GND)
       (node (ref R2) (pin 2))
-      (node (ref P2) (pin 2))
+      (node (ref P2) (pin 1))
       (node (ref P1) (pin 1))
       (node (ref R6) (pin 1))
       (node (ref P15) (pin 1))
@@ -402,7 +402,7 @@
       (node (ref C1) (pin 1))
       (node (ref U1) (pin 2))
       (node (ref R10) (pin 1))
-      (node (ref P2) (pin 1))
+      (node (ref P2) (pin 2))
       (node (ref Q1) (pin 2)))
     (net (code 15) (name "Net-(P15-Pad2)")
       (node (ref P15) (pin 2)))
