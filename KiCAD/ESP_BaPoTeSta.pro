@@ -1,4 +1,4 @@
-update=Tue 08 Nov 2016 07:41:11 PM CET
+update=Sun 13 Nov 2016 11:24:21 AM CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,4 @@ LibName30=maxim
 LibName31=ESP8266
 LibName32=sensors
 LibName33=ir
+LibName34=battery_management
