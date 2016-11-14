@@ -164,10 +164,10 @@ U 1 1 5662C8D4
 P 1300 1900
 F 0 "P2" H 1300 2050 50  0000 C CNN
 F 1 "Battery" V 1400 1900 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x02" H 1300 1900 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 1300 1900 50  0001 C CNN
 F 3 "" H 1300 1900 50  0000 C CNN
 	1    1300 1900
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L +BATT #PWR04
@@ -803,23 +803,6 @@ F 3 "" H 2200 6150 50  0000 C CNN
 	1    2200 6150
 	1    0    0    -1  
 $EndComp
-$Comp
-L C C6
-U 1 1 5829CE52
-P 3300 6150
-F 0 "C6" H 3325 6250 50  0000 L CNN
-F 1 "4u7" H 3325 6050 50  0000 L CNN
-F 2 "Capacitors_SMD:C_1206_HandSoldering" H 3338 6000 50  0001 C CNN
-F 3 "" H 3300 6150 50  0000 C CNN
-	1    3300 6150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3300 6000 3300 5550
-Connection ~ 3300 5550
-Wire Wire Line
-	3300 6300 3300 6450
-Connection ~ 3300 6450
 Wire Wire Line
 	2200 6300 2200 6450
 Connection ~ 2200 6450
