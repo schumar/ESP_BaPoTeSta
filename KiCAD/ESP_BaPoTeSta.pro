@@ -1,4 +1,4 @@
-update=Tue 12 Jan 2016 05:22:33 PM CET
+update=Sun 13 Nov 2016 11:24:21 AM CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -20,14 +20,14 @@ SolderMaskMinWidth=0.000000000000
 DrawSegmentWidth=0.200000000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
+[general]
+version=1
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
-LibDir=../../../kicad/kicad-ESP8266
+LibDir=kicad-ESP8266
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -58,8 +58,8 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/martin/kicad/libraries/kicad-ESP8266/ESP8266
-LibName31=maxim
-LibName32=ESP8266
-LibName33=sensors
-LibName34=bytelabs_library/open-project
+LibName30=maxim
+LibName31=ESP8266
+LibName32=sensors
+LibName33=ir
+LibName34=battery_management
