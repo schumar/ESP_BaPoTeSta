@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NCP300
+D Voltage Detector with Complementary Output
+K undervoltage  brownout
+F http://www.onsemi.com/pub/Collateral/NCP300-D.PDF
+$ENDCMP
+#
+#End Doc Library

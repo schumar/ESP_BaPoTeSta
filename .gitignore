@@ -1,6 +1,8 @@
 *.swp
 *.bak
+*.bck
 *-rescue.lib
 *_pcb-bak
 _autosave-*
+_saved*
 *.net

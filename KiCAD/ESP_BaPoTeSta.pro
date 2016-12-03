@@ -1,4 +1,4 @@
-update=Sun 13 Nov 2016 11:24:21 AM CET
+update=Sat 03 Dec 2016 05:53:26 PM CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,4 @@ LibName31=ESP8266
 LibName32=sensors
 LibName33=ir
 LibName34=battery_management
+LibName35=NCP300
