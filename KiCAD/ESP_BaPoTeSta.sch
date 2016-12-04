@@ -1029,4 +1029,23 @@ F 3 "" H 8650 3250 50  0000 C CNN
 	1    8450 3250
 	0    -1   -1   0   
 $EndComp
+$Comp
+L CONN_01X02 P6
+U 1 1 58444F17
+P 950 2700
+F 0 "P6" H 950 2850 50  0000 C CNN
+F 1 "Charge" V 1050 2700 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 950 2700 50  0001 C CNN
+F 3 "" H 950 2700 50  0000 C CNN
+	1    950  2700
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 2650 1150 2600
+Wire Wire Line
+	1150 2600 1100 2600
+Connection ~ 1100 2600
+Wire Wire Line
+	1150 2750 1250 2750
+Connection ~ 1250 2750
 $EndSCHEMATC
