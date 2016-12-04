@@ -1007,4 +1007,26 @@ Text Label 10450 1900 0    40   ~ 0
 PC1
 Text Label 10450 1450 0    40   ~ 0
 PB5
+$Comp
+L TEST_1P TP5
+U 1 1 584408F4
+P 8450 950
+F 0 "TP5" V 8450 1200 50  0000 C CNN
+F 1 "TEST_1P" V 8350 1200 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 8650 950 50  0001 C CNN
+F 3 "" H 8650 950 50  0000 C CNN
+	1    8450 950 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L TEST_1P TP6
+U 1 1 58440CF8
+P 8450 3250
+F 0 "TP6" V 8450 3500 50  0000 C CNN
+F 1 "TEST_1P" V 8350 3500 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 8650 3250 50  0001 C CNN
+F 3 "" H 8650 3250 50  0000 C CNN
+	1    8450 3250
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
