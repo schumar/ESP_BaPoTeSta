@@ -16,6 +16,7 @@ Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very
 ### Pictures of v0.6
 
 ![BaPoTeSta Board v0.6 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_render.jpg)
+![BaPoTeSta Board v0.6 with ATmega Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_atmega_render.jpg)
 
 ### Maintenance Web-Interface
 
