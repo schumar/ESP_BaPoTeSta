@@ -1,13 +1,8 @@
 /*
-   Battery-Powered WiFi Temperature Station
-   Send temperature data via UDP
+   ESP8266 Battery Powered Temperature Station
+   https://git.io/ESPTemp
 
-   Martin Schuster 2015
-
-Pins:
-    CH_PD PullUp  GPIO 15 PullDn  GPIO 2 PullUp
-    Normal: GPIO 0 PullUp
-    Upload: GPIO 0 GND
+   Martin Schuster 2015 - 2016
  */
 
 #include <ESP8266WiFi.h>
