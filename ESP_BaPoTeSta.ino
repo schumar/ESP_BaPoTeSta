@@ -44,7 +44,6 @@ DHT dhtSensor(0,0);
 bool configmode = false;
 ESP8266WebServer httpServer(80);
 IPAddress IPSubnet(255, 255, 255, 0);
-float ntc_rinf;
 
 Adafruit_BMP280 bmp280;
 
@@ -182,22 +181,11 @@ void loop() {
 
 void collectData() {
     debugPrint("Collecting data...");
-    if (config.usentc) getNTC();
     if (config.battery) getBattery();
     if (config.usedallas) getDallas();
     if (config.usebmp280) getBMP280();
     if (config.usedht) getDHT();
     if (config.doperf) getPerf();
-}
-
-void getNTC() {
-    int raw;
-
-    raw = readADC();
-
-    addData(NTC_ID, TEMP, (int) (100.0*calcNTCTemp(raw)), CENT_DEGC);
-    if (config.ntcraw)
-        addData(NTC_ID, TEMP, raw, RAW);
 }
 
 void getDallas() {
@@ -303,9 +291,6 @@ void getBattery() {
     int raw;
     float volt;
 
-    // Sanity check: We only have 1 ADC, so we can't measure battery AND NTC
-    if (config.usentc) return;
-
     raw = readADC();
     volt = calcBattery(raw);
 
@@ -362,7 +347,7 @@ void sendData() {
 
 void powerSensors(bool on) {
     // only power the pin if actually needed
-    if (config.usentc || config.usedallas || config.usedht || config.usebmp280) {
+    if (config.usedallas || config.usedht || config.usebmp280) {
         pinMode(config.pinpwrsens, OUTPUT);
         digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
         // when switching "off", ensure that the pin is not connected to GND or Vcc anymore
@@ -371,23 +356,6 @@ void powerSensors(bool on) {
     }
 }
 
-
-float calcNTCTemp(unsigned int raw) {
-    /*
-       V = Vdd * Rfix / (Rfix + NTC)
-       raw/1024 = V - Voff
-
-       NTC = Vdd*Rfix / V - Rfix
-           = Vdd*Rfix / (raw/1024 + Voff) - Rfix
-
-       T = B / ln(R/Rinf)
-     */
-    float ntc = Vdd * config.ntcrfix / (raw/1024. + Voff) - config.ntcrfix;
-    float temp = config.ntc_b / log(ntc/ntc_rinf) - 273.15;
-    // float temp = raw * 0.01;  // use this to test ADC
-    // float temp = ntc * 1e-3;  // use this to test the NTC
-    return temp;
-}
 
 float calcBattery(int raw) {
     /*
@@ -526,9 +494,6 @@ void webForm() {
     buf.replace("${biasdhthumid}", String(config.biasDHTHumid));
     buf.replace("${dhthi}", config.dhthi ? "checked" : "");
 
-    buf.replace("${usentc}", config.usentc ? "checked" : "");
-    buf.replace("${ntcraw}", config.ntcraw ? "checked" : "");
-
     buf.replace("${battery}", config.battery ? "checked" : "");
     buf.replace("${battraw}", config.battraw ? "checked" : "");
 
@@ -544,9 +509,6 @@ void webForm() {
     buf.replace("${pindhtdata}", String(config.pindhtdata));
     buf.replace("${adcmeas}", String(config.adcmeas));
     buf.replace("${battdiv}", String(config.battdiv));
-    buf.replace("${ntcrfix}", String(config.ntcrfix));
-    buf.replace("${ntc_b}", String(config.ntc_b));
-    buf.replace("${ntc_r0}", String(config.ntc_r0));
 
     httpServer.send(200, "text/html", buf);
 }
@@ -583,9 +545,6 @@ void getConfig() {
                 IPSubnet = { 0xff, 0xff, 0xff,
                     (uint8_t)(0xff - ((uint8_t)0xff >> (config.netmask-24)))};
             }
-
-            // (T0 = 25 + 273.15 = 298.15)
-            ntc_rinf = config.ntc_r0*exp(-config.ntc_b/298.15);
 
         } else {
             debugPrint("Ignoring EEPROM, wrong cfg version");
@@ -653,16 +612,6 @@ void storeConfig() {
     else
         config.dhthi = false;
 
-    if (httpServer.hasArg("usentc"))
-        config.usentc = true;
-    else
-        config.usentc = false;
-
-    if (httpServer.hasArg("ntcraw"))
-        config.ntcraw = true;
-    else
-        config.ntcraw = false;
-
     if (httpServer.hasArg("battery"))
         config.battery = true;
     else
@@ -711,15 +660,6 @@ void storeConfig() {
 
     if (httpServer.hasArg("battdiv"))
         config.battdiv = httpServer.arg("battdiv").toFloat();
-
-    if (httpServer.hasArg("ntcrfix"))
-        config.ntcrfix = httpServer.arg("ntcrfix").toFloat();
-
-    if (httpServer.hasArg("ntc_b"))
-        config.ntc_b = httpServer.arg("ntc_b").toFloat();
-
-    if (httpServer.hasArg("ntc_r0"))
-        config.ntc_r0 = httpServer.arg("ntc_r0").toFloat();
 
     debugPrint("Saving form data");
     EEPROM.put(0, 0x42);        // magic byte

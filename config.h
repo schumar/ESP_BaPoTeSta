@@ -19,9 +19,6 @@ const float Vdd = 3.3;
 const float Voff = 0.00;        // highest V where ADC still reports "0"
 const float VLowBat = 3.0;      // don't take/send measurements if Vbat < this
 
-// NTC
-const unsigned int NTC_ID = 42; // NTC doesn't have a special "id" -> use 42
-
 // Dallas
 /* Each DS18B20 has its own ID, but as the rest of the software can't handle
  * more than 1 Dallas (yet), we can just stick to a hardcoded Id. Set to 0
@@ -71,10 +68,6 @@ R"(<!DOCTYPE html>
                     <label for="dhthi"> report HI</label><input type="checkbox" id="dhthi" name="dhthi" ${dhthi} />
                 </div>
                 <div class="inputgroup">
-                    <label for="usentc">Use NTC</label><input type="checkbox" id="usentc" name="usentc" ${usentc} />
-                    <label for="ntcraw"> incl. raw value</label><input type="checkbox" id="ntcraw" name="ntcraw" ${ntcraw} />
-                </div>
-                <div class="inputgroup">
                     <label for="battery">Report battery</label><input type="checkbox" id="battery" name="battery" ${battery} />
                     <label for="battraw"> incl. raw value</label><input type="checkbox" id="battraw" name="battraw" ${battraw} />
                 </div>
@@ -99,9 +92,6 @@ R"(<!DOCTYPE html>
                 <div class="inputgroup">
                     <label for="adcmeas">Number of ADC measurements</label><input type="number" min="1" max="13" step="2" id="adcmeas" name="adcmeas" value="${adcmeas}" />
                     <label for="battdiv">Battery divider</label><input type="number" min="0" max="1" step="0.0001" id="battdiv" name="battdiv" value="${battdiv}" />
-                    <label for="ntcrfix">NTC fixed R (&Omega;)</label><input type="number" id="ntcrfix" name="ntcrfix" value="${ntcrfix}" />
-                    <label for="ntc_b">NTC B</label><input type="number" id="ntc_b" name="ntc_b" value="${ntc_b}" />
-                    <label for="ntc_r0">NTC R0 (&Omega;)</label><input type="number" id="ntc_r0" name="ntc_r0" value="${ntc_r0}" />
                 </div>
             </fieldset>
 

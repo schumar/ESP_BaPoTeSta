@@ -54,7 +54,7 @@ struct allMeasurements {
 };
 
 struct config {
-    byte cfgversion = 3;
+    byte cfgversion = 4;
 
     char ssid[32] = "tabr.org";
     char password[32] = "";
@@ -74,9 +74,6 @@ struct config {
     float biasDHTTemp = 0.0;
     float biasDHTHumid = 0.0;
     bool dhthi = true;
-
-    bool usentc = false;
-    bool ntcraw = true;
 
     bool battery = true;
     bool battraw = false;
@@ -103,14 +100,10 @@ struct config {
 
     byte adcmeas = 5;
     float battdiv = 10.0/66;
-    float ntcrfix = 4.7e3;
-    float ntc_b = 3950;
-    float ntc_r0 = 20e3;
 
 };
 
 void sendTemp(float temp);
-float calcNTCTemp(unsigned int raw);
 int readADC();
 void getBattery();
 float calcBattery(int raw);
@@ -118,7 +111,6 @@ void bubbleSort(float * analogValues, int nr);
 void bubbleSort(int * analogValues, int nr);
 void gotoSleep(unsigned int seconds);
 void collectData();
-void getNTC();
 void getDallas();
 void getDHT();
 void getPerf();
@@ -126,7 +118,6 @@ void addData(unsigned int sensorId, enum sensorType type,
         int value, enum unitType unit);
 void sendData();
 void powerSensors(bool on);
-void powerNTC(bool on);
 
 void setupNormal();
 void setupWebserver();
