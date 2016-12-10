@@ -21,6 +21,9 @@ Pins:
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPUpdateServer.h>
 #include <EEPROM.h>
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BMP280.h>
 
 #ifdef SERIALDEBUG
 #include <Serial.h>
@@ -42,6 +45,8 @@ bool configmode = false;
 ESP8266WebServer httpServer(80);
 IPAddress IPSubnet(255, 255, 255, 0);
 float ntc_rinf;
+
+Adafruit_BMP280 bmp280;
 
 #ifdef SERIALDEBUG
 ESP8266HTTPUpdateServer httpUpdater(true);
@@ -113,6 +118,20 @@ void setupNormal() {
         dhtSensor.begin();
     }
 
+    // setup I2C
+    if (config.usebmp280) {
+        Wire.begin(config.pini2csda, config.pini2cscl);
+    }
+
+    // setup BMP280
+    if (config.usebmp280) {
+        // if bmp280addr is set, use it, otherwise stick to the default (0x77)
+        if (! (config.bmp280addr > 0 ?
+                    bmp280.begin(config.bmp280addr) : bmp280.begin())) {
+            debugPrint("BMP280 not found.");
+        }
+    }
+
     // get ChipID, will be used as unique ID when sending data
     data.chipId = ESP.getChipId();
     data.sensorMeasurements = sensorMeasurements;
@@ -166,6 +185,7 @@ void collectData() {
     if (config.usentc) getNTC();
     if (config.battery) getBattery();
     if (config.usedallas) getDallas();
+    if (config.usebmp280) getBMP280();
     if (config.usedht) getDHT();
     if (config.doperf) getPerf();
 }
@@ -211,6 +231,33 @@ void getDallas() {
 
     // use last two byte of serial as ID (addr[0] is "family code")
     addData(id, TEMP, (int) (temp * 100.0), CENT_DEGC);
+}
+
+void getBMP280() {
+    float temp;
+    float pres;
+
+    debugPrint("Querying BMP280...");
+
+    temp = bmp280.readTemperature();
+    pres = bmp280.readPressure();
+
+    debugPrint("BMP280Temp=" + (String)temp + "\n" +
+               "BMP280Pres=" + (String)pres);
+
+    if (pres < 1.0)
+        return;
+
+    addData(0x0280, TEMP, (int) (temp * 100.0), CENT_DEGC);
+
+    if (config.bmppress) {
+        // report measured pressure (current height)
+        addData(0x0280, PRESSURE, (int) (pres), PASCAL);
+    }
+    if (config.bmpslp && config.heightASL > 0) {
+        // report pressure at sea level
+        addData(0x0280, PRESSUREASL, (int) (sealevelPressure(pres)), PASCAL);
+    }
 }
 
 void getDHT() {
@@ -315,7 +362,7 @@ void sendData() {
 
 void powerSensors(bool on) {
     // only power the pin if actually needed
-    if (config.usentc || config.usedallas || config.usedht) {
+    if (config.usentc || config.usedallas || config.usedht || config.usebmp280) {
         pinMode(config.pinpwrsens, OUTPUT);
         digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
         // when switching "off", ensure that the pin is not connected to GND or Vcc anymore
@@ -379,6 +426,17 @@ void bubbleSort(int * analogValues, int nr) {
             }
         }
     }
+}
+
+float sealevelPressure(float pressure) {
+    // calculate the pressure at sea level, given the measured pressure
+    // and the height it was measured at
+    float slp;
+
+    slp = pressure / (
+            exp( log(1 - 1.0*config.heightASL/44330) / 0.1903 )
+            );
+    return slp;
 }
 
 void gotoSleep(unsigned int seconds) {
