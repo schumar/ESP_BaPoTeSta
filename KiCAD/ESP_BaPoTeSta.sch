@@ -912,12 +912,12 @@ Wire Wire Line
 	10550 2300 10450 2300
 Wire Wire Line
 	10550 2200 10450 2200
-Text GLabel 10550 2000 2    40   Input ~ 0
+Text GLabel 10550 2100 2    40   Input ~ 0
 ADC
 NoConn ~ 8550 2400
 Text GLabel 1450 4950 1    40   Input ~ 0
 RST
-Text GLabel 10550 2400 2    40   Input ~ 0
+Text GLabel 10450 2450 2    40   Input ~ 0
 RST
 Wire Wire Line
 	10550 2400 10450 2400
@@ -942,16 +942,14 @@ Wire Wire Line
 $Comp
 L TEST_1P TP2
 U 1 1 5844A62F
-P 10550 1900
-F 0 "TP2" V 10550 2150 50  0000 C CNN
-F 1 "TEST_1P" V 10450 2150 50  0001 C CNN
-F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 10750 1900 50  0001 C CNN
-F 3 "" H 10750 1900 50  0000 C CNN
-	1    10550 1900
+P 10550 2000
+F 0 "TP2" V 10550 2250 50  0000 C CNN
+F 1 "TEST_1P" V 10450 2250 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 10750 2000 50  0001 C CNN
+F 3 "" H 10750 2000 50  0000 C CNN
+	1    10550 2000
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	10550 1900 10450 1900
 $Comp
 L TEST_1P TP3
 U 1 1 5844B108
@@ -989,12 +987,9 @@ Wire Wire Line
 	10550 1450 10450 1450
 NoConn ~ 10450 950 
 NoConn ~ 10450 1150
-NoConn ~ 10450 1250
-NoConn ~ 10450 1350
 NoConn ~ 10450 1550
 NoConn ~ 10450 1650
 NoConn ~ 10450 1800
-NoConn ~ 10450 2100
 NoConn ~ 10450 3150
 NoConn ~ 10450 3250
 NoConn ~ 8550 2300
@@ -1003,10 +998,10 @@ Text Label 10450 2850 0    40   ~ 0
 PD3
 Text Label 10450 2950 0    40   ~ 0
 PD4
-Text Label 10450 1900 0    40   ~ 0
-PC1
+Text Label 10450 2000 0    40   ~ 0
+PC3
 Text Label 10450 1450 0    40   ~ 0
-PB5
+SCK
 $Comp
 L TEST_1P TP5
 U 1 1 584408F4
@@ -1048,4 +1043,50 @@ Connection ~ 1100 2600
 Wire Wire Line
 	1150 2750 1250 2750
 Connection ~ 1250 2750
+$Comp
+L TEST_1P TP7
+U 1 1 586E64E6
+P 10550 1250
+F 0 "TP7" V 10550 1500 50  0000 C CNN
+F 1 "TEST_1P" V 10450 1500 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 10750 1250 50  0001 C CNN
+F 3 "" H 10750 1250 50  0000 C CNN
+	1    10550 1250
+	0    1    1    0   
+$EndComp
+$Comp
+L TEST_1P TP8
+U 1 1 586E658C
+P 10550 1350
+F 0 "TP8" V 10550 1600 50  0000 C CNN
+F 1 "TEST_1P" V 10450 1600 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Round-SMD-Pad_Small" H 10750 1350 50  0001 C CNN
+F 3 "" H 10750 1350 50  0000 C CNN
+	1    10550 1350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10550 1250 10450 1250
+Wire Wire Line
+	10550 1350 10450 1350
+Text Label 10450 1350 0    40   ~ 0
+MISO
+Text Label 10450 1250 0    40   ~ 0
+MOSI
+NoConn ~ 10450 1900
+Wire Wire Line
+	10450 2100 10550 2100
+Wire Wire Line
+	10450 2400 10450 2450
+$Comp
+L TEST_1P TP9
+U 1 1 586E81F2
+P 10550 2400
+F 0 "TP9" V 10550 2650 50  0000 C CNN
+F 1 "TEST_1P" V 10450 2650 50  0001 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Small" H 10750 2400 50  0001 C CNN
+F 3 "" H 10750 2400 50  0000 C CNN
+	1    10550 2400
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
