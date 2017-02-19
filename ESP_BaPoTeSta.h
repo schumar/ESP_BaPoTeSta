@@ -92,10 +92,10 @@ struct config {
     int8_t pinblue = -1;
     bool invblue = true;
     byte pinconfig = 4;
-    byte pinpwrsens = 14;
-    byte pindallas = 13;
+    byte pinpwrsens = 13;
+    byte pindallas = 5;
     byte pindhtdata = 2;
-    byte pini2cscl = 13;
+    byte pini2cscl = 14;
     byte pini2csda = 12;
 
     byte adcmeas = 5;

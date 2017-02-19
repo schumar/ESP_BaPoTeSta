@@ -10,7 +10,7 @@ const unsigned int lowBattSleepSec = 3600;
 const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
 const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
 const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
-const byte maxSensors = 8;
+const byte maxSensors = 16;
 
 // #define SERIALDEBUG
 
