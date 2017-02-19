@@ -6,7 +6,8 @@ enum sensorType {
     TIME,
     TEMPHI,
     PRESSURE,
-    PRESSUREASL
+    PRESSUREASL,
+    WIFIRSSI
 };
 
 const char* sensorTypeName[] = {
@@ -16,7 +17,8 @@ const char* sensorTypeName[] = {
     "time",
     "tempHI",
     "pressure",
-    "pressureASL"
+    "pressureASL",
+    "wifiRSSI"
 };
 
 enum unitType {
@@ -26,7 +28,8 @@ enum unitType {
     MVOLT,
     USEC,
     CENT_PERC,
-    PASCAL
+    PASCAL,
+    DBM
 };
 
 const char* unitTypeName[] = {
@@ -36,7 +39,8 @@ const char* unitTypeName[] = {
     "millivolt",
     "microsec",
     "centpercent",
-    "pascal"
+    "pascal",
+    "dbm"
 };
 
 struct sensorMeasurement {
@@ -54,7 +58,7 @@ struct allMeasurements {
 };
 
 struct config {
-    byte cfgversion = 4;
+    byte cfgversion = 5;
 
     char ssid[32] = "tabr.org";
     char password[32] = "";
@@ -80,6 +84,8 @@ struct config {
 
     bool doperf = true;
     bool perfraw = false;
+
+    bool dowifi = true;         // send WiFi RSSI?
 
     bool usebmp280 = true;
     byte bmp280addr = 0x76;     // 0 or 0x77 for SDO=HIGH, 0x76 for SDO=LOW

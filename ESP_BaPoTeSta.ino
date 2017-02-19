@@ -180,6 +180,7 @@ void collectData() {
     if (config.usedallas) getDallas();
     if (config.usebmp280) getBMP280();
     if (config.usedht) getDHT();
+    if (config.dowifi) getWiFi();
     if (config.doperf) getPerf();
 }
 
@@ -299,6 +300,10 @@ void getBattery() {
     addData(0, BATTERY, (int) (volt * 1000.0), MVOLT);
     if (config.battraw)
         addData(0, BATTERY, raw, RAW);
+}
+
+void getWiFi() {
+    addData(0, WIFIRSSI, WiFi.RSSI(), DBM);
 }
 
 void getPerf() {
@@ -492,6 +497,8 @@ void webForm() {
     buf.replace("${battery}", config.battery ? "checked" : "");
     buf.replace("${battraw}", config.battraw ? "checked" : "");
 
+    buf.replace("${dowifi}", config.dowifi ? "checked" : "");
+
     buf.replace("${doperf}", config.doperf ? "checked" : "");
     buf.replace("${perfraw}", config.perfraw ? "checked" : "");
 
@@ -616,6 +623,11 @@ void storeConfig() {
         config.battraw = true;
     else
         config.battraw = false;
+
+    if (httpServer.hasArg("dowifi"))
+        config.dowifi = true;
+    else
+        config.dowifi = false;
 
     if (httpServer.hasArg("doperf"))
         config.doperf = true;

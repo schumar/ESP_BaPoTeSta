@@ -72,6 +72,9 @@ R"(<!DOCTYPE html>
                     <label for="battraw"> incl. raw value</label><input type="checkbox" id="battraw" name="battraw" ${battraw} />
                 </div>
                 <div class="inputgroup">
+                    <label for="dowifi">Report WiFi strength</label><input type="checkbox" id="dowifi" name="dowifi" ${dowifi} />
+                </div>
+                <div class="inputgroup">
                     <label for="doperf">Report performance</label><input type="checkbox" id="doperf" name="doperf" ${doperf} />
                     <label for="perfraw"> incl. raw value</label><input type="checkbox" id="perfraw" name="perfraw" ${perfraw} />
                 </div>
