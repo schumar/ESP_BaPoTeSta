@@ -348,11 +348,11 @@ void sendData() {
 void powerSensors(bool on) {
     // only power the pin if actually needed
     if (config.usedallas || config.usedht || config.usebmp280) {
-        pinMode(config.pinpwrsens, OUTPUT);
+        // when switching "off", ensure that the pin is not connected to GND or
+        // Vcc anymore by changing it to INPUT
+        pinMode(config.pinpwrsens, on ? OUTPUT : INPUT);
+        // when pinMode is INPUT, writing LOW will disable the internal pullup
         digitalWrite(config.pinpwrsens, on ? HIGH : LOW);
-        // when switching "off", ensure that the pin is not connected to GND or Vcc anymore
-        // by changing it to INPUT
-        if (! on) pinMode(config.pinpwrsens, INPUT);
     }
 }
 
