@@ -96,6 +96,13 @@ void setupNormal() {
     // now is a perfect time for "other" stuff, as WiFi will need some time
     // to associate
 
+    // get ChipID, will be used as unique ID when sending data
+    data.chipId = ESP.getChipId();
+    data.sensorMeasurements = sensorMeasurements;
+    data.nrMeasurements = 0;
+
+    if (config.battery) getBattery();
+
     powerSensors(true);     // activate power to sensors
 
     // setup Dallas sensors
@@ -126,10 +133,6 @@ void setupNormal() {
         }
     }
 
-    // get ChipID, will be used as unique ID when sending data
-    data.chipId = ESP.getChipId();
-    data.sensorMeasurements = sensorMeasurements;
-
     // wait until WiFi is connected, but max maxConnRetry
     for (byte i = 0;
             i < maxConnRetry && WiFi.status() != WL_CONNECTED;
@@ -157,7 +160,6 @@ void loop() {
     } else {
         // this won't actually "loop", as the last command leads to a reset
         data.timestep = 0;      // [XXX] this needs to be read from eprom and ++
-        data.nrMeasurements = 0;
 
         mqttClient.loop();
 
@@ -176,7 +178,6 @@ void loop() {
 
 void collectData() {
     debugPrint("Collecting data...");
-    if (config.battery) getBattery();
     if (config.usedallas) getDallas();
     if (config.usebmp280) getBMP280();
     if (config.usedht) getDHT();
@@ -286,6 +287,9 @@ int readADC() {
 void getBattery() {
     int raw;
     float volt;
+
+    pinMode(config.pinpwrsens, OUTPUT);
+    digitalWrite(config.pinpwrsens, LOW);
 
     raw = readADC();
     volt = calcBattery(raw);

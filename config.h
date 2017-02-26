@@ -8,7 +8,7 @@ const byte maxConnRetry = 200;      // how many sleepWifiCheck sleeps
 const unsigned int noConnSleepSec = 600;
 const unsigned int lowBattSleepSec = 3600;
 const byte sleepEnd = 100;          // ms to sleep before going to deepSleep
-const byte sleepADCmeasure = 100;   // ms to sleep before each ADC read
+const byte sleepADCmeasure = 2;   // ms to sleep before each ADC read
 const unsigned int sleepDHT = 2000; // ms to sleep before querying DHT
 const byte maxSensors = 16;
 
