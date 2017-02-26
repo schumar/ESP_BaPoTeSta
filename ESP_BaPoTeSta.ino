@@ -270,12 +270,20 @@ void getDHT() {
 
 int readADC() {
     int sensorValue[config.adcmeas];
+    char buf[16];
 
     // measure multiple times
     for (byte c=0; c<config.adcmeas; c++) {
         delay(sleepADCmeasure);
         sensorValue[c] = analogRead(A0);
     }
+
+#ifdef SERIALDEBUG
+    for (byte c=0; c<config.adcmeas; c++) {
+        sprintf(buf, "ADC %d=%d", c, sensorValue[c]);
+        debugPrint(buf);
+    }
+#endif
 
     // calculate median
     bubbleSort(sensorValue, config.adcmeas);
