@@ -57,7 +57,7 @@ void setup() {
     }
 
     #ifdef SERIALDEBUG
-    Serial.begin(115200);
+    Serial.begin(230400);
     delay(10);
     debugPrint("\nSYNCSYNC\n");
     #endif
