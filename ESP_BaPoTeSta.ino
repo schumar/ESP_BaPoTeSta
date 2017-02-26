@@ -163,7 +163,7 @@ void loop() {
 
         mqttClient.loop();
 
-        collectData();          // make mesurements
+        collectData();          // make measurements
         powerSensors(false);    // deactivate power to sensors again
 
         sendData();
