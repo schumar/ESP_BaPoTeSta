@@ -1,26 +1,30 @@
 #  ESP8266 Battery Powered Temperature Station
 
+## Moved to GitLab
+
+This project has moved to [GitLab/schumar/ESP_BaPoTeSta](https://gitlab.com/schumar/ESP_BaPoTeSta)
+
 ## Intro
 
 Using only an ESP8266 (no Atmel AVR) and a sensor, it's possible to build a very cheap and power-efficient WiFi-enabled weather station.
 
 ### Pictures of v0.3
 
-![BaPoTeSta Board v0.3 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg)
-![BaPoTeSta Board v0.3 real](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.3_real.jpg)
+![BaPoTeSta Board v0.3 Rendering](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/ESP_BaPoTeSta.jpg)
+![BaPoTeSta Board v0.3 real](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.3_real.jpg)
 
 ### Pictures of v0.5
 
-![BaPoTeSta Board v0.5 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.5_render.jpg)
+![BaPoTeSta Board v0.5 Rendering](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.5_render.jpg)
 
 ### Pictures of v0.6
 
-![BaPoTeSta Board v0.6 Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_render.jpg)
-![BaPoTeSta Board v0.6 with ATmega Rendering](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_atmega_render.jpg)
+![BaPoTeSta Board v0.6 Rendering](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_render.jpg)
+![BaPoTeSta Board v0.6 with ATmega Rendering](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/board_v0.6_atmega_render.jpg)
 
 ### Maintenance Web-Interface
 
-![BaPoTeSta Webinterface](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/webinterface.png)
+![BaPoTeSta Webinterface](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/webinterface.png)
 
 ## Current state
 
@@ -34,7 +38,7 @@ The sensors are reporting their data via MQTT, so the data can be received with 
 
 ## Screenshot
 
-![RRD Graph](https://github.com/schumar/ESP_BaPoTeSta/raw/master/docs/temp-daily.png)
+![RRD Graph](https://gitlab.com/schumar/ESP_BaPoTeSta/raw/master/docs/temp-daily.png)
 
 ## Technical details
 
@@ -65,7 +69,7 @@ DHT22|1|http://www.aliexpress.com/item/x/32544057083.html|2.70|2.70
 
 ## To Do
 
-see https://github.com/schumar/ESP_BaPoTeSta/issues
+see [Issues](https://gitlab.com/schumar/ESP_BaPoTeSta/issues)
 
 ## Thanks
 
